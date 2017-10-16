@@ -1,0 +1,79 @@
+html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family:  Helvetica, Arial, sans-serif, "Avenir";
+  font-weight: 300;
+  list-style: none;
+}
+
+html {
+  height: 100%;
+}
+
+* {
+  position: relative;
+  box-sizing: border-box;
+}
+
+button {
+  outline: none;
+}
+
+/*
+ * grid
+ */
+.nav-bar {
+  height: 60px;
+  width: 100%;
+  background-color: #5F5F5F;
+  position: fixed;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.nav-bar .nav-logo {
+  /*margin-top: 5px;*/
+  position: relative;
+  height: 60px;
+  margin-left: 10%;
+}
+
+.nav-bar .left-nav {
+  display: inline-block;
+  margin-left: 2%;
+  color: white;
+}
+
+.nav-bar .right-nav {
+  display: inline-block;
+  margin-right: 10%;
+  float: right;
+}
+
+
+.el-menu{
+  background-color: #5F5F5F;
+}
+
+.el-menu li {
+  color: white;
+  padding-left:10px;
+  padding-right: 10px;
+  font-size: 15px;
+  letter-spacing: 3px;
+  font-weight: 500;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.el-menu li:hover {
+  background-color: #585858;
+  color: white;
+}
+
+
