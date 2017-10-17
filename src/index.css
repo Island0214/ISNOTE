@@ -29,6 +29,22 @@ h3 {
   letter-spacing: 0.5vmax;
 }
 
+h4 {
+  color: #b3b3af;
+  position: absolute;
+  font-family: 'Helvetica Neue', 'Arial', 'PingFang TC';
+  font-size: 1.2vmax;
+  letter-spacing: 0.5vmax;
+}
+
+h5 {
+  color: #b3b3af;
+  position: absolute;
+  font-family: 'Helvetica Neue', 'Arial', 'PingFang TC';
+  font-size: 1vmax;
+  letter-spacing: 0vmax;
+}
+
 button {
   border-radius: 20px;
   letter-spacing: 0.3vmax;
