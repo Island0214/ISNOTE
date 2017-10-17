@@ -1,19 +1,20 @@
 <template>
 
   <div>
-    <Nav>
-
-    </Nav>
+    <Nav/>
+    <Main/>
   </div>
 
 </template>
 
 <script>
   import Nav from '../components/Nav/Nav'
+  import Main from '../components/Main/Main'
   export default {
     name: 'HelloWorld',
     components: {
-      Nav
+      Nav,
+      Main
     },
     data () {
       return {

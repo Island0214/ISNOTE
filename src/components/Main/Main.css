@@ -1,0 +1,7 @@
+#main-part {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url('../../assets/Background.png');
+  background-size: cover;
+}
