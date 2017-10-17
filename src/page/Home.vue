@@ -3,6 +3,7 @@
   <div>
     <Nav/>
     <Main/>
+    <Footer/>
   </div>
 
 </template>
@@ -10,11 +11,13 @@
 <script>
   import Nav from '../components/Nav/Nav'
   import Main from '../components/Main/Main'
+  import Footer from '../components/Footer/Footer'
   export default {
     name: 'HelloWorld',
     components: {
       Nav,
-      Main
+      Main,
+      Footer
     },
     data () {
       return {
