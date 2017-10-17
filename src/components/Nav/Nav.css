@@ -2,8 +2,8 @@ html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
   margin: 0;
   padding: 0;
   border: 0;
-  font-family:  Helvetica, Arial, sans-serif, "Avenir";
-  font-weight: 300;
+  font-family:  Helvetica, Arial, sans-serif, "Avenir", 'PingFang TC';
+  font-weight: 200;
   list-style: none;
 }
 
@@ -27,10 +27,11 @@ button {
   height: 60px;
   width: 100%;
   background-color: #5F5F5F;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   white-space: nowrap;
   overflow: hidden;
+  opacity: 0.8;
 }
 
 .nav-bar .nav-logo {
@@ -63,7 +64,7 @@ button {
   padding-right: 10px;
   font-size: 15px;
   letter-spacing: 3px;
-  font-weight: 500;
+  font-weight: 400;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;
