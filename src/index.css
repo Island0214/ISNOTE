@@ -20,3 +20,17 @@ h2 {
   font-size: 1.5vmax;
   letter-spacing: 0.5vmax;
 }
+
+h3 {
+  color: #5f5f5f;
+  position: absolute;
+  font-family: 'Helvetica Neue', 'Arial', 'PingFang TC';
+  font-size: 1.5vmax;
+  letter-spacing: 0.5vmax;
+}
+
+button {
+  border-radius: 20px;
+  letter-spacing: 0.3vmax;
+  font-weight: 400;
+}

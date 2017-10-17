@@ -185,8 +185,8 @@
 }
 
 .el-step__head.is-success{
-    color: #13ce66;
-    border-color: #13ce66;
+    color: #B2DDAC;
+    border-color: #B2DDAC;
 }
 
 .el-step__head.is-wait{
@@ -219,8 +219,8 @@
 
 .el-step__head.is-text.is-success{
     color: #fff;
-    background-color: #13ce66;
-    border-color: #13ce66;
+    background-color: #B2DDAC;
+    border-color: #B2DDAC;
 }
 
 .el-step__head.is-text.is-wait{
@@ -259,7 +259,7 @@
 
 .el-step__title.is-success{
     font-weight: 700;
-    color: #13ce66;
+    color: #B2DDAC;
 }
 
 .el-step__title.is-wait{
@@ -287,7 +287,7 @@
 }
 
 .el-step__description.is-success{
-    color: #13ce66;
+    color: #B2DDAC;
 }
 
 .el-step__description.is-wait{
