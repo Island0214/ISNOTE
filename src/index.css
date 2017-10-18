@@ -50,3 +50,38 @@ button {
   letter-spacing: 0.3vmax;
   font-weight: 400;
 }
+input {
+  position: absolute;
+  width: 60%;
+  left: 20%;
+  font-size: 1.2vmax;
+  padding: 0.2vmax;
+  background-color: #f5f4f0;
+  border: none;
+  outline: none;
+  color: #5f5f5f;
+  font-family: 'Helvetica Neue', 'Arial', 'PingFang TC';
+  letter-spacing: 0.2vmax;
+}
+
+.input-error {
+  border: 1px solid #ff94a3;
+}
+
+i {
+  position: absolute;
+  cursor: pointer;
+}
+
+p {
+  color: #b3b3af;
+  position: absolute;
+  font-family: 'Helvetica Neue', 'Arial', 'PingFang TC';
+  font-size: 1vmax;
+  letter-spacing: 0.2vmax;
+  font-weight: 500;
+}
+
+.p-error {
+  color: #ff94a3;
+}

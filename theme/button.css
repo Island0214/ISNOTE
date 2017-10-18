@@ -330,26 +330,26 @@
 
 .el-button--danger{
     color: #fff;
-    background-color: #ff4949;
-    border-color: #ff4949;
+    background-color: #ff94a3;
+    border-color: #ff94a3;
 }
 
 .el-button--danger:hover, .el-button--danger:focus{
-    background: rgb(255, 109, 109);
-    border-color: rgb(255, 109, 109);
+    background: rgb(255, 169, 181);
+    border-color: rgb(255, 169, 181);
     color: #fff;
 }
 
 .el-button--danger:active{
-    background: rgb(230, 66, 66);
-    border-color: rgb(230, 66, 66);
+    background: rgb(230, 133, 147);
+    border-color: rgb(230, 133, 147);
     color: #fff;
     outline: none;
 }
 
 .el-button--danger.is-active{
-    background: rgb(230, 66, 66);
-    border-color: rgb(230, 66, 66);
+    background: rgb(230, 133, 147);
+    border-color: rgb(230, 133, 147);
     color: #fff;
 }
 
@@ -361,14 +361,14 @@
 
 .el-button--danger.is-plain:hover, .el-button--danger.is-plain:focus{
     background: #fff;
-    border-color: #ff4949;
-    color: #ff4949;
+    border-color: #ff94a3;
+    color: #ff94a3;
 }
 
 .el-button--danger.is-plain:active{
     background: #fff;
-    border-color: rgb(230, 66, 66);
-    color: rgb(230, 66, 66);
+    border-color: rgb(230, 133, 147);
+    color: rgb(230, 133, 147);
     outline: none;
 }
 

@@ -414,23 +414,23 @@
 }
 .el-button--danger{
   color: #fff;
-  background-color: #ff4949;
-  border-color: #ff4949;
+  background-color: #ff94a3;
+  border-color: #ff94a3;
 }
 .el-button--danger:hover, .el-button--danger:focus{
-  background: rgb(255, 109, 109);
-  border-color: rgb(255, 109, 109);
+  background: rgb(255, 169, 181);
+  border-color: rgb(255, 169, 181);
   color: #fff;
 }
 .el-button--danger:active{
-  background: rgb(230, 66, 66);
-  border-color: rgb(230, 66, 66);
+  background: rgb(230, 133, 147);
+  border-color: rgb(230, 133, 147);
   color: #fff;
   outline: none;
 }
 .el-button--danger.is-active{
-  background: rgb(230, 66, 66);
-  border-color: rgb(230, 66, 66);
+  background: rgb(230, 133, 147);
+  border-color: rgb(230, 133, 147);
   color: #fff;
 }
 .el-button--danger.is-plain{
@@ -440,13 +440,13 @@
 }
 .el-button--danger.is-plain:hover, .el-button--danger.is-plain:focus{
   background: #fff;
-  border-color: #ff4949;
-  color: #ff4949;
+  border-color: #ff94a3;
+  color: #ff94a3;
 }
 .el-button--danger.is-plain:active{
   background: #fff;
-  border-color: rgb(230, 66, 66);
-  color: rgb(230, 66, 66);
+  border-color: rgb(230, 133, 147);
+  color: rgb(230, 133, 147);
   outline: none;
 }
 .el-button--info{
@@ -957,15 +957,15 @@
 }
 
 .el-message-box__input input.invalid{
-  border-color: #ff4949;
+  border-color: #ff94a3;
 }
 
 .el-message-box__input input.invalid:focus{
-  border-color: #ff4949;
+  border-color: #ff94a3;
 }
 
 .el-message-box__errormsg{
-  color: #ff4949;
+  color: #ff94a3;
   font-size: 12px;
   min-height: 18px;
   margin-top: 2px;
@@ -1023,7 +1023,7 @@
 }
 
 .el-message-box__status.el-icon-circle-cross{
-  color: #ff4949;
+  color: #ff94a3;
 }
 
 .msgbox-fade-enter-active {

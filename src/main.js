@@ -7,7 +7,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import './index.css'
 import '../theme/index.css'
+import Vuex from 'vuex'
+import './style.less'
 
+Vue.use(Vuex)
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 

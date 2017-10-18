@@ -72,12 +72,27 @@
 #main-part .center-panel .right-wrapper {
   position: absolute;
   /*padding-bottom: 100%;*/
-  padding-bottom: 72%;
+  padding-bottom: 75%;
   width: 55%;
   left: 45%;
+  background-color: #ffffff00;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  /*opacity: 0.8;*/
+}
+
+
+#main-part .center-panel .right-wrapper .inner-wrapper{
+  position: absolute;
+  /*padding-bottom: 100%;*/
+  height: 95.5%;
+  width: 96%;
+  left: 0%;
   top: 2%;
   background-color: #f9f9f7;
-  box-shadow: 2px 2px 10px #5f5f5f;
+  box-shadow: 0.2vmax 0.2vmax 0.6vmax #5f5f5f;
   z-index: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -103,6 +118,44 @@
   margin: 0;
   padding: 0;
   left: 0;
+}
+
+#main-part .center-panel .right-wrapper h3 {
+  width: 100%;
+  text-align: center;
+}
+
+#main-part .center-panel .right-wrapper i {
+  position: absolute;
+  left: 85%;
+  top: 61%;
+  font-size: 1.2vmax;
+}
+#main-part .center-panel .right-wrapper .switch-wrapper{
+  position: absolute;
+  display: inline-block;
+  float: right;
+  font-size: 0.8vmax;
+  right: 3%;
+  text-align: right;
+  left: 0;
+}
+
+#main-part .center-panel .right-wrapper .switch-wrapper p {
+  position: relative;
+  font-size: 0.8vmax;
+  width: auto;
+  display: inline-block;
+  letter-spacing: 0.1vmax;
+}
+
+#main-part .center-panel .right-wrapper  .switch-wrapper a {
+  position: relative;
+  color: #B2DDAC;
+  font-size: 0.8vmax;
+  right: 1%;
+  letter-spacing: 0.1vmax;
+  margin-left: 1%;
 }
 
 .el-button {
