@@ -31,7 +31,7 @@
                       <input style="top: 30%;" v-model="username"/>
                       <h3 style="top: 45%;">密码</h3>
                       <input style="top: 60%;" type="password" v-model="password"/>
-                      <el-button type="success" style="top: 85%">登 录</el-button>
+                      <el-button type="success" style="top: 85%" @click="tryLogIn()">登 录</el-button>
                     </div>
                   </div>
 
@@ -173,8 +173,9 @@
     methods: {
       ...mapMutations({
         showWelcome: types.SHOW_MAIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
-        showLogInMutation: types.SHOW_LOGIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
-        showSignInMutation: types.SHOW_SIGNIN
+        showLogIn: types.SHOW_LOGIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
+        showSignIn: types.SHOW_SIGNIN,
+        log_in: types.LOG_IN
       }),
       handleSelect (key, keyPath) {
         console.log(key, keyPath)
@@ -199,29 +200,24 @@
           this.correctPassword = true
         }
       },
-      showLogIn () {
-        this.showLogInMutation()
-        this.username = ''
-        this.password = ''
-      },
-      showSignIn () {
-        this.showSignInMutation()
-        this.username = ''
-        this.password = ''
-        this.correctUsername = true
-        this.correctPassword = true
-      },
-//      showWelcome () {
-//        this.showMainMutation()
-//      },
       startExplore () {
         this.showLogIn()
+      },
+      tryLogIn () {
+        this.log_in()
+        this.showWelcome()
       }
     },
     watch: {
       logIn: function () {
         this.username = ''
         this.password = ''
+      },
+      signIn: function () {
+        this.username = ''
+        this.password = ''
+        this.correctUsername = true
+        this.correctPassword = true
       }
     }
   }

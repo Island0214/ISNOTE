@@ -2,7 +2,7 @@ html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
   margin: 0;
   padding: 0;
   border: 0;
-  font-family:  Helvetica, Arial, sans-serif, "Avenir", 'PingFang TC';
+  font-family: Helvetica, Arial, sans-serif, "Avenir", 'PingFang TC';
   font-weight: 200;
   list-style: none;
 }
@@ -30,8 +30,11 @@ button {
   position: absolute;
   z-index: 1;
   white-space: nowrap;
-  overflow: hidden;
+  /*overflow: hidden;*/
   opacity: 0.8;
+  overflow: visible;
+  word-break: break-all;
+  display: inline;
 }
 
 .nav-bar .nav-logo {
@@ -53,14 +56,13 @@ button {
   float: right;
 }
 
-
-.el-menu{
+/deep/ .el-menu {
   background-color: #5F5F5F;
 }
 
 .el-menu li {
   color: white;
-  padding-left:10px;
+  padding-left: 10px;
   padding-right: 10px;
   font-size: 18px;
   letter-spacing: 3px;
@@ -77,4 +79,47 @@ button {
   color: white;
 }
 
+.el-menu /deep/ .el-submenu {
+  background-color: #5F5F5F;
+  color: white;
+}
 
+.el-menu /deep/ .el-submenu:hover {
+  background-color: #585858;
+  color: white;
+}
+
+.el-menu .el-submenu /deep/ .is-active {
+  border: none;
+}
+
+/deep/ .is-active {
+  border: none;
+}
+
+.el-menu .el-submenu /deep/ .el-submenu__title {
+  color: white;
+}
+
+.el-menu .el-submenu /deep/ .el-submenu__title:hover {
+  background-color: #585858;
+
+}
+
+.el-menu .el-submenu /deep/ .el-menu-item {
+  background-color: #5F5F5F;
+
+}
+
+.el-menu .el-submenu /deep/ > .el-menu {
+  padding: 0;
+}
+
+.el-menu .el-submenu /deep/ > .el-menu li:hover {
+  background-color: #585858;
+  border-bottom: 5px solid #B2DDAC;
+}
+
+.el-menu--horizontal > .el-submenu.is-active /deep/ .el-submenu__title {
+  border: none;
+}
