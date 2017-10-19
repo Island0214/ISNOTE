@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/page/Home'
-// import Nav from '@/components/HelloWorld'
+// import HelloWorld from '../components/HelloWorld.vue'
 
 Vue.use(Router)
 

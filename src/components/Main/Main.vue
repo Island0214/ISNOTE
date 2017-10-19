@@ -146,6 +146,9 @@
 </template>
 
 <script>
+  import { mapGetters, mapMutations } from 'vuex'
+  import * as types from '../../store/mutation-types'
+
   export default {
     data () {
       return {
@@ -153,17 +156,26 @@
           height: window.innerHeight + 'px'
         },
         input: '',
-        username: '',
-        password: '',
         show: false,
-        correctPassword: true,
+        password: '',
+        username: '',
         correctUsername: true,
-        welcome: true,
-        logIn: false,
-        signIn: false
+        correctPassword: true
       }
     },
+    computed: {
+      ...mapGetters({
+        welcome: 'welcome',
+        logIn: 'logIn',
+        signIn: 'signIn'
+      })
+    },
     methods: {
+      ...mapMutations({
+        showWelcome: types.SHOW_MAIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
+        showLogInMutation: types.SHOW_LOGIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
+        showSignInMutation: types.SHOW_SIGNIN
+      }),
       handleSelect (key, keyPath) {
         console.log(key, keyPath)
       },
@@ -188,29 +200,28 @@
         }
       },
       showLogIn () {
-        this.welcome = false
-        this.logIn = true
-        this.signIn = false
-        this.password = ''
+        this.showLogInMutation()
         this.username = ''
+        this.password = ''
       },
       showSignIn () {
-        this.welcome = false
-        this.logIn = false
-        this.signIn = true
-        this.password = ''
+        this.showSignInMutation()
         this.username = ''
+        this.password = ''
         this.correctUsername = true
         this.correctPassword = true
       },
-      showWelcome () {
-        this.welcome = true
-        this.logIn = false
-        this.signIn = false
-      },
+//      showWelcome () {
+//        this.showMainMutation()
+//      },
       startExplore () {
-        this.welcome = false
-        this.logIn = true
+        this.showLogIn()
+      }
+    },
+    watch: {
+      logIn: function () {
+        this.username = ''
+        this.password = ''
       }
     }
   }

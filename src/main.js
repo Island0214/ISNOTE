@@ -9,6 +9,7 @@ import './index.css'
 import '../theme/index.css'
 import Vuex from 'vuex'
 import './style.less'
+import store from './store'
 
 Vue.use(Vuex)
 Vue.config.productionTip = false
@@ -18,6 +19,7 @@ Vue.use(ElementUI)
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

@@ -4,22 +4,22 @@
 
     <div class="left-nav">
         <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <el-menu-item index="1">哈哈哈</el-menu-item>
-          <el-menu-item index="2">呵呵呵</el-menu-item>
+          <el-menu-item index="1" @click="showWelcome()">首页</el-menu-item>
+          <el-menu-item index="2">笔记</el-menu-item>
           <!--<el-submenu index="2">-->
             <!--<template slot="title">呵呵呵</template>-->
             <!--<el-menu-item index="2-1">选项1</el-menu-item>-->
             <!--<el-menu-item index="2-2">选项2</el-menu-item>-->
             <!--<el-menu-item index="2-3">选项3</el-menu-item>-->
           <!--</el-submenu>-->
-          <el-menu-item index="3">嘻嘻嘻</el-menu-item>
+          <el-menu-item index="3">交流</el-menu-item>
         </el-menu>
     </div>
 
     <div class="right-nav">
       <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">登录</el-menu-item>
-        <el-menu-item index="2">注册</el-menu-item>
+        <el-menu-item index="1" @click="showLogIn()">登录</el-menu-item>
+        <el-menu-item index="2" @click="showSignIn()">注册</el-menu-item>
       </el-menu>
     </div>
     <!--<el-collapse v-model="activeName" accordion>-->
@@ -34,6 +34,9 @@
 
 
 <script>
+  import { mapMutations } from 'vuex'
+  import * as types from '../../store/mutation-types'
+
   export default {
     data () {
       return {
@@ -42,6 +45,11 @@
       }
     },
     methods: {
+      ...mapMutations({
+        showWelcome: types.SHOW_MAIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
+        showLogIn: types.SHOW_LOGIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
+        showSignIn: types.SHOW_SIGNIN
+      }),
       handleSelect (key, keyPath) {
         console.log(key, keyPath)
       }
