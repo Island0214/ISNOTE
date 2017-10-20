@@ -60,7 +60,7 @@ button {
   background-color: #5F5F5F;
 }
 
-.el-menu li {
+.el-menu li{
   color: white;
   padding-left: 10px;
   padding-right: 10px;
@@ -72,6 +72,21 @@ button {
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
+}
+
+.nav-button {
+  color: white;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  letter-spacing: 3px;
+  font-weight: 900;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  text-decoration: none;
 }
 
 .el-menu li:hover {
@@ -122,4 +137,10 @@ button {
 
 .el-menu--horizontal > .el-submenu.is-active /deep/ .el-submenu__title {
   border: none;
+}
+
+.nav-breaker {
+  width: 100%;
+  background-color: #B2DDAC;
+  height: 2px;
 }

@@ -10,10 +10,12 @@ import '../theme/index.css'
 import Vuex from 'vuex'
 import './style.less'
 import store from './store'
+import VueRouter from 'vue-router'
 
 Vue.use(Vuex)
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(VueRouter)
 
 /* eslint-disable no-new */
 new Vue({
