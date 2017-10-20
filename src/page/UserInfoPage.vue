@@ -10,7 +10,7 @@
 
 <script>
   import Nav from '../components/Nav/Nav'
-  import UserInfo from '../components/UserInfo/UserInfo'
+  import UserInfo from '../components/Info/UserInfo'
   import Footer from '../components/Footer/Footer'
   export default {
     name: 'HelloWorld',

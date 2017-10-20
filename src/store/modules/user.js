@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-
+import router from '../../router'
 // initial state
 const state = {
   loginState: false
@@ -21,6 +21,7 @@ const mutations = {
   },
   [types.QUIT_LOG] (state) {
     state.loginState = false
+    router.push('/')
   }
 }
 

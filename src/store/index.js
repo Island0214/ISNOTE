@@ -4,6 +4,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 import main from './modules/main'
 import user from './modules/user'
+import global from './modules/global'
 
 // import createLogger from '../../../src/plugins/logger'
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
   getters,
   modules: {
     main,
-    user
+    user,
+    global
   },
   strict: debug
   // plugins: debug ? [createLogger()] : []
