@@ -30,7 +30,8 @@ new Vue({
   },
   data () {
     return {
-      screenWidth: document.body.clientWidth
+      screenWidth: document.body.clientWidth,
+      screenHeight: window.innerHeight
     }
   },
   computed: {
@@ -43,7 +44,9 @@ new Vue({
     window.onresize = () => {
       return (() => {
         window.screenWidth = document.body.clientWidth
+        window.screenHeight = window.innerHeight
         that.screenWidth = window.screenWidth
+        that.screenHeight = window.screenHeight
       })()
     }
   },
@@ -67,12 +70,16 @@ new Vue({
 //            that.timer = false
 //          }, 400)
 //        }
+    },
+    screenHeight: function () {
+      this.setWindowHeight()
     }
   },
   methods: {
     ...Vuex.mapMutations({
       setLarge: types.SET_LARGE_SIZE, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
-      setSmall: types.SET_SMALL_SIZE
+      setSmall: types.SET_SMALL_SIZE,
+      setWindowHeight: types.SET_HEIGHT
     })
   }
 })

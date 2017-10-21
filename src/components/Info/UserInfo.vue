@@ -40,7 +40,24 @@
       </div>
       <div class="right-wrapper" :style="contentStyle">
         <div class="inner-wrapper">
-
+          <!--<input class="file_input" type="file" multiple id="avc"/>-->
+          <!--<div class="upload_box">-->
+            <!--点我上传图片哦-->
+          <!--</div>-->
+          <div>
+            <div class="icon-wrapper">
+              <el-upload
+                class="avatar-uploader"
+                :show-file-list="false"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-success="handleAvatarSuccess"
+                :on-failure="handleAvatarFailure"
+                :before-upload="beforeAvatarUpload">
+                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                <i class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+          </div>
+          </div>
         </div>
       </div>
 
@@ -52,25 +69,44 @@
 <script>
   import {mapGetters} from 'vuex'
   //  import * as types from '../../store/mutation-types'
-  //
   export default {
     data () {
       return {
+        isCollapse: false,
+        imageUrl: require('../../assets/icon.png'),
         mainStyle: {
           height: window.innerHeight + 'px'
         },
         contentStyle: {
           height: window.innerHeight - 100 + 'px'
-        },
-        isCollapse: false
+        }
       }
     },
     computed: {
       ...mapGetters({
-        largeSize: 'largeSize'
+        largeSize: 'largeSize',
+        mainHeight: 'mainHeight'
       })
     },
     methods: {
+      handleAvatarSuccess (res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw)
+      },
+      handleAvatarFailure (res, file) {
+        alert('fail')
+      },
+      beforeAvatarUpload (file) {
+        const isJPG = file.type === 'image/jpeg' || file.type === 'image/png'
+        const isLt2M = file.size / 1024 / 1024 < 4
+
+        if (!isJPG) {
+          alert('上传头像图片只能是 JPG 或 PNG 格式!')
+        }
+        if (!isLt2M) {
+          alert('上传头像图片大小不能超过 4MB!')
+        }
+        return isJPG && isLt2M
+      },
 //      ...mapMutations({
 //      }),
 //      handleSelect (key, keyPath) {
@@ -86,10 +122,12 @@
     watch: {
       largeSize: function () {
         this.isCollapse = !this.largeSize
-//        alert(this.largeSize)
+      },
+      mainHeight: function () {
+        this.mainStyle.height = this.mainHeight + 'px'
+        this.contentStyle.height = this.mainHeight - 100 + 'px'
       }
     }
   }
-  //  alert(windowHeight)
 </script>
 <style scoped src="./info.css"></style>

@@ -2,14 +2,14 @@ import * as types from '../mutation-types'
 
 // initial state
 const state = {
-  largeSize: document.body.clientWidth > 768
+  largeSize: document.body.clientWidth > 768,
+  mainHeight: window.innerHeight
 }
 
 // getters
 const getters = {
-  largeSize: function () {
-    return state.largeSize
-  }
+  largeSize: state => state.largeSize,
+  mainHeight: state => state.mainHeight
 }
 
 // actions
@@ -24,6 +24,9 @@ const mutations = {
   [types.SET_SMALL_SIZE] (state) {
     state.largeSize = false
     // alert(state.largeSize)
+  },
+  [types.SET_HEIGHT] (state) {
+    state.mainHeight = window.innerHeight
   }
 }
 
