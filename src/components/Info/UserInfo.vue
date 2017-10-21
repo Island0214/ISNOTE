@@ -26,11 +26,11 @@
             <!--<el-menu-item index="1-4-1">选项1</el-menu-item>-->
             <!--</el-submenu>-->
             <!--</el-submenu>-->
-            <el-menu-item index="1">
+            <el-menu-item index="1" @click="handleNavClick">
               <i class="el-icon-menu i-button"></i>
               <span slot="title">账 户 设 置</span>
             </el-menu-item>
-            <el-menu-item index="2">
+            <el-menu-item index="2" @click="handleNavClick">
               <i class="el-icon-setting i-button"></i>
               <span slot="title">隐 私 设 置</span>
             </el-menu-item>
@@ -44,7 +44,7 @@
           <!--<div class="upload_box">-->
             <!--点我上传图片哦-->
           <!--</div>-->
-          <div>
+          <div class="info-wrapper" v-show="userInfo">
             <div class="icon-wrapper">
               <el-upload
                 class="avatar-uploader"
@@ -56,7 +56,71 @@
                 <img v-if="imageUrl" :src="imageUrl" class="avatar">
                 <i class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
+            </div>
+            <div class="name-wrapper"  v-show="!userInfo">
+              <p>ISLAND</p>
+            </div>
+            <div class="prop-wrapper">
+              <el-row :gutter="10">
+                <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
+                  <p>密码</p>
+
+                </el-col>
+                <el-col :xs="16" :sm="16" :md="16" :lg="16" style="padding: 0">
+                  <input disabled value="*****"/>
+                </el-col>
+                <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
+                  <el-button type="success" >修改</el-button>
+                </el-col>
+              </el-row>
+            </div>
+            <div class="prop-wrapper" style="top: 10%">
+              <el-row :gutter="10">
+                <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
+                  <p>手机</p>
+
+                </el-col>
+                <el-col :xs="16" :sm="16" :md="16" :lg="16" style="padding: 0">
+                  <input disabled value="*****"/>
+                </el-col>
+                <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
+                  <el-button type="success" >修改</el-button>
+                </el-col>
+              </el-row>
+            </div>
+            <div class="prop-wrapper" style="top: 15%">
+              <el-row :gutter="10">
+                <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
+                  <p>邮箱</p>
+
+                </el-col>
+                <el-col :xs="16" :sm="16" :md="16" :lg="16" style="padding: 0">
+                  <input disabled value="*****"/>
+                </el-col>
+                <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
+                  <el-button type="success" >修改</el-button>
+                </el-col>
+              </el-row>
+            </div>
+            <div class="prop-wrapper" style="top: 20%">
+              <el-row :gutter="10">
+                <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
+                  <p>标签</p>
+
+                </el-col>
+                <el-col :xs="16" :sm="16" :md="16" :lg="16" style="padding: 0">
+                  <input disabled value="*****"/>
+                </el-col>
+                <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
+                  <el-button type="success" >修改</el-button>
+                </el-col>
+              </el-row>
+            </div>
           </div>
+          <div class="info-wrapper">
+            <div class="friend-info-wrapper">
+
+            </div>
           </div>
         </div>
       </div>
@@ -79,7 +143,8 @@
         },
         contentStyle: {
           height: window.innerHeight - 100 + 'px'
-        }
+        },
+        userInfo: true
       }
     },
     computed: {
@@ -112,6 +177,14 @@
 //      handleSelect (key, keyPath) {
 //        console.log(key, keyPath)
 //      }
+      handleNavClick (key, keyPath) {
+        if (key.index === '1') {
+          this.userInfo = true
+        }
+        if (key.index === '2') {
+          this.userInfo = false
+        }
+      },
       handleOpen (key, keyPath) {
         console.log(key, keyPath)
       },
