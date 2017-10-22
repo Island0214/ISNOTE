@@ -8,24 +8,6 @@
         <div class="inner-wrapper">
           <el-menu default-active="1" class="el-menu-vertical-demo left-nav" @open="handleOpen" @close="handleClose"
                    :collapse="isCollapse">
-            <!--<el-submenu index="1">-->
-            <!--<template slot="title">-->
-            <!--<i class="el-icon-message"></i>-->
-            <!--<span slot="title">导航一</span>-->
-            <!--</template>-->
-            <!--<el-menu-item-group>-->
-            <!--<span slot="title">分组一</span>-->
-            <!--<el-menu-item index="1-1">选项1</el-menu-item>-->
-            <!--<el-menu-item index="1-2">选项2</el-menu-item>-->
-            <!--</el-menu-item-group>-->
-            <!--<el-menu-item-group title="分组2">-->
-            <!--<el-menu-item index="1-3">选项3</el-menu-item>-->
-            <!--</el-menu-item-group>-->
-            <!--<el-submenu index="1-4">-->
-            <!--<span slot="title">选项4</span>-->
-            <!--<el-menu-item index="1-4-1">选项1</el-menu-item>-->
-            <!--</el-submenu>-->
-            <!--</el-submenu>-->
             <el-menu-item index="1" @click="handleNavClick">
               <i class="el-icon-menu i-button"></i>
               <span slot="title">账 户 设 置</span>
@@ -57,7 +39,7 @@
                 <i class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </div>
-            <div class="name-wrapper"  v-show="!userInfo">
+            <div class="name-wrapper">
               <p>ISLAND</p>
             </div>
             <div class="prop-wrapper">
@@ -81,7 +63,7 @@
 
                 </el-col>
                 <el-col :xs="16" :sm="16" :md="16" :lg="16" style="padding: 0">
-                  <input disabled value="*****"/>
+                  <input disabled value="13151059368"/>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
                   <el-button type="success" >修改</el-button>
@@ -95,7 +77,7 @@
 
                 </el-col>
                 <el-col :xs="16" :sm="16" :md="16" :lg="16" style="padding: 0">
-                  <input disabled value="*****"/>
+                  <input disabled value="islandq0214@gamil.com"/>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
                   <el-button type="success" >修改</el-button>
@@ -109,7 +91,7 @@
 
                 </el-col>
                 <el-col :xs="16" :sm="16" :md="16" :lg="16" style="padding: 0">
-                  <input disabled value="*****"/>
+                  <input disabled value="哈哈哈, 嘻嘻嘻"/>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
                   <el-button type="success" >修改</el-button>
@@ -117,9 +99,77 @@
               </el-row>
             </div>
           </div>
-          <div class="info-wrapper">
-            <div class="friend-info-wrapper">
+          <div class="info-wrapper" v-show="!userInfo">
+            <div class="prop-wrapper" style="top: 5%;">
+              <el-row :gutter="10">
+                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">
+                  <p>允许谁看我的笔记</p>
+                </el-col>
+                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
+                  <el-select v-model="value0" placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.label">
+                    </el-option>
+                  </el-select>
+                </el-col>
 
+              </el-row>
+            </div>
+            <div class="prop-wrapper" style="top: 15%">
+              <el-row :gutter="10">
+                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">
+                  <p>允许谁修改我的笔记</p>
+                </el-col>
+                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
+                  <el-select v-model="value1" placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-col>
+
+              </el-row>
+            </div>
+            <div class="prop-wrapper" style="top: 25%">
+              <el-row :gutter="10">
+                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">
+                  <p>允许谁搜索到我的笔记</p>
+                </el-col>
+                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
+                  <el-select v-model="value2" placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-col>
+              </el-row>
+            </div>
+            <div class="prop-wrapper" style="top: 35%">
+              <el-row :gutter="10">
+                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">
+                  <p>将笔记动态显示在社区</p>
+                </el-col>
+                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
+                  <el-select v-model="value3" placeholder="请选择">
+                    <el-option
+                      v-for="item in options2"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-col>
+
+              </el-row>
             </div>
           </div>
         </div>
@@ -144,7 +194,28 @@
         contentStyle: {
           height: window.innerHeight - 100 + 'px'
         },
-        userInfo: true
+        userInfo: true,
+        options: [{
+          value: '选项1',
+          label: '所有人'
+        }, {
+          value: '选项2',
+          label: '仅好友'
+        }, {
+          value: '选项3',
+          label: '只有我'
+        }],
+        options2: [{
+          value: '选项4',
+          label: '允许'
+        }, {
+          value: '选项5',
+          label: '不允许'
+        }],
+        value0: '',
+        value1: '',
+        value2: '',
+        value3: ''
       }
     },
     computed: {

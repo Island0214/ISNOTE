@@ -180,6 +180,33 @@
 
 }
 
+#main-part .right-wrapper .inner-wrapper .info-wrapper .prop-wrapper /deep/  .el-select {
+  width: 80%;
+  font-size: 2vmin;
+
+}
+
+#main-part .right-wrapper .inner-wrapper .info-wrapper .prop-wrapper .el-select /deep/ input{
+  position: absolute;
+  left: 0;
+}
+
+#main-part .right-wrapper .inner-wrapper .info-wrapper .prop-wrapper .el-select .el-input /deep/ i{
+  z-index: 1;
+}
+
+#main-part .right-wrapper .inner-wrapper .info-wrapper .prop-wrapper .el-select /deep/ .el-input__inner{
+  left: 0;
+  position: relative;
+  top: 0;
+  z-index: 0;
+  font-size: 2vmin;
+}
+
+#main-part .right-wrapper .inner-wrapper .info-wrapper .prop-wrapper .el-select .el-input /deep/ .el-input__icon{
+  z-index: 1;
+}
+
 #main-part .right-wrapper .inner-wrapper .icon-wrapper{
   position: relative;
   display: inline-block;
@@ -255,4 +282,18 @@
 .el-row /deep/ .el-col{
   padding: 0;
   margin: 0;
+}
+
+/deep/ .el-select-dropdown__item {
+  font-size: 2vmin;
+  /*height: 3vmin;*/
+  line-height: 3vmin;
+}
+
+/deep/ .el-select .el-input .el-input__icon {
+  z-index: 1;
+}
+
+/deep/ .el-checkbox__label {
+  font-size: 2vmin;
 }
