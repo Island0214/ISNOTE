@@ -54,7 +54,7 @@
               <router-link to="/info" class="nav-button">个人信息</router-link>
             </el-menu-item>
             <el-menu-item index="2-2">
-              <router-link to="/info" class="nav-button">好友信息</router-link>
+              <router-link to="/friends" class="nav-button">好友信息</router-link>
             </el-menu-item>
             <el-menu-item index="2-3" @click="quitLog()">
               退出登录

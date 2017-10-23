@@ -41,6 +41,9 @@
             </div>
             <div class="name-wrapper">
               <p>ISLAND</p>
+              <el-tooltip class="item" effect="dark" content="点击修改" placement="bottom-end">
+                <p class="intro-wrapper">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+              </el-tooltip>
             </div>
             <div class="prop-wrapper">
               <el-row :gutter="10">
