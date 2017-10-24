@@ -42,7 +42,7 @@
             <div class="name-wrapper">
               <p>ISLAND</p>
               <el-tooltip class="item" effect="dark" content="点击修改" placement="bottom-end">
-                <p class="intro-wrapper">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+                <p class="intro-wrapper" @click="showModifyIntro = true">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
               </el-tooltip>
             </div>
             <div class="prop-wrapper">
@@ -55,7 +55,7 @@
                   <input disabled value="*****"/>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
-                  <el-button type="success" >修改</el-button>
+                  <el-button type="success"  @click="showModifyPassword = true">修改</el-button>
                 </el-col>
               </el-row>
             </div>
@@ -69,7 +69,7 @@
                   <input disabled value="13151059368"/>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
-                  <el-button type="success" >修改</el-button>
+                  <el-button type="success" @click="showModifyPhone = true">修改</el-button>
                 </el-col>
               </el-row>
             </div>
@@ -83,7 +83,7 @@
                   <input disabled value="islandq0214@gamil.com"/>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
-                  <el-button type="success" >修改</el-button>
+                  <el-button type="success" @click="showModifyEmail = true">修改</el-button>
                 </el-col>
               </el-row>
             </div>
@@ -97,7 +97,7 @@
                   <input disabled value="哈哈哈, 嘻嘻嘻"/>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
-                  <el-button type="success" >修改</el-button>
+                  <el-button type="success"  @click="showModifyTags = true">修改</el-button>
                 </el-col>
               </el-row>
             </div>
@@ -178,6 +178,103 @@
         </div>
       </div>
 
+      <el-dialog :visible.sync="showModifyIntro"  top="30%">
+        <h3 style="top: 0; font-size: 18px;">修改简介</h3>
+        <el-input
+          type="textarea"
+          :rows="2"
+          placeholder="请输入内容"
+          v-model="textarea"
+        >
+        </el-input>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="showModifyIntro = false">取 消</el-button>
+          <el-button type="primary" @click="showModifyIntro = false">确 定</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog :visible.sync="showModifyPassword"  top="30%">
+        <h3 style="top: 0; font-size: 18px;">修改密码</h3>
+        <p style="width: 100%">输入原密码</p>
+        <el-input v-model="oldPassword" placeholder="" type="password" class="el-dialog-input"
+                  v-bind:class="[!errorOldPassword ? 'input-success' : 'input-error']"
+        ></el-input>
+        <p style="width: 100%">设置新密码</p>
+        <el-input v-model="newPassword1" placeholder="" type="password" class="el-dialog-input"
+                  v-bind:class="[!errorNewPassword ? 'input-success' : 'input-error']"
+        ></el-input>
+        <p style="width: 100%">确认新密码</p>
+        <el-input v-model="newPassword2" placeholder="" type="password" class="el-dialog-input"
+                  v-bind:class="[!errorNewPassword ? 'input-success' : 'input-error']"
+        ></el-input>
+
+        <p class="p-error" style="margin: 0" v-show="errorOldPassword">原密码错误</p>
+        <p class="p-error" style="margin: 0" v-show="errorNewPassword">两次密码输入不一致</p>
+
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="showModifyPassword = false">取 消</el-button>
+          <el-button type="primary" @click="showModifyPassword = false">确 定</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog :visible.sync="showModifyPhone"  top="30%">
+        <h3 style="top: 0; font-size: 18px;">修改手机号</h3>
+        <p style="width: 100%">输入新手机号</p>
+        <el-input v-model="newPhone" placeholder="" class="el-dialog-input" v-on:input="testPhonePattern()"
+                  v-bind:class="[!errorPhonePattern ? 'input-success' : 'input-error']"
+        ></el-input>
+        <p class="p-error" v-show="errorPhonePattern" style="margin: 0;">手机号格式错误</p>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="showModifyPhone = false">取 消</el-button>
+          <el-button type="primary" @click="showModifyPhone = false">确 定</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog :visible.sync="showModifyEmail"  top="30%">
+        <h3 style="top: 0; font-size: 18px;">修改邮箱</h3>
+        <p style="width: 100%">输入新邮箱</p>
+        <el-input v-model="newEmail" placeholder="" class="el-dialog-input" v-on:input="testEmailPattern()"
+                  v-bind:class="[!errorEmailPattern ? 'input-success' : 'input-error']"
+        ></el-input>
+        <p class="p-error" v-show="errorPhonePattern" style="margin: 0;">邮箱格式错误</p>
+
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="showModifyEmail = false">取 消</el-button>
+          <el-button type="primary" @click="showModifyEmail = false">确 定</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog :visible.sync="showModifyTags"  top="30%">
+        <h3 style="top: 0; font-size: 18px;">修改标签</h3>
+
+        <el-tag
+          :key="tag"
+          v-for="tag in dynamicTags"
+          :closable="true"
+          :close-transition="false"
+          @close="handleCloseTag(tag)"
+          style="margin-top: 3vmin"
+        >
+          {{tag}}
+        </el-tag>
+        <el-input
+          class="input-new-tag"
+          v-if="inputVisible"
+          v-model="inputValue"
+          ref="saveTagInput"
+          size="mini"
+          @keyup.enter.native="handleInputConfirm"
+          @blur="handleInputConfirm"
+        >
+        </el-input>
+        <el-button class="button-new-tag" size="small" @click="showInput" v-else>+ New Tag</el-button>
+
+
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="showModifyTags = false">取 消</el-button>
+          <el-button type="primary" @click="showModifyTags = false">确 定</el-button>
+        </div>
+      </el-dialog>
 
     </div>
   </div>
@@ -218,7 +315,24 @@
         value0: '',
         value1: '',
         value2: '',
-        value3: ''
+        value3: '',
+        showModifyIntro: false,
+        showModifyPassword: false,
+        showModifyPhone: false,
+        showModifyEmail: false,
+        showModifyTags: false,
+        oldPassword: '',
+        newPassword1: '',
+        newPassword2: '',
+        newPhone: '',
+        newEmail: '',
+        dynamicTags: ['标签一', '标签二', '标签三'],
+        inputVisible: false,
+        inputValue: '',
+        errorPhonePattern: false,
+        errorEmailPattern: false,
+        errorOldPassword: false,
+        errorNewPassword: false
       }
     },
     computed: {
@@ -264,6 +378,31 @@
       },
       handleClose (key, keyPath) {
         console.log(key, keyPath)
+      },
+      handleCloseTag (tag) {
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
+      },
+      showInput () {
+        this.inputVisible = true
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus()
+        })
+      },
+      handleInputConfirm () {
+        let inputValue = this.inputValue
+        if (inputValue) {
+          this.dynamicTags.push(inputValue)
+        }
+        this.inputVisible = false
+        this.inputValue = ''
+      },
+      testPhonePattern () {
+        let phonePattern = /^1[34578]\d{9}$/
+        this.errorPhonePattern = !phonePattern.test(this.newPhone)
+      },
+      testEmailPattern () {
+        let phonePattern = /^1[34578]\d{9}$/
+        this.errorPhonePattern = !phonePattern.test(this.newEmail)
       }
     },
     watch: {
@@ -273,6 +412,12 @@
       mainHeight: function () {
         this.mainStyle.height = this.mainHeight + 'px'
         this.contentStyle.height = this.mainHeight - 100 + 'px'
+      },
+      showModifyPhone: function () {
+        this.newPhone = ''
+      },
+      showModifyEmail: function () {
+        this.newEmail = ''
       }
     }
   }

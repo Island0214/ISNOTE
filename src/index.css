@@ -55,7 +55,7 @@ button {
 input {
   position: absolute;
   width: 60%;
-  left: 20%;
+  /*left: 20%;*/
   font-size: 1.2vmax;
   padding: 0.2vmax;
   background-color: #f5f4f0;
@@ -69,6 +69,7 @@ input {
 .input-error {
   border: 1px solid #ff94a3;
 }
+
 
 i {
   position: absolute;
@@ -87,3 +88,22 @@ p {
 .p-error {
   color: #ff94a3;
 }
+
+
+.el-message-box__wrapper /deep/ .el-message-box {
+  width: 40%;
+}
+
+.el-message-box__wrapper /deep/ .el-message-box /deep/ .el-message-box__header /deep/ .el-message-box__title {
+  color: #5f5f5f;
+  font-size: 2.5vmin;
+  font-family: 'Helvetica Neue', 'Arial', 'PingFang TC';
+}
+
+.el-message-box__wrapper .el-message-box /deep/ .el-message-box__input {
+  left: 0;
+}
+
+.el-message-box__wrapper .el-message-box .el-message-box__input /deep/ input {
+  position: relative;
+  margin-top: 20px;}
