@@ -28,9 +28,9 @@
 
                       <!--<img src="../../assets/lines.png">-->
                       <h3 style="top: 15%;">账户</h3>
-                      <input style="top: 30%;" v-model="username"/>
+                      <input style="top: 30%; left: 20%;" v-model="username"/>
                       <h3 style="top: 45%;">密码</h3>
-                      <input style="top: 60%;" type="password" v-model="password"/>
+                      <input style="top: 60%; left: 20%;" type="password" v-model="password"/>
                       <el-button type="success" style="top: 85%" @click="tryLogIn()">登 录</el-button>
                     </div>
                   </div>
@@ -56,12 +56,12 @@
                       </div>
 
                       <h3 style="top: 15%;">账户</h3>
-                      <input style="top: 30%;" v-model="username" v-bind:class="{ 'input-error': !correctUsername }"
+                      <input style="top: 30%; left: 20%;" v-model="username" v-bind:class="{ 'input-error': !correctUsername }"
                              v-on:input="testUsername()"/>
                       <p style="top: 35%; left: 20%;" class="p-error" v-if="!correctUsername">账户至多12位</p>
 
                       <h3 style="top: 45%;">密码</h3>
-                      <input style="top: 60%;" v-bind:class="{ 'input-error': !correctPassword }" type="password"
+                      <input style="top: 60%; left: 20%;" v-bind:class="{ 'input-error': !correctPassword }" type="password"
                              id="signInPasswordInput" v-model="password" v-on:input="testPassword()"/>
                       <p style="top: 65%; left: 20%;" class="p-error" v-if="!correctPassword">密码至多16位</p>
 

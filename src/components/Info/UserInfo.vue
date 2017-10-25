@@ -48,6 +48,22 @@
             <div class="prop-wrapper">
               <el-row :gutter="10">
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
+                  <p>性别</p>
+                </el-col>
+                <el-col :xs="20" :sm="20" :md="20" :lg="20" style="padding: 0; line-height: 5vmin; text-align: left;">
+                  <template>
+                    <el-radio class="radio" v-model="radio" label="男">男</el-radio>
+                    <el-radio class="radio" v-model="radio" label="女">女</el-radio>
+                  </template>
+                </el-col>
+                <!--<el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">-->
+                  <!--<el-button type="success"  @click="showModifyPassword = true">修改</el-button>-->
+                <!--</el-col>-->
+              </el-row>
+            </div>
+            <div class="prop-wrapper" style="top: 10%">
+              <el-row :gutter="10">
+                <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
                   <p>密码</p>
 
                 </el-col>
@@ -59,7 +75,7 @@
                 </el-col>
               </el-row>
             </div>
-            <div class="prop-wrapper" style="top: 10%">
+            <div class="prop-wrapper" style="top: 15%">
               <el-row :gutter="10">
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
                   <p>手机</p>
@@ -73,7 +89,7 @@
                 </el-col>
               </el-row>
             </div>
-            <div class="prop-wrapper" style="top: 15%">
+            <div class="prop-wrapper" style="top: 20%">
               <el-row :gutter="10">
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
                   <p>邮箱</p>
@@ -87,7 +103,7 @@
                 </el-col>
               </el-row>
             </div>
-            <div class="prop-wrapper" style="top: 20%">
+            <div class="prop-wrapper" style="top: 25%">
               <el-row :gutter="10">
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
                   <p>标签</p>
@@ -332,7 +348,9 @@
         errorPhonePattern: false,
         errorEmailPattern: false,
         errorOldPassword: false,
-        errorNewPassword: false
+        errorNewPassword: false,
+        textarea: '',
+        radio: '男'
       }
     },
     computed: {
