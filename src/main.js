@@ -31,15 +31,12 @@ new Vue({
   data () {
     return {
       screenWidth: document.body.clientWidth,
-      screenHeight: window.innerHeight
+      screenHeight: window.innerHeight,
+      scrollTop: window.scrollY
     }
   },
-  computed: {
-    // largeSize: function () {
-    //   return this.screenWidth > 768
-    // }
-  },
   mounted () {
+    window.addEventListener('scroll', this.handleScrollEvent)
     const that = this
     window.onresize = () => {
       return (() => {
@@ -79,7 +76,14 @@ new Vue({
     ...Vuex.mapMutations({
       setLarge: types.SET_LARGE_SIZE, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
       setSmall: types.SET_SMALL_SIZE,
-      setWindowHeight: types.SET_HEIGHT
-    })
+      setWindowHeight: types.SET_HEIGHT,
+      setScrollY: types.SET_SCROLLY
+    }),
+    handleScrollEvent () {
+      this.setScrollY()
+    }
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScrollEvent)
   }
 })

@@ -252,7 +252,7 @@
         <el-input v-model="newEmail" placeholder="" class="el-dialog-input" v-on:input="testEmailPattern()"
                   v-bind:class="[!errorEmailPattern ? 'input-success' : 'input-error']"
         ></el-input>
-        <p class="p-error" v-show="errorPhonePattern" style="margin: 0;">邮箱格式错误</p>
+        <p class="p-error" v-show="errorEmailPattern" style="margin: 0;">邮箱格式错误</p>
 
         <div slot="footer" class="dialog-footer">
           <el-button @click="showModifyEmail = false">取 消</el-button>
@@ -419,8 +419,8 @@
         this.errorPhonePattern = !phonePattern.test(this.newPhone)
       },
       testEmailPattern () {
-        let phonePattern = /^1[34578]\d{9}$/
-        this.errorPhonePattern = !phonePattern.test(this.newEmail)
+        let emailPattern = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
+        this.errorEmailPattern = !emailPattern.test(this.newEmail)
       }
     },
     watch: {
@@ -433,9 +433,11 @@
       },
       showModifyPhone: function () {
         this.newPhone = ''
+        this.errorPhonePattern = false
       },
       showModifyEmail: function () {
         this.newEmail = ''
+        this.errorEmailPattern = false
       }
     }
   }

@@ -184,7 +184,6 @@
 
 #main-part .right-wrapper .inner-wrapper .info-wrapper .prop-wrapper .el-button {
   position: relative;
-  color: #ffffff;
   font-size: 2vmin;
   left: 0;
   top: 0;
@@ -193,16 +192,21 @@
   /*background-color: #B2DDAC;*/
   width: 100%;
   display: inline-block;
-  border: none;
-  border-radius: 0;
   padding: 0;
   font-family: 'Helvetica Neue', 'Arial', 'PingFang TC';
   font-weight: 800;
   border-radius: 0px 10px 10px 0px;
+  background-color: #f9f9f7;
+  border: 1px solid #B2DDAC;
+  color: #B2DDAC;
   /*margin-left: -1%;*/
-
 }
 
+
+#main-part .right-wrapper .inner-wrapper .info-wrapper .prop-wrapper .el-button:hover {
+  background-color: #B2DDAC;
+  color: #f9f9f7;
+}
 #main-part .right-wrapper .inner-wrapper .info-wrapper .prop-wrapper /deep/  .el-select {
   width: 80%;
   font-size: 2vmin;
@@ -334,14 +338,20 @@
 .el-textarea /deep/ textarea {
   margin-top: 3vmin;
   height: 20vmin;
-  font-size: 2vmin;
+  font-size: 2.5vmin;
   color: #5f5f5f;
   letter-spacing: 0.2vmin;
+  border: none;
+  background-color: #f5f4f0;
 }
 
 /deep/ .el-button {
   font-size: 2vmin;
   border-radius: 20px;
+}
+
+.el-dialog__wrapper /deep/ .el-dialog {
+  background-color: #f9f9f7;
 }
 
 .el-dialog p{
@@ -356,12 +366,12 @@
   width: 60%;
   position: relative;
   left: 20%;
-  border-radius: 5vmin;
+  /*border-radius: 5vmin;*/
   /*border: 1px solid #B2DDAC;*/
 }
 
 .input-success {
-  border: 1px solid #B2DDAC;
+  /*border: 1px solid #B2DDAC;*/
 }
 
 .input-error {
@@ -371,8 +381,9 @@
 .el-dialog .el-input /deep/ input{
   text-align: center;
   position: relative;
-  border-radius: 5vmin;
+  border-radius: 0;
   border: none;
+  background-color: #f5f4f0;
 }
 
 /deep/ .el-tag {

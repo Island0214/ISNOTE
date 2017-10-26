@@ -3,13 +3,15 @@ import * as types from '../mutation-types'
 // initial state
 const state = {
   largeSize: document.body.clientWidth > 768,
-  mainHeight: window.innerHeight
+  mainHeight: window.innerHeight,
+  scrollTop: window.scrollY
 }
 
 // getters
 const getters = {
   largeSize: state => state.largeSize,
-  mainHeight: state => state.mainHeight
+  mainHeight: state => state.mainHeight,
+  scrollTop: state => state.scrollTop
 }
 
 // actions
@@ -27,6 +29,9 @@ const mutations = {
   },
   [types.SET_HEIGHT] (state) {
     state.mainHeight = window.innerHeight
+  },
+  [types.SET_SCROLLY] (state) {
+    state.scrollTop = window.scrollY
   }
 }
 

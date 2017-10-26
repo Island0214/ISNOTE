@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/page/Home'
-import UserInfoPage from '@/page/UserInfoPage'
-import FriendInfoPage from '@/page/FriendInfoPage'
-// import HelloWorld from '../components/HelloWorld.vue'
+import Home from '../page/Home'
+import UserInfoPage from '../page/UserInfoPage'
+import FriendInfoPage from '../page/FriendInfoPage'
+import CommunityPage from '../page/CommunityPage'
 
 Vue.use(Router)
 
@@ -21,6 +21,10 @@ export default new Router({
       path: '/friends',
       name: 'friendsInfo',
       component: FriendInfoPage
+    }, {
+      path: '/community',
+      name: 'community',
+      component: CommunityPage
     }
   ]
 })

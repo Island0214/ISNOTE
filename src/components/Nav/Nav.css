@@ -35,6 +35,7 @@ button {
   overflow: visible;
   word-break: break-all;
   display: inline;
+  top: 0;
 }
 
 .nav-bar .nav-logo {

@@ -33,8 +33,12 @@
           <el-menu-item index="1" @click="showWelcome()">
             <router-link to="/" class="nav-button">首 页</router-link>
           </el-menu-item>
-          <el-menu-item index="2">笔 记</el-menu-item>
-          <el-menu-item index="3">社 区</el-menu-item>
+          <el-menu-item index="2">
+            <router-link to="/note" class="nav-button">笔 记</router-link>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <router-link to="/community" class="nav-button">社 区</router-link>
+          </el-menu-item>
 
         </el-menu>
       </div>
