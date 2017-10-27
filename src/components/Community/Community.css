@@ -10,13 +10,13 @@
 }
 
 /*#main-wrapper .left-wrapper {*/
-  /*position: relative;*/
-  /*!*display: inline-block;*!*/
-  /*margin-top: 80px;*/
-  /*background: #f9f9f7;*/
-  /*width: 80%;*/
-  /*left: 10%;*/
-  /*!*padding-bottom: 100%;*!*/
+/*position: relative;*/
+/*!*display: inline-block;*!*/
+/*margin-top: 80px;*/
+/*background: #f9f9f7;*/
+/*width: 80%;*/
+/*left: 10%;*/
+/*!*padding-bottom: 100%;*!*/
 /*}*/
 
 #main-wrapper .left-wrapper {
@@ -44,8 +44,7 @@
   width: 20%;
 }
 
-
-#main-wrapper .left-wrapper h1{
+#main-wrapper .left-wrapper h1 {
   position: absolute;
   left: 0;
   top: 0;
@@ -57,15 +56,142 @@
   font-size: 5vmin;
 }
 
-
 #main-wrapper .left-wrapper .inner-border {
-  position: absolute;
-  width: 95%;
+  position: relative;
+  width: 93%;
   left: 4%;
   /*height: 92%;*/
-  top: 20px;
-  bottom: 20px;
+  margin-top: 2vmin;
+  margin-bottom: 2vmin;
   border: 5px solid #c2c2c0;
+  height: auto;
+}
+
+#main-wrapper .left-wrapper .inner-border .el-input {
+  width: 80%;
+  left: 5%;
+  top: 3vmin;
+}
+
+#main-wrapper .left-wrapper .inner-border .el-input /deep/ .el-input__icon {
+  z-index: 1;
+  line-height: 4vmin;
+  font-size: 1.5vmin;
+  width: 3vmin;
+}
+
+#main-wrapper .left-wrapper .inner-border .el-input /deep/ .el-input__inner {
+  border-radius: 5vmax;
+  line-height: 4vmin;
+  height: 4vmin;
+  font-size: 1.5vmin;
+  padding-right: 3vmin;
+}
+
+#main-wrapper .left-wrapper .inner-border h2 {
+  position: relative;
+  left: 5%;
+  top: 7vmin;
+  color: #ffffff;
+  font-size: 2.5vmin;
+}
+
+#main-wrapper .left-wrapper .inner-border ul {
+  position: relative;
+  left: 5%;
+  top: 5vmin;
+  padding-left: 0;
+}
+
+#main-wrapper .left-wrapper .inner-border ul li {
+  top: 25%;
+  list-style: none;
+  font-size: 2vmin;
+  margin-bottom: 1vmin
+}
+
+#main-wrapper .left-wrapper .inner-border ul li a {
+  text-decoration: none;
+  color: #b3b3af;
+  letter-spacing: 0.2vmin;
+  font-weight: 500;
+}
+
+#main-wrapper .left-wrapper .inner-border ul li a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+#main-wrapper .left-wrapper .inner-border .user-wrapper {
+  position: relative;
+  /*padding-bottom: 20%;*/
+  background: #ffffff20;
+  /*top: 25vmin;*/
+  width: 90%;
+  left: 5%;
+  margin-bottom: 3vmin;
+  /*padding: 5vmin;*/
+  padding: 0;
+}
+
+#main-wrapper .left-wrapper .inner-border .user-wrapper a {
+  position: absolute;
+  color: #FFFFFF;
+  width: 50%;
+  line-height: 2.5vmin;
+  top: 20%;
+  left: 30%;
+  font-size: 2vmin;
+  cursor: pointer;
+}
+
+#main-wrapper .left-wrapper .inner-border .user-wrapper a:hover {
+  text-decoration: underline;
+}
+
+#main-wrapper .left-wrapper .inner-border .user-wrapper p {
+  position: absolute;
+  color: #b3b3af;
+  width: 50%;
+  line-height: 2.5vmin;
+  font-size: 1.5vmin;
+  left: 30%;
+  top: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#main-wrapper .left-wrapper .inner-border .user-wrapper img {
+  width: 20%;
+  /*height: 5vmin;*/
+  margin: 5%;
+  padding: 0;
+  cursor: pointer;
+}
+
+#main-wrapper .left-wrapper .inner-border .user-wrapper button {
+  width: 15%;
+  height: 100%;
+  white-space: normal;
+  top: 0;
+  position: absolute;
+  right: 0;
+  background: #ffffff00;
+  color: #B2DDAC;
+  border-radius: 0;
+  padding: 0;
+  text-align: center;
+  margin: 0;
+  border: 0.2vmin solid #B2DDAC;
+  font-weight: 600;
+  font-size: 1.5vmin;
+  letter-spacing: 0;
+}
+
+#main-wrapper .left-wrapper .inner-border .user-wrapper button:hover {
+  background-color: #B2DDAC;
+  color: #ffffff;
 }
 
 #main-wrapper .right-wrapper {
