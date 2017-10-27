@@ -1,7 +1,7 @@
 <template>
   <div id="main-wrapper" :style="mainStyle">
     <el-row :gutter="10" style="margin: 0">
-      <el-col :xs="8" :sm="8" :md="6" :lg="6" style="padding: 0; overflow: hidden" id="left-col" :class="{'sticky': isSticky}">
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" style="padding: 0; overflow: hidden" id="left-col" :class="{'largeSticky': largeSize && isSticky, 'smallSticky': (!largeSize) && isSticky}">
         <div class="left-wrapper" >
           <div class="inner-border">
             <el-input
@@ -45,13 +45,63 @@
         </div>
       </el-col>
 
-      <el-col :xs="8" :sm="8" :md="6" :lg="6" style="padding: 0; overflow: hidden">
+      <el-col :xs="8" :sm="6" :md="6" :lg="6" style="padding: 0; overflow: hidden">
         <div style="min-height: 1px; background-color: #ffffff00"></div>
       </el-col>
-      <el-col :xs="16" :sm="16" :md="18" :lg="18" style="padding: 0;">
+      <el-col :xs="16" :sm="18" :md="18" :lg="18" style="padding: 0;">
         <div class="right-wrapper" :style="leftWrapperStyle">
-          <!--<div class="inner-border">-->
-          <!--</div>-->
+          <h1>关注人动态</h1>
+          <div class="post-wrapper">
+            <h2>说句话吧</h2>
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 4, maxRows: 4}"
+              placeholder="说 话。"
+              v-model="textarea">
+            </el-input>
+            <br>
+            <el-button type="success">发言</el-button>
+          </div>
+          <!--<el-upload-->
+            <!--action="https://jsonplaceholder.typicode.com/posts/"-->
+            <!--list-type="picture-card"-->
+            <!--:on-preview="handlePictureCardPreview"-->
+            <!--:on-remove="handleRemove">-->
+            <!--<i class="el-icon-plus"></i>-->
+          <!--</el-upload>-->
+          <!--<el-dialog v-model="dialogVisible" size="tiny">-->
+            <!--<img width="100%" :src="dialogImageUrl" alt="">-->
+          <!--</el-dialog>-->
+          <div class="split-wrapper"></div>
+          <div class="info-wrapper">
+            <div class="icon-wrapper">
+              <img src="../../assets/icon.png"/>
+            </div>
+            <div class="content-wrapper">
+              <a href="#">ISLAND</a>
+              <p>说：</p>
+              <p style="float: right">2017-07-28 11:11:11</p>
+              <div class="inner-wrapper">
+                <p>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-wrapper">
+            <div class="icon-wrapper">
+              <img src="../../assets/icon.png"/>
+            </div>
+            <div class="content-wrapper">
+              <a href="#">ISLAND</a>
+              <p>创建了笔记：</p>
+              <p style="float: right">2017-07-28 11:11:11</p>
+              <div class="inner-wrapper">
+                <h3>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</h3>
+                <p>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </el-col>
       <!--<el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">-->
@@ -70,14 +120,17 @@
     data () {
       return {
         mainStyle: {
-          minHeight: window.innerHeight - 80 + 'px'
+          minHeight: window.innerHeight - 60 + 'px'
         },
         leftWrapperStyle: {
           minHeight: window.innerHeight - 160 + 'px'
 //          minHeight: '380px'
         },
         isSticky: false,
-        input2: ''
+        input2: '',
+        textarea: '',
+        dialogImageUrl: '',
+        dialogVisible: false
       }
     },
     computed: {
@@ -90,10 +143,17 @@
     method: {
       handleIconClick: function () {
       }
+//      handleRemove (file, fileList) {
+//        console.log(file, fileList)
+//      },
+//      handlePictureCardPreview (file) {
+//        this.dialogImageUrl = file.url
+//        this.dialogVisible = true
+//      }
     },
     watch: {
       mainHeight: function () {
-        this.mainStyle.minHeight = this.mainHeight - 80 + 'px'
+        this.mainStyle.minHeight = this.mainHeight - 60 + 'px'
         this.leftWrapperStyle.minHeight = this.mainHeight - 100 + 'px'
 //      this.contentStyle.height = this.mainHeight - 100 + 'px'
       },
@@ -103,6 +163,9 @@
         } else {
           this.isSticky = false
         }
+      },
+      largeSize: function () {
+//        alert(this.largeSize)
       }
     }
   }
