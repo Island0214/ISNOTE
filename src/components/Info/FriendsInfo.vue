@@ -37,8 +37,9 @@
                   <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
-                  <el-button type="success" >取消关注</el-button>
+                  <el-button type="success">取消关注</el-button>
                 </el-col>
+
               </el-row>
             </div>
           </div>

@@ -78,11 +78,13 @@ i {
 
 p {
   color: #b3b3af;
-  position: absolute;
+  position: relative;
   font-family: 'Helvetica Neue', 'Arial', 'PingFang TC';
   font-size: 1vmax;
   letter-spacing: 0.2vmax;
   font-weight: 500;
+  word-break: break-all;
+  white-space: normal;
 }
 
 .p-error {

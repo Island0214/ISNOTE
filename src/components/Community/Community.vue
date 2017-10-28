@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-popover="http://www.w3.org/1999/xhtml">
   <div id="main-wrapper" :style="mainStyle">
     <el-row :gutter="10" style="margin: 0">
       <el-col :xs="8" :sm="6" :md="6" :lg="6" style="padding: 0; overflow: hidden" id="left-col" :class="{'largeSticky': largeSize && isSticky, 'smallSticky': (!largeSize) && isSticky}">
@@ -73,9 +73,13 @@
             <!--<img width="100%" :src="dialogImageUrl" alt="">-->
           <!--</el-dialog>-->
           <div class="split-wrapper"></div>
+          <post></post>
+
           <div class="info-wrapper">
             <div class="icon-wrapper">
               <img src="../../assets/icon.png"/>
+              <!--<div class="popover-wrapper"></div>-->
+
             </div>
             <div class="content-wrapper">
               <a href="#">ISLAND</a>
@@ -85,14 +89,20 @@
                 <p>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</p>
               </div>
             </div>
+
+
           </div>
 
           <div class="info-wrapper">
             <div class="icon-wrapper">
-              <img src="../../assets/icon.png"/>
+
+              <img src="../../assets/icon.png" v-popover:popover5/>
+              <!--<div class="popover-wrapper"></div>-->
+
+
             </div>
             <div class="content-wrapper">
-              <a href="#">ISLAND</a>
+              <a href="#" >ISLAND</a>
               <p>创建了笔记：</p>
               <p style="float: right">2017-07-28 11:11:11</p>
               <div class="inner-wrapper">
@@ -102,21 +112,25 @@
             </div>
           </div>
 
+
+
         </div>
       </el-col>
       <!--<el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">-->
       <!--<el-button type="success"  @click="showModifyPassword = true">修改</el-button>-->
       <!--</el-col>-->
     </el-row>
-
-
   </div>
 </template>
 
 <script>
   import {mapGetters} from 'vuex'
+  import Post from '../Community/Post.vue'
 
   export default {
+    components: {
+      Post
+    },
     data () {
       return {
         mainStyle: {
@@ -130,7 +144,8 @@
         input2: '',
         textarea: '',
         dialogImageUrl: '',
-        dialogVisible: false
+        dialogVisible: false,
+        visible2: false
       }
     },
     computed: {
@@ -167,6 +182,12 @@
       largeSize: function () {
 //        alert(this.largeSize)
       }
+    },
+    mounted () {
+//      this.$refs.reference // 获取到目标的引用
+    },
+    bind (el, binding, vnode) {
+      vnode.context.$refs[binding.arg].$refs.reference = el
     }
   }
 </script>
