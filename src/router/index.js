@@ -4,6 +4,7 @@ import Home from '../page/Home'
 import UserInfoPage from '../page/UserInfoPage'
 import FriendInfoPage from '../page/FriendInfoPage'
 import CommunityPage from '../page/CommunityPage'
+import NotePage from '../page/NotePage'
 
 Vue.use(Router)
 
@@ -25,6 +26,10 @@ export default new Router({
       path: '/community',
       name: 'community',
       component: CommunityPage
+    }, {
+      path: '/note',
+      name: 'note',
+      component: NotePage
     }
   ]
 })

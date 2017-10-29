@@ -74,32 +74,20 @@
           <!--</el-dialog>-->
           <div class="split-wrapper"></div>
           <post></post>
+          <post></post>
+          <post></post>
+          <post></post>
+          <post></post>
+          <post></post>
+          <post></post>
+          <post></post>
+          <post></post>
+          <post></post>
+
 
           <div class="info-wrapper">
             <div class="icon-wrapper">
-              <img src="../../assets/icon.png"/>
-              <!--<div class="popover-wrapper"></div>-->
-
-            </div>
-            <div class="content-wrapper">
-              <a href="#">ISLAND</a>
-              <p>说：</p>
-              <p style="float: right">2017-07-28 11:11:11</p>
-              <div class="inner-wrapper">
-                <p>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</p>
-              </div>
-            </div>
-
-
-          </div>
-
-          <div class="info-wrapper">
-            <div class="icon-wrapper">
-
               <img src="../../assets/icon.png" v-popover:popover5/>
-              <!--<div class="popover-wrapper"></div>-->
-
-
             </div>
             <div class="content-wrapper">
               <a href="#" >ISLAND</a>
