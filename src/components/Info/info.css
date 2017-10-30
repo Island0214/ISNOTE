@@ -58,12 +58,13 @@
 
 .el-menu-item:hover {
   background-color: #585858;
-  border-right: 5px solid #B2DDAC;
+  border-left: 5px solid #B2DDAC;
 }
 
 .is-active {
-  background-color: #585858;
+  /*background-color: #585858;*/
   color: #B2DDAC;
+  border-left: 5px solid #B2DDAC;
 }
 
 .i-button {
