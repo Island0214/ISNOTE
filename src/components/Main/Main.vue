@@ -67,7 +67,7 @@
 
                       <i class="el-icon-fa-eye" @mouseover="showPassword()" @mouseout="hidePassword()"></i>
 
-                      <input style="top: 60%;" id="hiddenPasswordInput" :value="password" v-if="show"
+                      <input style="top: 60%;  left: 20%;" id="hiddenPasswordInput" :value="password" v-if="show"
                              v-bind:class="{ 'input-error': !correctPassword }"/>
                       <el-button type="success" style="top: 85%">注 册</el-button>
                     </div>
