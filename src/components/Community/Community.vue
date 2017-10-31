@@ -2,7 +2,7 @@
   <div id="main-wrapper" :style="mainStyle">
     <el-row :gutter="10" style="margin: 0">
       <el-col :xs="8" :sm="6" :md="6" :lg="6" style="padding: 0; overflow: hidden" id="left-col" :class="{'largeSticky': largeSize && isSticky, 'smallSticky': (!largeSize) && isSticky}">
-        <div class="left-wrapper" >
+        <div class="left-wrapper" :style="leftWrapperStyle">
           <div class="inner-border">
             <el-input
               placeholder=""
@@ -11,7 +11,7 @@
               :on-icon-click="handleIconClick">
             </el-input>
 
-            <h2>热门笔记</h2>
+              <h2 style="top: 15%;">热门笔记</h2>
               <ul>
                 <li><a href="#">1. sagascaxsfasd</a></li>
                 <li><a href="#">2. xwxzxas</a></li>
@@ -20,25 +20,26 @@
                 <li><a href="#">5. asfgasgdsgsdf</a></li>
               </ul>
 
-            <h2 style="margin-top: 3vmin;">推荐关注</h2>
-            <div class="user-wrapper" style="margin-top: 8vmin;">
-              <img src="../../assets/icon.png"/>
-              <a class="name-wrapper">ISLAND</a>
-              <p class="info-wrapper">哈哈哈哈哈哈哈哈哈</p>
-              <el-button type="default">关<br><br>注</el-button>
-            </div>
-            <div class="user-wrapper">
-              <img src="../../assets/icon.png"/>
-              <a class="name-wrapper">ISLAND</a>
-              <p class="info-wrapper">哈哈哈哈哈哈哈哈哈</p>
-              <el-button type="default">关<br><br>注</el-button>
-            </div>
-            <div class="user-wrapper">
-              <img src="../../assets/icon.png"/>
-              <a class="name-wrapper">ISLAND</a>
-              <p class="info-wrapper">哈哈哈哈哈哈哈哈哈</p>
-              <el-button type="default">关<br><br>注</el-button>
-            </div>
+              <h2 style="top: 50%;">推荐关注</h2>
+
+              <div class="user-wrapper" style="top: 58%;">
+                <img src="../../assets/icon.png"/>
+                <a class="name-wrapper">ISLAND</a>
+                <p class="info-wrapper">哈哈哈哈哈哈哈哈哈</p>
+                <el-button type="default">关<br><br>注</el-button>
+              </div>
+              <div class="user-wrapper" style="top: 72%;">
+                <img src="../../assets/icon.png"/>
+                <a class="name-wrapper">ISLAND</a>
+                <p class="info-wrapper">哈哈哈哈哈哈哈哈哈</p>
+                <el-button type="default">关<br><br>注</el-button>
+              </div>
+              <div class="user-wrapper" style="top: 86%;">
+                <img src="../../assets/icon.png"/>
+                <a class="name-wrapper">ISLAND</a>
+                <p class="info-wrapper">哈哈哈哈哈哈哈哈哈</p>
+                <el-button type="default">关<br><br>注</el-button>
+              </div>
 
           </div>
           <h1>社 区。</h1>
@@ -125,7 +126,7 @@
           minHeight: window.innerHeight - 60 + 'px'
         },
         leftWrapperStyle: {
-          minHeight: window.innerHeight - 160 + 'px'
+          minHeight: window.innerHeight - 110 + 'px'
 //          minHeight: '380px'
         },
         isSticky: false,
@@ -157,7 +158,7 @@
     watch: {
       mainHeight: function () {
         this.mainStyle.minHeight = this.mainHeight - 60 + 'px'
-        this.leftWrapperStyle.minHeight = this.mainHeight - 100 + 'px'
+        this.leftWrapperStyle.minHeight = this.mainHeight - 110 + 'px'
 //      this.contentStyle.height = this.mainHeight - 100 + 'px'
       },
       scrollTop: function () {

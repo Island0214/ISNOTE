@@ -32,7 +32,7 @@
   overflow: hidden;
   opacity: 0.8;
   margin-top: 80px;
-  padding: 5px;
+  padding: 0px;
   float: left;
   /*padding-bottom: 180%;*/
 }
@@ -65,20 +65,24 @@
 }
 
 #main-wrapper .left-wrapper .inner-border {
-  position: relative;
-  width: 93%;
-  left: 4%;
+  position: absolute;
+  /*width: 93%;*/
+  left: 2.5vmin;
+  right: 0%;
   /*height: 92%;*/
-  margin-top: 2vmin;
-  margin-bottom: 2vmin;
-  border: 5px solid #c2c2c0;
-  height: auto;
+  top: 2.5vmin;
+  bottom: 2.5vmin;
+  /*margin-top: 2vmin;*/
+  /*margin-bottom: 2vmin;*/
+  border: 0.8vmin solid #c2c2c0;
+  border-right: none;
 }
 
 #main-wrapper .left-wrapper .inner-border .el-input {
-  width: 80%;
+  position: absolute;
+  width: 90%;
   left: 5%;
-  top: 3vmin;
+  top: 8%;
 }
 
 #main-wrapper .left-wrapper .inner-border .el-input /deep/ .el-input__icon {
@@ -97,7 +101,7 @@
 }
 
 #main-wrapper .left-wrapper .inner-border h2 {
-  position: relative;
+  position: absolute;
   left: 5%;
   top: 7vmin;
   color: #ffffff;
@@ -105,9 +109,9 @@
 }
 
 #main-wrapper .left-wrapper .inner-border ul {
-  position: relative;
+  position: absolute;
   left: 5%;
-  top: 5vmin;
+  top: 20%;
   padding-left: 0;
 }
 
@@ -115,7 +119,8 @@
   top: 25%;
   list-style: none;
   font-size: 2vmin;
-  margin-bottom: 1vmin
+  /*margin-bottom: 1vmin;*/
+  margin-bottom: 10%;
 }
 
 #main-wrapper .left-wrapper .inner-border ul li a {
@@ -131,13 +136,14 @@
 }
 
 #main-wrapper .left-wrapper .inner-border .user-wrapper {
-  position: relative;
+  top: 55%;
+  position: absolute;
   /*padding-bottom: 20%;*/
   background: #ffffff20;
   /*top: 25vmin;*/
   width: 90%;
   left: 5%;
-  margin-bottom: 3vmin;
+  margin-bottom: 10%;
   /*padding: 5vmin;*/
   padding: 0;
 }
