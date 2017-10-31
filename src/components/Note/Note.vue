@@ -6,7 +6,7 @@
           <div class="inner-border">
           </div>
           <h1>笔 记。</h1>
-          <el-button type="default" class="create-button">新建笔记本</el-button>
+          <el-button type="default" class="create-button" @click="createBookAction=true">新建笔记本</el-button>
           <div class="nav-wrapper">
             <el-menu default-active="0" class="el-menu-vertical-demo" :style="mainStyle">
               <el-menu-item index="0">所有笔记</el-menu-item>
@@ -54,7 +54,7 @@
 
             <el-row :gutter="10" style="margin: 0">
               <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper new-wrapper">
+                <div class="collection-wrapper new-wrapper"  @click="createNewNoteAction=true">
                   <el-button type="default"><i class="el-icon-plus"></i><br><br><br>新建笔记</el-button>
                 </div>
               </el-col>
@@ -132,6 +132,8 @@
     <dialogs
       :confirmCloseAction="confirmCloseAction" @closeConfirmClose="closeConfirmClose"
       :modifyBookAction="modifyBookAction" @closeModifyBook="closeModifyBook"
+      :createNewNoteAction="createNewNoteAction" @closeCreateNewNote="closeCreateNewNote"
+      :createBookAction="createBookAction" @closeCreateBook="closeCreateBook"
     ></dialogs>
 
   </div>
@@ -164,7 +166,9 @@
         visible2: false,
         isHoverProperty: false,
         confirmCloseAction: false,
-        modifyBookAction: false
+        modifyBookAction: false,
+        createNewNoteAction: false,
+        createBookAction: false
       }
     },
     computed: {
@@ -206,6 +210,12 @@
       },
       closeModifyBook: function () {
         this.modifyBookAction = false
+      },
+      closeCreateNewNote: function () {
+        this.createNewNoteAction = false
+      },
+      closeCreateBook: function () {
+        this.createBookAction = false
       }
     }
   }

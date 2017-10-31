@@ -63,7 +63,7 @@
   /*margin-top: 2vmin;*/
   /*margin-bottom: 2vmin;*/
   border: 0.8vmin solid #c2c2c0;
-  border-right: none;;
+  border-right: none;
 }
 
 #main-wrapper .left-wrapper .nav-wrapper {
@@ -122,10 +122,11 @@
 }
 
 #main-wrapper .left-wrapper .el-menu .el-menu-item.is-active {
-  border-right: 0.8vmin solid #B2DDAC;
+  /*border-right: 0.8vmin solid #B2DDAC;*/
   /*color: #B2DDAC;*/
   font-size: 2.5vmin;
   color: #B2DDAC;
+  background-color: #525252;
 }
 
 #main-wrapper .right-wrapper {

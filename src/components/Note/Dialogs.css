@@ -1,0 +1,130 @@
+/deep/ .el-dialog__wrapper {
+  width: 80%;
+  left: 10%;
+}
+
+.el-dialog__wrapper .el-button {
+  border-radius: 5vmin;
+  font-size: 1.5vmin;
+  padding: 1vmin 2vmin 1vmin 2vmin;
+}
+
+.el-dialog__wrapper /deep/ .el-dialog {
+  background-color: #f9f9f7;
+}
+
+.el-dialog p{
+  position: relative;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  font-size: 2vmin;
+}
+
+.el-dialog .el-dialog-input {
+  position: relative;
+  display: inline-block;
+  width: 60%;
+  left: 20%;
+  /*border-radius: 5vmin;*/
+  /*border: 1px solid #B2DDAC;*/
+}
+
+.el-dialog .el-input /deep/ input{
+  position: relative;
+  border-radius: 0;
+  border: none;
+  background-color: #f5f4f0;
+  width: 60%;
+  left: 20%;
+  font-size: 2.5vmin;
+  color: #5f5f5f;
+}
+
+/deep/ .el-row {
+  padding: 0;
+  margin: 0;
+}
+
+.el-row /deep/ .el-col{
+  padding: 0;
+  margin: 0;
+}
+
+/deep/ .el-select-dropdown__item {
+  font-size: 2vmin;
+  /*height: 3vmin;*/
+  line-height: 3vmin;
+}
+
+/deep/ .el-select .el-input .el-input__icon {
+  z-index: 1;
+}
+
+/deep/ .el-checkbox__label {
+  font-size: 2vmin;
+}
+
+/deep/ .el-tooltip__popper .is-dark {
+  background-color: #B2DDAC;
+}
+
+.el-dialog__head /deep/ .el-dialog__title{
+  color: #5f5f5f;
+  font-size: 24px;
+}
+
+
+.el-textarea /deep/ textarea {
+  margin-top: 3vmin;
+  height: 20vmin;
+  font-size: 2.5vmin;
+  color: #5f5f5f;
+  letter-spacing: 0.2vmin;
+  border: none;
+  background-color: #f5f4f0;
+}
+
+.input-success {
+  /*border: 1px solid #B2DDAC;*/
+}
+
+.input-error {
+  border: 1px solid #ff94a3;
+}
+
+
+/deep/  .el-select {
+  width: 60%;
+  font-size: 2vmin;
+  left: 20%;
+  background-color: #f5f4f0;
+
+}
+
+.el-select /deep/ input{
+  position: absolute;
+  left: 0;
+  color: #5f5f5f;
+  background-color: #f5f4f0;
+  border-radius: 0;
+  border: none;
+  font-weight: 600;
+}
+
+.el-select .el-input /deep/ i{
+  z-index: 1;
+}
+
+.el-select /deep/ .el-input__inner{
+  left: 0;
+  position: relative;
+  top: 0;
+  z-index: 0;
+  font-size: 2vmin;
+  color: #5f5f5f;
+}
+
+.el-select .el-input /deep/ .el-input__icon{
+  z-index: 1;
+}
