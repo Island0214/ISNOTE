@@ -86,22 +86,6 @@
           <post></post>
 
 
-          <div class="info-wrapper">
-            <div class="icon-wrapper">
-              <img src="../../assets/icon.png" v-popover:popover5/>
-            </div>
-            <div class="content-wrapper">
-              <a href="#" >ISLAND</a>
-              <p>创建了笔记：</p>
-              <p style="float: right">2017-07-28 11:11:11</p>
-              <div class="inner-wrapper">
-                <h3>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</h3>
-                <p>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</p>
-              </div>
-            </div>
-          </div>
-
-
 
         </div>
       </el-col>
@@ -114,7 +98,7 @@
 
 <script>
   import {mapGetters} from 'vuex'
-  import Post from '../Community/Post.vue'
+  import Post from '../Post/Post.vue'
 
   export default {
     components: {

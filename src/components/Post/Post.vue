@@ -13,8 +13,20 @@
       <div class="inner-wrapper">
         <p>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</p>
       </div>
+
     </div>
+    <div class="content-wrapper" style="display: none">
+      <a href="#" >ISLAND</a>
+      <p>创建了笔记：</p>
+      <p style="float: right">2017-07-28 11:11:11</p>
+      <div class="inner-wrapper">
+        <h3>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</h3>
+        <p>HAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHA</p>
+      </div>
+    </div>
+
   </div>
+
 </template>
 
 <script>
@@ -51,4 +63,4 @@
   }
 </script>
 
-<style scoped src="./Community.css"></style>
+<style scoped src="./Post.css"></style>

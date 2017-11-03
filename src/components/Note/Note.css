@@ -68,7 +68,7 @@
 
 #main-wrapper .left-wrapper .nav-wrapper {
   position: absolute;
-  top: 12vmin;
+  top: 15vmin;
   /*background-color: #000000;*/
   /*height: 90%;*/
   overflow: scroll;
@@ -81,8 +81,8 @@
   position: absolute;
   /*width: 93%;*/
   top: 7vmin;
-  left: 3.2vmin;
-  right: 0;
+  left: 5.2vmin;
+  right: 2vmin;
   background-color: #ffffff00;
   border-radius: 0;
   border: 0.4vmin solid #ffffff;
@@ -91,6 +91,7 @@
   font-size: 2vmin;
   height: 5vmin;
   padding: 0;
+  border-radius: 5vmin;
 }
 
 #main-wrapper .left-wrapper .create-button:hover {
@@ -380,7 +381,7 @@
   display: inline-block;
   left: 5%;
   width: 90%;
-  color: #B2DDAC;
+  color: #b3b3af;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
