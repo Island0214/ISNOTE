@@ -233,3 +233,25 @@ p {
   white-space: normal;
 }
 
+/deep/ .el-tag {
+  background-color: #B2DDAC;
+  margin-right: 2vmin;
+  border-radius: 20px;
+}
+
+/deep/ .input-new-tag {
+  width: 10%;
+}
+
+
+/deep/ .el-input--small {
+  width: 10%;
+}
+
+/deep/ .button-new-tag {
+  padding: 0 5px;
+  height: 24px;
+  line-height: 22px;
+  font-size: 12px;
+}
+
