@@ -49,7 +49,7 @@ new Vue({
   },
   watch: {
     screenWidth: function () {
-      if (this.screenWidth > 768) {
+      if (this.screenWidth > 1200) {
         this.setLarge()
       } else {
         this.setSmall()

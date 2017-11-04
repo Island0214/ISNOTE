@@ -1,7 +1,7 @@
 <template>
   <div id="main-wrapper" :style="mainStyle">
     <el-row :gutter="10" style="margin: 0">
-      <el-col :xs="8" :sm="6" :md="6" :lg="6" style="padding: 0; overflow: hidden" id="left-col" :class="{'largeSticky': largeSize && isSticky, 'smallSticky': (!largeSize) && isSticky}">
+      <el-col :xs="8" :sm="8" :md="8" :lg="6" style="padding: 0; overflow: hidden" id="left-col" :class="{'largeSticky': largeSize && isSticky, 'smallSticky': (!largeSize) && isSticky}">
         <div class="left-wrapper" :style="leftWrapperStyle">
           <div class="inner-border">
           </div>
@@ -30,10 +30,10 @@
         </div>
       </el-col>
 
-      <el-col :xs="8" :sm="6" :md="6" :lg="6" style="padding: 0; overflow: hidden">
+      <el-col :xs="8" :sm="8" :md="8" :lg="6" style="padding: 0; overflow: hidden">
         <div style="min-height: 1px; background-color: #ffffff00"></div>
       </el-col>
-      <el-col :xs="16" :sm="18" :md="18" :lg="18" style="padding: 0;">
+      <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
 
         <div class="right-wrapper">
           <div class="search-wrapper">

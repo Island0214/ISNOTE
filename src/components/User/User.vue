@@ -1,7 +1,7 @@
 <template>
   <div id="main-wrapper" :style="mainStyle">
     <el-row :gutter="10" style="margin: 0">
-      <el-col :xs="8" :sm="8" :md="6" :lg="6" style="padding: 0; overflow: visible;" id="left-col" :class="{'largeSticky': largeSize && isSticky, 'smallSticky': (!largeSize) && isSticky}">
+      <el-col :xs="8" :sm="8" :md="8" :lg="6" style="padding: 0; overflow: visible;" id="left-col" :class="{'largeSticky': largeSize && isSticky, 'smallSticky': (!largeSize) && isSticky}">
         <div class="left-wrapper" style="padding-bottom: 150%; overflow: visible;">
           <div class="inner-border" style="overflow: visible;">
             <img src="../../assets/icon.png"/>
@@ -44,10 +44,10 @@
         </div>
       </el-col>
 
-      <el-col :xs="8" :sm="8" :md="6" :lg="6" style="padding: 0; overflow: hidden">
+      <el-col :xs="8" :sm="8" :md="8" :lg="6" style="padding: 0; overflow: hidden">
         <div style="min-height: 1px; background-color: #ffffff00"></div>
       </el-col>
-      <el-col :xs="16" :sm="16" :md="18" :lg="18" style="padding: 0;">
+      <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
 
         <div class="right-wrapper" style="z-index: -1;">
           <div class="search-wrapper">

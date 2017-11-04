@@ -2,7 +2,7 @@ import * as types from '../mutation-types'
 
 // initial state
 const state = {
-  largeSize: document.body.clientWidth > 768,
+  largeSize: document.body.clientWidth > 1200,
   mainHeight: window.innerHeight,
   scrollTop: window.scrollY
 }
