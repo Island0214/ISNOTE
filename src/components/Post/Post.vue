@@ -7,7 +7,7 @@
 
     </div>
     <div class="content-wrapper">
-      <a href="#" @mouseover="showPopoverView">ISLAND</a>
+      <a href="#" @mouseover="showPopoverView" @click="toUser">ISLAND</a>
       <p>说：</p>
       <p style="float: right">2017-07-28 11:11:11</p>
       <div class="inner-wrapper">
@@ -58,6 +58,9 @@
       },
       enterPopoverView: function () {
         this.enterPopover = true
+      },
+      toUser: function () {
+        this.$router.push('/user')
       }
     }
   }

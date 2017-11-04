@@ -216,3 +216,20 @@ p {
   line-height: 22px;
   font-size: 12px;
 }
+
+
+/deep/ .el-tooltip__popper {
+  width: 10%;
+  white-space: normal;
+}
+
+.el-tooltip__popper /deep/ .is-dark {
+  width: 10%;
+  white-space: normal;
+}
+
+/deep/.tooltip-wrapper {
+  width: 10px;
+  white-space: normal;
+}
+

@@ -1,0 +1,139 @@
+
+.left-wrapper .inner-border img {
+  position: absolute;
+  width: 20%;
+  top: 15%;
+  left: 40%;
+}
+
+.left-wrapper .inner-border h5 {
+  position: absolute;
+  width: 100%;
+  top: 30%;
+  color: #ffffff;
+  text-align: center;
+  font-size: 2vmin;
+  letter-spacing: 0.2vmin;
+  margin: 0;
+  padding: 0;
+}
+
+.left-wrapper .inner-border p {
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 40%;
+  color: #b3b3af;
+  text-align: center;
+  font-size: 1.8vmin;
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.left-wrapper .inner-border h6 {
+  position: absolute;
+  color: #b3b3af;
+  font-size: 1.5vmin;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+.left-wrapper .inner-border h6 span {
+  color: #ffffff;
+  font-size: 1.8vmin;
+  margin-right: 1vmin;
+}
+
+.left-wrapper .inner-border /deep/ .el-button {
+  position: absolute;
+  top: 57%;
+  width: 60%;
+  left: 20%;
+  font-size: 2vmin;
+  padding: 0.5vmin;
+  font-weight: 600;
+  border-radius: 5vmin;
+  border: 0.3vmin solid #B2DDAC;
+  color: #B2DDAC;
+  background-color: #ffffff00;
+}
+
+.left-wrapper .inner-border /deep/ .el-button:hover {
+  background-color: #B2DDAC;
+  color: #ffffff;
+}
+
+.left-wrapper .nav-wrapper{
+  top: 65%;
+}
+
+.left-wrapper .nav-wrapper .el-menu {
+  width: 100%;
+  text-align: center;
+}
+
+.left-wrapper .nav-wrapper .el-menu i {
+  position: absolute;
+  display: inline-block;
+  font-size: 2vmin;
+  line-height: 5vmin;
+  margin: 0;
+  top: 0;
+  padding: 0;
+  width: 30%;
+  left: 35%;
+  font-weight: 600;
+  color: #B2DDAC;
+
+}
+
+#main-wrapper .left-wrapper .el-menu .el-menu-item {
+  height: 5vmin;
+  font-size: 4vmin;
+  padding: 0;
+}
+
+#main-wrapper .left-wrapper .el-menu .el-menu-item:hover {
+  background-color: #525252 !important;
+  color: #B2DDAC;
+}
+
+#main-wrapper .left-wrapper .el-menu .el-menu-item.is-active{
+  color: #ffffff;
+  background-color: #ffffff00;
+}
+
+#main-wrapper .left-wrapper .el-menu .el-submenu {
+  height: 5vmin;
+}
+
+#main-wrapper .left-wrapper .el-menu .el-submenu.is-active{
+  color: #B2DDAC;
+  background-color: #525252;
+}
+
+#main-wrapper .left-wrapper .el-menu .el-submenu /deep/ .el-submenu__title{
+  height: 5vmin;
+  font-size: 4vmin;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.5vmin;
+}
+
+#main-wrapper .left-wrapper .el-menu .el-submenu /deep/ .el-submenu__title:hover{
+  color: #B2DDAC;
+  background-color: #525252;
+  border-right: 5px solid #B2DDAC;
+}
+
+.el-menu--collapse .el-submenu /deep/ .el-menu {
+  background-color: #5f5f5f;
+  opacity: 0.8;
+}
