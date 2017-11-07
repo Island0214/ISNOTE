@@ -35,7 +35,7 @@
       </el-col>
       <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
 
-        <div class="right-wrapper">
+        <div class="right-wrapper" style="display: none">
           <div class="search-wrapper">
           <input placeholder="搜索笔记"/>
           <el-button type="default"><i class="el-icon-search"></i></el-button>
@@ -124,6 +124,8 @@
             </el-row>
           </div>
         </div>
+        <note-pad></note-pad>
+
       </el-col>
       <!--<el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">-->
       <!--<el-button type="success"  @click="showModifyPassword = true">修改</el-button>-->
@@ -142,10 +144,12 @@
 <script>
   import {mapGetters} from 'vuex'
   import Dialogs from './Dialogs'
+  import NotePad from '../NotePad/NotePad'
 
   export default {
     components: {
-      Dialogs
+      Dialogs,
+      NotePad
     },
     data () {
       return {
@@ -156,7 +160,7 @@
           minHeight: window.innerHeight - 110 + 'px'
         },
         rightWrapperStyle: {
-          height: window.innerHeight - 20 + 'px'
+          height: window.innerHeight + 140 + 'px'
         },
         isSticky: false,
         input2: '',
@@ -182,7 +186,7 @@
       mainHeight: function () {
         this.mainStyle.minHeight = this.mainHeight - 60 + 'px'
         this.leftWrapperStyle.minHeight = this.mainHeight - 110 + 'px'
-        this.rightWrapperStyle.height = this.mainHeight - 20 + 'px'
+        this.rightWrapperStyle.height = this.mainHeight + 140 + 'px'
 //      this.contentStyle.height = this.mainHeight - 100 + 'px'
       },
       scrollTop: function () {
