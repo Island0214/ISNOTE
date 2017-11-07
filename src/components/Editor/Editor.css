@@ -1,7 +1,7 @@
 .quillWrapper {
-  bottom: 8vmin;
-  top: 8vmin;
-  position: absolute;
+  /* bottom: 8vmin; */
+  /* top: 8vmin; */
+  position: relative;
   display: inline-block;
   height: auto;
   width: 98%;
@@ -88,5 +88,5 @@
 }
 
 .quillWrapper /deep/ .ql-container {
-  height: auto;
+  /*height: 600px;*/
 }

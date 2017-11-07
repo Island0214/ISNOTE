@@ -8,7 +8,9 @@
               placeholder=""
               icon="search"
               v-model="input2"
-              :on-icon-click="handleIconClick">
+            >
+              <!--:on-icon-click=""-->
+
             </el-input>
 
               <h2 style="top: 15%;">热门笔记</h2>
@@ -111,7 +113,6 @@
         },
         leftWrapperStyle: {
           minHeight: window.innerHeight - 110 + 'px'
-//          minHeight: '380px'
         },
         isSticky: false,
         input2: '',
@@ -129,15 +130,6 @@
       })
     },
     method: {
-      handleIconClick: function () {
-      }
-//      handleRemove (file, fileList) {
-//        console.log(file, fileList)
-//      },
-//      handlePictureCardPreview (file) {
-//        this.dialogImageUrl = file.url
-//        this.dialogVisible = true
-//      }
     },
     watch: {
       mainHeight: function () {

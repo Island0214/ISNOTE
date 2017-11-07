@@ -10,6 +10,7 @@
   import Quill from 'quill'
   import 'quill/dist/quill.core.css'
   import 'quill/dist/quill.snow.css'
+  import {mapGetters} from 'vuex'
 
   var defaultToolbar = [
     ['bold', 'italic', 'underline', 'strike'],
@@ -22,6 +23,7 @@
     [{'align': []}],
     ['clean']
   ]
+
   export default {
     name: 'vue-editor',
     props: {
@@ -45,21 +47,16 @@
         toolbar: this.editorToolbar ? this.editorToolbar : defaultToolbar
       }
     },
+    computed: {
+      ...mapGetters({
+        largeSize: 'largeSize',
+        mainHeight: 'mainHeight'
+      })
+    },
     mounted () {
       this.initializeVue2Editor()
       this.handleUpdatedEditor()
-
-      document.querySelector(`#${this.id} .ql-editor`).style.height = document.getElementById('quill-wrapper').clientHeight - document.getElementsByClassName('ql-toolbar')[0].clientHeight - 40 + 'px'
-
-      window.onresize = () => {
-        return (() => {
-          let containerHeight = document.getElementById('quill-wrapper').clientHeight - document.getElementsByClassName('ql-toolbar')[0].clientHeight - 40
-//          alert(containerHeight)
-          document.querySelector(`#${this.id} .ql-editor`).style.height = containerHeight + 'px'
-//          alert('con' + containerHeight)
-//          alert(document.getElementById('quill-container').clientHeight)
-        })()
-      }
+      document.querySelector(`#${this.id} .ql-editor`).style.height = this.mainHeight - document.getElementsByClassName('ql-toolbar')[0].clientHeight - 80 + 'px'
     },
     watch: {
       value (val) {
@@ -69,6 +66,13 @@
       },
       disabled (status) {
         this.quill.enable(!status)
+      },
+      mainHeight: function () {
+        document.querySelector(`#${this.id} .ql-editor`).style.height = this.mainHeight - document.getElementsByClassName('ql-toolbar')[0].clientHeight - 80 + 'px'
+//        alert(this.mainHeight - document.getElementsByClassName('ql-toolbar')[0].clientHeight - 40 + 'px')
+//      this.contentStyle.height = this.mainHeight - 100 + 'px'
+      },
+      largeSize: function () {
       }
     },
     methods: {
@@ -121,11 +125,5 @@
     }
   }
 </script>
-
-<style>
-  .ql-editor {
-    height: ;
-  }
-</style>
 
 <style scoped src="./Editor.css"></style>

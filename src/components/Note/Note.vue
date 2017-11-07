@@ -221,6 +221,12 @@
       closeCreateBook: function () {
         this.createBookAction = false
       }
+    },
+    mounted () {
+//      this.$refs.reference // 获取到目标的引用
+    },
+    bind (el, binding, vnode) {
+      vnode.context.$refs[binding.arg].$refs.reference = el
     }
   }
 </script>

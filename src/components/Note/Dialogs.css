@@ -95,9 +95,8 @@
 
 
 /deep/  .el-select {
-  width: 60%;
+  width: 100%;
   font-size: 2vmin;
-  left: 20%;
   background-color: #f5f4f0;
 
 }
