@@ -1,5 +1,6 @@
 import * as types from '../mutation-types'
-import router from '../../router'
+import * as authApi from '../../api/auth'
+
 // initial state
 const state = {
   loginState: false
@@ -12,18 +13,27 @@ const getters = {
 
 // actions
 const actions = {
+  [types.LOG_IN] ({dispatch}, {body}) {
+    // alert(body.name)
+    // alert(body.password)
+    authApi.userLogIn(data => {
+      alert(data.error)
+      if (data.error !== undefined) {
+        console.log(data.error)
+      } else {
+        localStorage.setItem('token', data.token)
+        console.log(data)
+        this.loginState = true
+      }
+    }, body)
+  },
+  [types.QUIT_LOG] (state) {
+
+  }
 }
 
 // mutations
-const mutations = {
-  [types.LOG_IN] (state) {
-    state.loginState = true
-  },
-  [types.QUIT_LOG] (state) {
-    state.loginState = false
-    router.push('/')
-  }
-}
+const mutations = {}
 
 export default {
   state,

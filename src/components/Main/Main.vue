@@ -146,8 +146,9 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
   import * as types from '../../store/mutation-types'
+//  import { Message } from 'element-ui'
 
   export default {
     data () {
@@ -174,7 +175,9 @@
       ...mapMutations({
         showWelcome: types.SHOW_MAIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
         showLogIn: types.SHOW_LOGIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
-        showSignIn: types.SHOW_SIGNIN,
+        showSignIn: types.SHOW_SIGNIN
+      }),
+      ...mapActions({
         log_in: types.LOG_IN
       }),
       handleSelect (key, keyPath) {
@@ -204,8 +207,11 @@
         this.showLogIn()
       },
       tryLogIn () {
-        this.log_in()
-        this.showWelcome()
+        this.log_in({
+          body: {
+            name: this.username,
+            password: this.password
+          }})
       }
     },
     watch: {
