@@ -8,17 +8,45 @@
         </template>
         <!--<el-menu-item-group>-->
         <!--<template slot="title">分组一</template>-->
-        <el-menu-item index="1-1" @click="showWelcome()">首 页</el-menu-item>
-        <el-menu-item index="1-2">笔 记</el-menu-item>
-        <el-menu-item index="1-3">社 区</el-menu-item>
+        <router-link to="/" class="nav-button">
+          <el-menu-item index="1-1" @click="showWelcome()">
+            首 页
+          </el-menu-item>
+        </router-link>
+        <router-link to="/note" class="nav-button">
+          <el-menu-item index="1-2">
+            笔 记
+          </el-menu-item>
+        </router-link>
+        <router-link to="/community" class="nav-button">
+          <el-menu-item index="1-3">
+            社 区
+          </el-menu-item>
+        </router-link>
         <div class="nav-breaker"></div>
-        <el-menu-item index="1-4" @click="showLogIn()" v-show="!loginState">登 录</el-menu-item>
-        <el-menu-item index="1-5" @click="showSignIn()" v-show="!loginState">注 册</el-menu-item>
+        <router-link to="/" class="nav-button">
+          <el-menu-item index="1-4" @click="showLogIn()" v-show="!loginState">
+            登 录
+          </el-menu-item>
+        </router-link>
+        <router-link to="/" class="nav-button">
+          <el-menu-item index="1-5" @click="showSignIn()" v-show="!loginState">
+            注 册
+          </el-menu-item>
+        </router-link>
         <!--</el-menu-item-group>-->
         <el-submenu index="1-6" v-show="loginState">
-          <template slot="title">ISLAND</template>
-          <el-menu-item index="2-1">个人信息</el-menu-item>
-          <el-menu-item index="2-2">好友信息</el-menu-item>
+          <template slot="title">{{ user }}</template>
+          <router-link to="/info" class="nav-button">
+            <el-menu-item index="2-1">
+              个人信息
+            </el-menu-item>
+          </router-link>
+          <router-link to="/friends" class="nav-button">
+            <el-menu-item index="2-2">
+              好友信息
+            </el-menu-item>
+          </router-link>
           <el-menu-item index="2-3" @click="quitLog()">退出登录</el-menu-item>
         </el-submenu>
 
@@ -53,7 +81,7 @@
           </el-menu-item>
 
           <el-submenu index="3" v-show="loginState">
-            <template slot="title">ISLAND</template>
+            <template slot="title">{{ user }}</template>
             <el-menu-item index="2-1">
               <router-link to="/info" class="nav-button">个人信息</router-link>
             </el-menu-item>
@@ -86,13 +114,15 @@
         screenWidth: document.body.clientWidth,
         overflowType: {
           'overflow': 'visible'
-        }
+        },
+        user: ''
       }
     },
     computed: {
       ...mapGetters({
         loginState: 'loginState',
-        largeSize: 'largeSize'
+        largeSize: 'largeSize',
+        curUsername: 'curUsername'
       })
     },
     methods: {
@@ -113,8 +143,12 @@
       }
     },
     mounted () {
+      this.user = this.curUsername
     },
     watch: {
+      curUsername: function () {
+        this.user = this.curUsername
+      }
     }
   }
 </script>

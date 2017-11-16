@@ -13,27 +13,32 @@ const getters = {
 
 // actions
 const actions = {
-  [types.LOG_IN] ({dispatch}, {body}) {
+  [types.LOG_IN] ({state, commit}, {body, onSuccess, onError}) {
     // alert(body.name)
     // alert(body.password)
     authApi.userLogIn(data => {
-      alert(data.error)
       if (data.error !== undefined) {
         console.log(data.error)
       } else {
         localStorage.setItem('token', data.token)
         console.log(data)
-        this.loginState = true
+        commit(types.CHANGE_USERNAME, body.name)
+        commit(types.CHANGE_LOG_STATUS)
+        commit(types.SHOW_MAIN)
       }
     }, body)
   },
-  [types.QUIT_LOG] (state) {
-
+  [types.QUIT_LOG] ({commit}) {
+    commit(types.CHANGE_LOG_STATUS)
   }
 }
 
 // mutations
-const mutations = {}
+const mutations = {
+  [types.CHANGE_LOG_STATUS] (state) {
+    state.loginState = !state.loginState
+  }
+}
 
 export default {
   state,

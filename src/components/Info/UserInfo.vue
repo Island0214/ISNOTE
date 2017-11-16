@@ -442,6 +442,8 @@
         this.newEmail = ''
         this.errorEmailPattern = false
       }
+    },
+    mounted () {
     }
   }
 </script>
