@@ -69,7 +69,7 @@
 
                       <input style="top: 60%;  left: 20%;" id="hiddenPasswordInput" :value="password" v-if="show"
                              v-bind:class="{ 'input-error': !correctPassword }"/>
-                      <el-button type="success" style="top: 85%">注 册</el-button>
+                      <el-button type="success" style="top: 85%" @click="trySignUp()" :disabled="!correctPassword || !correctUsername">注 册</el-button>
                     </div>
                   </div>
 
@@ -148,7 +148,6 @@
 <script>
   import { mapGetters, mapMutations, mapActions } from 'vuex'
   import * as types from '../../store/mutation-types'
-//  import { Message } from 'element-ui'
 
   export default {
     data () {
@@ -168,7 +167,8 @@
       ...mapGetters({
         welcome: 'welcome',
         logIn: 'logIn',
-        signIn: 'signIn'
+        signIn: 'signIn',
+        loginState: 'loginState'
       })
     },
     methods: {
@@ -178,7 +178,8 @@
         showSignIn: types.SHOW_SIGNIN
       }),
       ...mapActions({
-        log_in: types.LOG_IN
+        log_in: types.LOG_IN,
+        sign_in: types.SHOW_SIGNIN
       }),
       handleSelect (key, keyPath) {
         console.log(key, keyPath)
@@ -204,7 +205,11 @@
         }
       },
       startExplore () {
-        this.showLogIn()
+        if (!this.loginState) {
+          this.showLogIn()
+        } else {
+          this.$router.push('/note')
+        }
       },
       tryLogIn () {
         this.log_in({
@@ -212,11 +217,41 @@
             name: this.username,
             password: this.password
           },
-          onSuccess: {
-
+          onSuccess: () => {
+            this.$message({
+              showClose: true,
+              message: '登录成功',
+              type: 'success'
+            })
           },
-          onError: {
-//            Message.
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          }
+        })
+      },
+      trySignUp () {
+        this.sign_in({
+          body: {
+            name: this.username,
+            password: this.password
+          },
+          onSuccess: () => {
+            this.$message({
+              showClose: true,
+              message: '注册成功',
+              type: 'success'
+            })
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
           }
         })
       }

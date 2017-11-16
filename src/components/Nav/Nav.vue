@@ -47,7 +47,7 @@
               好友信息
             </el-menu-item>
           </router-link>
-          <el-menu-item index="2-3" @click="quitLog()">退出登录</el-menu-item>
+          <el-menu-item index="2-3" @click="quit()">退出登录</el-menu-item>
         </el-submenu>
 
       </el-submenu>
@@ -88,7 +88,7 @@
             <el-menu-item index="2-2">
               <router-link to="/friends" class="nav-button">好友信息</router-link>
             </el-menu-item>
-            <el-menu-item index="2-3" @click="quitLog()">
+            <el-menu-item index="2-3" @click="quit()">
               退出登录
             </el-menu-item>
           </el-submenu>
@@ -103,7 +103,7 @@
 
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {mapGetters, mapMutations, mapActions} from 'vuex'
   import * as types from '../../store/mutation-types'
 
   export default {
@@ -129,7 +129,9 @@
       ...mapMutations({
         showWelcome: types.SHOW_MAIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
         showLogIn: types.SHOW_LOGIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
-        showSignIn: types.SHOW_SIGNIN,
+        showSignIn: types.SHOW_SIGNIN
+      }),
+      ...mapActions({
         quitLog: types.QUIT_LOG
       }),
       handleSelect (key, keyPath) {
@@ -140,6 +142,17 @@
       },
       handleClose (key, keyPath) {
         console.log(key, keyPath)
+      },
+      quit () {
+        this.quitLog({
+          onSuccess: (info) => {
+            this.$message({
+              showClose: true,
+              message: info,
+              type: 'success'
+            })
+          }
+        })
       }
     },
     mounted () {

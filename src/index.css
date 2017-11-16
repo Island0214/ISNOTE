@@ -255,3 +255,12 @@ p {
   font-size: 12px;
 }
 
+
+.el-message /deep/ .el-message__img {
+  opacity: 0.5;
+}
+
+.el-message .el-message__group p, .el-message .el-message__group .el-message__closeBtn  {
+  color: #666;
+}
+

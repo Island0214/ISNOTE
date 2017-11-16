@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 export function userLogIn (callback, body) {
-  console.log('login')
+  // console.log('login')
   axios.post('/user/login',
     body,
     {
@@ -13,7 +13,7 @@ export function userLogIn (callback, body) {
   )
     .then(function (response) {
       callback(response.data)
-      console.log(response)
+      // console.log(response)
     })
     .catch(function (error) {
       console.log(error)

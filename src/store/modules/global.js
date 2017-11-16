@@ -4,16 +4,14 @@ import * as types from '../mutation-types'
 const state = {
   largeSize: document.body.clientWidth > 1200,
   mainHeight: window.innerHeight,
-  scrollTop: window.scrollY,
-  curUsername: ''
+  scrollTop: window.scrollY
 }
 
 // getters
 const getters = {
   largeSize: state => state.largeSize,
   mainHeight: state => state.mainHeight,
-  scrollTop: state => state.scrollTop,
-  curUsername: state => state.curUsername
+  scrollTop: state => state.scrollTop
 }
 
 // actions
@@ -34,10 +32,6 @@ const mutations = {
   },
   [types.SET_SCROLLY] (state) {
     state.scrollTop = window.scrollY
-  },
-  [types.CHANGE_USERNAME] (state, username) {
-    state.curUsername = username
-    alert(state.curUsername)
   }
 }
 
