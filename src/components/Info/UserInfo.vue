@@ -40,9 +40,9 @@
               </el-upload>
             </div>
             <div class="name-wrapper">
-              <p>ISLAND</p>
+              <p>{{ username }}</p>
               <el-tooltip class="item" effect="dark" content="点击修改" placement="bottom-end">
-                <p class="intro-wrapper" @click="showModifyIntro = true">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+                <p class="intro-wrapper" @click="showModifyIntro = true">{{ intro }}</p>
               </el-tooltip>
             </div>
             <div class="prop-wrapper">
@@ -82,7 +82,7 @@
 
                 </el-col>
                 <el-col :xs="16" :sm="16" :md="16" :lg="16" style="padding: 0">
-                  <input disabled value="13151059368"/>
+                  <input disabled :value="phone"/>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
                   <el-button type="success" @click="showModifyPhone = true">修改</el-button>
@@ -96,7 +96,7 @@
 
                 </el-col>
                 <el-col :xs="16" :sm="16" :md="16" :lg="16" style="padding: 0">
-                  <input disabled value="islandq0214@gamil.com"/>
+                  <input disabled :value="email"/>
                 </el-col>
                 <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
                   <el-button type="success" @click="showModifyEmail = true">修改</el-button>
@@ -125,7 +125,7 @@
                   <p>允许谁看我的笔记</p>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
-                  <el-select v-model="value0" placeholder="请选择">
+                  <el-select v-model="seen" placeholder="请选择">
                     <el-option
                       v-for="item in options"
                       :key="item.value"
@@ -143,7 +143,7 @@
                   <p>允许谁修改我的笔记</p>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
-                  <el-select v-model="value1" placeholder="请选择">
+                  <el-select v-model="modify" placeholder="请选择">
                     <el-option
                       v-for="item in options"
                       :key="item.value"
@@ -161,7 +161,7 @@
                   <p>允许谁搜索到我的笔记</p>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
-                  <el-select v-model="value2" placeholder="请选择">
+                  <el-select v-model="search" placeholder="请选择">
                     <el-option
                       v-for="item in options"
                       :key="item.value"
@@ -178,7 +178,7 @@
                   <p>将笔记动态显示在社区</p>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
-                  <el-select v-model="value3" placeholder="请选择">
+                  <el-select v-model="info" placeholder="请选择">
                     <el-option
                       v-for="item in options2"
                       :key="item.value"
@@ -201,12 +201,12 @@
             type="textarea"
             :rows="2"
             placeholder="请输入内容"
-            v-model="textarea"
+            v-model="newIntro"
           >
           </el-input>
           <div slot="footer" class="dialog-footer">
             <el-button @click="showModifyIntro = false">取 消</el-button>
-            <el-button type="primary" @click="showModifyIntro = false">确 定</el-button>
+            <el-button type="primary" @click="modifyInfo">确 定</el-button>
           </div>
         </el-dialog>
 
@@ -226,24 +226,24 @@
           ></el-input>
 
           <p class="p-error" style="margin: 0" v-show="errorOldPassword">原密码错误</p>
-          <p class="p-error" style="margin: 0" v-show="errorNewPassword">两次密码输入不一致</p>
+          <p class="p-error" style="margin: 0" v-show="errorNewPassword">两次密码输入不一致或新密码小于6位</p>
 
           <div slot="footer" class="dialog-footer">
             <el-button @click="showModifyPassword = false">取 消</el-button>
-            <el-button type="primary" @click="showModifyPassword = false">确 定</el-button>
+            <el-button type="primary" @click="modifyPassword">确 定</el-button>
           </div>
         </el-dialog>
 
         <el-dialog :visible.sync="showModifyPhone"  top="30%">
           <h3 style="top: 0; font-size: 18px;">修改手机号</h3>
           <p style="width: 100%">输入新手机号</p>
-          <el-input v-model="newPhone" placeholder="" class="el-dialog-input" v-on:input="testPhonePattern()"
-                    v-bind:class="[!errorPhonePattern ? 'input-success' : 'input-error']"
+          <el-input class="el-dialog-input" v-on:input="testPhonePattern()"
+                    v-bind:class="[!errorPhonePattern ? 'input-success' : 'input-error']" v-model="newPhone"
           ></el-input>
           <p class="p-error" v-show="errorPhonePattern" style="margin: 0;">手机号格式错误</p>
           <div slot="footer" class="dialog-footer">
             <el-button @click="showModifyPhone = false">取 消</el-button>
-            <el-button type="primary" @click="showModifyPhone = false">确 定</el-button>
+            <el-button type="primary" @click="modifyPhone">确 定</el-button>
           </div>
         </el-dialog>
 
@@ -251,13 +251,13 @@
           <h3 style="top: 0; font-size: 18px;">修改邮箱</h3>
           <p style="width: 100%">输入新邮箱</p>
           <el-input v-model="newEmail" placeholder="" class="el-dialog-input" v-on:input="testEmailPattern()"
-                    v-bind:class="[!errorEmailPattern ? 'input-success' : 'input-error']"
+                    v-bind:class="[!errorEmailPattern ? 'input-success' : 'input-error']" :value="newEmail"
           ></el-input>
           <p class="p-error" v-show="errorEmailPattern" style="margin: 0;">邮箱格式错误</p>
 
           <div slot="footer" class="dialog-footer">
             <el-button @click="showModifyEmail = false">取 消</el-button>
-            <el-button type="primary" @click="showModifyEmail = false">确 定</el-button>
+            <el-button type="primary" @click="modifyEmail">确 定</el-button>
           </div>
         </el-dialog>
 
@@ -300,8 +300,9 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  //  import * as types from '../../store/mutation-types'
+  import {mapGetters, mapActions} from 'vuex'
+  import * as types from '../../store/mutation-types'
+
   export default {
     data () {
       return {
@@ -331,10 +332,6 @@
           value: '选项5',
           label: '不允许'
         }],
-        value0: '',
-        value1: '',
-        value2: '',
-        value3: '',
         showModifyIntro: false,
         showModifyPassword: false,
         showModifyPhone: false,
@@ -345,15 +342,24 @@
         newPassword2: '',
         newPhone: '',
         newEmail: '',
+        newIntro: '',
         dynamicTags: ['标签一', '标签二', '标签三'],
         inputVisible: false,
-        inputValue: '',
         errorPhonePattern: false,
         errorEmailPattern: false,
         errorOldPassword: false,
         errorNewPassword: false,
         textarea: '',
-        radio: '男'
+        radio: '无',
+        username: '',
+        intro: '',
+        email: '',
+        phone: '',
+        seen: '',
+        info: '',
+        search: '',
+        modify: '',
+        count: 0
       }
     },
     computed: {
@@ -363,6 +369,12 @@
       })
     },
     methods: {
+      ...mapActions({
+        'getUser': 'getUser',
+        'modifyUser': 'modifyUser',
+        log_in: types.LOG_IN,
+        'modifyPasswordAction': 'modifyPassword'
+      }),
       handleAvatarSuccess (res, file) {
         this.imageUrl = URL.createObjectURL(file.raw)
       },
@@ -424,6 +436,96 @@
       testEmailPattern () {
         let emailPattern = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
         this.errorEmailPattern = !emailPattern.test(this.newEmail)
+      },
+      modifyUserInfo () {
+        this.modifyUser({
+          body: {
+            name: this.username,
+            email: this.email,
+            phone: this.phone,
+            gender: this.radio,
+            intro: this.intro,
+            icon: '../',
+            see: this.seen,
+            modify: this.modify,
+            search: this.search,
+            info: this.info
+          },
+          onSuccess: (success) => {
+            this.$message({
+              showClose: true,
+              message: success,
+              type: 'success'
+            })
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          }
+        })
+      },
+      modifyPhone () {
+        this.showModifyPhone = false
+        if (!this.errorPhonePattern) {
+          this.phone = this.newPhone
+          this.modifyUserInfo()
+        }
+      },
+      modifyEmail () {
+        this.showModifyEmail = false
+        if (!this.errorEmailPattern) {
+          this.email = this.newEmail
+          this.modifyUserInfo()
+        }
+      },
+      modifyInfo () {
+        this.showModifyIntro = false
+        this.intro = this.newIntro
+        this.modifyUserInfo()
+      },
+      modifyPassword () {
+        this.errorNewPassword = false
+        this.errorOldPassword = false
+
+        this.log_in({
+          body: {
+            name: this.username,
+            password: this.oldPassword
+          },
+          onSuccess: () => {
+            if (this.newPassword1 !== this.newPassword2 || this.newPassword1.length < 6) {
+              this.errorNewPassword = true
+            } else {
+              this.modifyPasswordAction({
+                body: {
+                  name: this.username,
+                  password: this.newPassword1
+                },
+                onSuccess: (success) => {
+                  this.$message({
+                    showClose: true,
+                    message: success,
+                    type: 'success'
+                  })
+                  this.showModifyPassword = false
+                },
+                onError: (error) => {
+                  this.$message({
+                    showClose: true,
+                    message: error,
+                    type: 'error'
+                  })
+                }
+              })
+            }
+          },
+          onError: () => {
+            this.errorOldPassword = true
+          }
+        })
       }
     },
     watch: {
@@ -441,9 +543,62 @@
       showModifyEmail: function () {
         this.newEmail = ''
         this.errorEmailPattern = false
+      },
+      radio: function () {
+        if (this.count > 4) {
+          this.modifyUserInfo()
+        }
+        this.count++
+      },
+      seen: function () {
+        if (this.count > 4) {
+          this.modifyUserInfo()
+        }
+        this.count++
+      },
+      modify: function () {
+        if (this.count > 4) {
+          this.modifyUserInfo()
+        }
+        this.count++
+      },
+      search: function () {
+        if (this.count > 4) {
+          this.modifyUserInfo()
+        }
+        this.count++
+      },
+      info: function () {
+        if (this.count > 4) {
+          this.modifyUserInfo()
+        }
+        this.count++
       }
     },
     mounted () {
+      this.getUser({
+        onSuccess: (user) => {
+          this.newIntro = user.intro
+          this.newEmail = user.email
+          this.newPhone = user.phone
+          this.username = user.name
+          this.intro = user.intro
+          this.radio = user.gender
+          this.phone = user.phone
+          this.email = user.email
+          this.seen = user.see
+          this.modify = user.modify
+          this.info = user.info
+          this.search = user.search
+        },
+        onError: (error) => {
+          this.$message({
+            showClose: true,
+            message: error,
+            type: 'error'
+          })
+        }
+      })
     }
   }
 </script>

@@ -151,6 +151,7 @@
               message: info,
               type: 'success'
             })
+            this.$router.push('/')
           }
         })
       }

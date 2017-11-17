@@ -175,11 +175,12 @@
       ...mapMutations({
         showWelcome: types.SHOW_MAIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
         showLogIn: types.SHOW_LOGIN, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
-        showSignIn: types.SHOW_SIGNIN
+        showSignIn: types.SHOW_SIGNIN,
+        changeLogStatus: types.CHANGE_LOG_STATUS
       }),
       ...mapActions({
         log_in: types.LOG_IN,
-        sign_in: types.SHOW_SIGNIN
+        sign_in: types.SIGN_IN
       }),
       handleSelect (key, keyPath) {
         console.log(key, keyPath)
@@ -223,6 +224,7 @@
               message: '登录成功',
               type: 'success'
             })
+            this.changeLogStatus()
           },
           onError: (error) => {
             this.$message({
@@ -242,7 +244,7 @@
           onSuccess: () => {
             this.$message({
               showClose: true,
-              message: '注册成功',
+              message: '注册成功!',
               type: 'success'
             })
           },

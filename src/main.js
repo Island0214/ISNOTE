@@ -8,12 +8,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import './index.css'
 import '../theme/index.css'
-import Vuex from 'vuex'
 import './style.less'
+import Vuex from 'vuex'
 import store from './store'
 import VueRouter from 'vue-router'
 import * as types from './store/mutation-types'
-// import { Vuex, mapMutations } from 'vuex'
+// import { mapMutations, mapActions } from 'vuex'
 
 Vue.use(Vuex)
 Vue.config.productionTip = false
@@ -49,6 +49,19 @@ new Vue({
         that.screenHeight = window.screenHeight
       })()
     }
+    this.getUser({
+      onSuccess: (user) => {
+        this.setUsername(user.name)
+        this.changeLogStatus()
+      },
+      onError: (error) => {
+        this.$message({
+          showClose: true,
+          message: error,
+          type: 'error'
+        })
+      }
+    }, localStorage.getItem('token'))
   },
   watch: {
     screenWidth: function () {
@@ -80,7 +93,12 @@ new Vue({
       setLarge: types.SET_LARGE_SIZE, // 将 `this.add()` 映射为 `this.$store.commit('increment')`,
       setSmall: types.SET_SMALL_SIZE,
       setWindowHeight: types.SET_HEIGHT,
-      setScrollY: types.SET_SCROLLY
+      setScrollY: types.SET_SCROLLY,
+      setUsername: types.CHANGE_USERNAME,
+      changeLogStatus: types.CHANGE_LOG_STATUS
+    }),
+    ...Vuex.mapActions({
+      getUser: 'getUser'
     }),
     handleScrollEvent () {
       this.setScrollY()
