@@ -23,14 +23,14 @@
           </div>
         </el-col>
 
-        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
+        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center" v-for="note in noteList">
           <div class="collection-wrapper" @mouseenter="showHoverContentView()" @mouseleave="hideHoverContentView()">
             <div>
-              <h5>娃娃的阿斯顿萨芬鹅气氛啊说</h5>
-              <h6>更新于<br>2017-08-08<br>08:08:08</h6>
+              <h5>{{ note.note_title }}</h5>
+              <h6>更新于<br>{{ note.updated_at }}</h6>
             </div>
             <div v-show="isHoverProperty">
-              <p><span>笔记内容</span><br>safasfasfsafasfasfafsasfafsasfasfasfasfasfasfasfasfaafsasfasfasfasfasfasfasfasfafsasfasf</p>
+              <p><span>笔记内容</span><br>{{ note.note_body }}</p>
             </div>
             <i class="el-icon-circle-close" @click="confirmCloseAction=true"></i>
           </div>
@@ -82,7 +82,8 @@
         largeSize: 'largeSize',
         mainHeight: 'mainHeight',
         scrollTop: 'scrollTop',
-        singleNotebook: 'singleNotebook'
+        singleNotebook: 'singleNotebook',
+        noteList: 'noteList'
       })
     },
     watch: {
@@ -109,7 +110,9 @@
       }),
       ...mapActions({
         'getNotebookById': 'getNotebookById',
-        'modifyNotebook': 'modifyNotebook'
+        'modifyNotebook': 'modifyNotebook',
+        'getMyNotes': 'getMyNotes',
+        'getNotesByNotebook': 'getNotesByNotebook'
       }),
       closeModifyBook: function () {
         this.modifyBookAction = false
@@ -149,7 +152,20 @@
       }
     },
     beforeRouteUpdate (to, from, next) {
-//      alert(to.params.id)
+//      if (this.singleNotebook.id === 0) {
+//        this.getMyNotes({
+//          onSuccess: (notes) => {
+//            console.log(notes)
+//          },
+//          onError: (error) => {
+//            this.$message({
+//              showClose: true,
+//              message: error,
+//              type: 'error'
+//            })
+//          }
+//        })
+//      }
       console.log(to.params.id)
       if (to.params.id === 0) {
         console.log('all')
@@ -161,7 +177,21 @@
       } else {
         this.getNotebookById({
           onSuccess: (notebook) => {
-            console.log(this.singleNotebook)
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: {
+            id: to.params.id
+          }
+        })
+
+        this.getNotesByNotebook({
+          onSuccess: (notebook) => {
           },
           onError: (error) => {
             this.$message({

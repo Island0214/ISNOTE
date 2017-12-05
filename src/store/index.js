@@ -6,6 +6,7 @@ import main from './modules/main'
 import user from './modules/user'
 import global from './modules/global'
 import notebook from './modules/notebook'
+import note from './modules/note'
 
 // import createLogger from '../../../src/plugins/logger'
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     main,
     user,
     global,
-    notebook
+    notebook,
+    note
   },
   strict: debug
   // plugins: debug ? [createLogger()] : []

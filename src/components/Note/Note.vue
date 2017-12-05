@@ -99,7 +99,8 @@
         'setNotebook': types.SET_NOTEBOOK
       }),
       ...mapActions({
-        'getMyNotebooks': 'getMyNotebooks'
+        'getMyNotebooks': 'getMyNotebooks',
+        'getMyNotes': 'getMyNotes'
       }),
       handleIconClick: function () {
       },
@@ -120,6 +121,18 @@
           notebook_name: '所有笔记'
         }
         this.setNotebook(allNotebook)
+        this.getMyNotes({
+          onSuccess: (notes) => {
+            console.log(notes)
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          }
+        })
       }
     },
     mounted () {

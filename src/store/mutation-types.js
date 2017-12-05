@@ -15,3 +15,5 @@ export const CHANGE_LOG_STATUS = 'CHANGE_LOG_STATUS'
 
 export const SET_NOTEBOOKS = 'SET_NOTEBOOKS'
 export const SET_NOTEBOOK = 'SET_NOTEBOOK'
+export const SET_NOTES = 'SET_NOTES'
+export const SET_NOTE = 'SET_NOTE'
