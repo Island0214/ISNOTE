@@ -13,7 +13,7 @@
             首 页
           </el-menu-item>
         </router-link>
-        <router-link to="/note" class="nav-button">
+        <router-link to="/note/0/notes" class="nav-button">
           <el-menu-item index="1-2">
             笔 记
           </el-menu-item>
@@ -62,7 +62,7 @@
             <router-link to="/" class="nav-button">首 页</router-link>
           </el-menu-item>
           <el-menu-item index="2">
-            <router-link to="/note" class="nav-button">笔 记</router-link>
+            <router-link to="/note/0/notes" class="nav-button">笔 记</router-link>
           </el-menu-item>
           <el-menu-item index="3">
             <router-link to="/community" class="nav-button">社 区</router-link>

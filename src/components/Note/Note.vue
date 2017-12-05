@@ -6,25 +6,11 @@
           <div class="inner-border">
           </div>
           <h1>笔 记。</h1>
-          <el-button type="default" class="create-button" @click="createBookAction=true">新建笔记本</el-button>
+          <el-button type="default" class="create-button" @click="createBookAction=true" style="width: 80%">新建笔记本</el-button>
           <div class="nav-wrapper">
             <el-menu default-active="0" class="el-menu-vertical-demo" :style="mainStyle">
               <el-menu-item index="0">所有笔记</el-menu-item>
-              <el-menu-item index="1">😶😶😶</el-menu-item>
-              <el-menu-item index="2">😐😐😐</el-menu-item>
-              <el-menu-item index="3">😢😢😢</el-menu-item>
-              <el-menu-item index="4">😊😊😊</el-menu-item>
-              <el-menu-item index="5">😍😍😍</el-menu-item>
-              <el-menu-item index="6">🙁🙁🙁</el-menu-item>
-              <el-menu-item index="7">😤😤😤</el-menu-item>
-              <el-menu-item index="8">🙄🙄🙄</el-menu-item>
-              <el-menu-item index="9">🤥🤥🤥</el-menu-item>
-              <el-menu-item index="10">😡😡😡</el-menu-item>
-              <el-menu-item index="11">😷😷😷</el-menu-item>
-              <el-menu-item index="12">🤐🤐🤐</el-menu-item>
-              <el-menu-item index="13">🙃🙃🙃</el-menu-item>
-              <el-menu-item index="14">🤧🤧🤧</el-menu-item>
-              <el-menu-item index="15">💩💩💩</el-menu-item>
+              <el-menu-item v-for="notebook in notebookList" :index="notebook.id + ''">{{ notebook.notebook_name }}</el-menu-item>
             </el-menu>
           </div>
         </div>
@@ -35,96 +21,8 @@
       </el-col>
       <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
 
-        <div class="right-wrapper" style="display: none">
-          <div class="search-wrapper">
-          <input placeholder="搜索笔记"/>
-          <el-button type="default"><i class="el-icon-search"></i></el-button>
-          </div>
-          <div class="collections-wrapper" :style="rightWrapperStyle">
-            <div class="breadcrumb-wrapper">
-              <el-breadcrumb separator="/">
-                <!--<el-breadcrumb-item :to="{ path: '/' }">笔记本</el-breadcrumb-item>-->
-                <!--<el-breadcrumb-item>笔记本</el-breadcrumb-item>-->
-                <el-breadcrumb-item :to="{ path: '/note/all' }">笔记本</el-breadcrumb-item>
-                <el-breadcrumb-item>所有笔记 <i class="el-icon-setting"  @click="modifyBookAction=true"></i></el-breadcrumb-item>
-              </el-breadcrumb>
-
-              <!--<el-button type="default">修改笔记本信息</el-button>-->
-            </div>
-
-            <el-row :gutter="10" style="margin: 0">
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper new-wrapper"  @click="createNewNoteAction=true">
-                  <el-button type="default"><i class="el-icon-plus"></i><br><br><br>新建笔记</el-button>
-                </div>
-              </el-col>
-
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper" @mouseenter="showHoverContentView()" @mouseleave="hideHoverContentView()">
-                  <div>
-                    <h5>娃娃的阿斯顿萨芬鹅气氛啊说</h5>
-                    <h6>更新于<br>2017-08-08<br>08:08:08</h6>
-                  </div>
-                  <div v-show="isHoverProperty">
-                    <p><span>笔记内容</span><br>safasfasfsafasfasfafsasfafsasfasfasfasfasfasfasfasfaafsasfasfasfasfasfasfasfasfafsasfasf</p>
-                  </div>
-                  <!--<p>撒反击哦册那就扫号放假哦啊少女心哦萨芬</p>-->
-                  <i class="el-icon-circle-close" @click="confirmCloseAction=true"></i>
-                </div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-
-            </el-row>
-          </div>
-        </div>
-        <note-pad></note-pad>
+        <router-view></router-view>
+        <!--<note-pad></note-pad>-->
 
       </el-col>
       <!--<el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">-->
@@ -132,9 +30,6 @@
       <!--</el-col>-->
     </el-row>
     <dialogs
-      :confirmCloseAction="confirmCloseAction" @closeConfirmClose="closeConfirmClose"
-      :modifyBookAction="modifyBookAction" @closeModifyBook="closeModifyBook"
-      :createNewNoteAction="createNewNoteAction" @closeCreateNewNote="closeCreateNewNote"
       :createBookAction="createBookAction" @closeCreateBook="closeCreateBook"
     ></dialogs>
 
@@ -142,7 +37,7 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
   import Dialogs from './Dialogs'
   import NotePad from '../NotePad/NotePad'
 
@@ -168,10 +63,6 @@
         dialogImageUrl: '',
         dialogVisible: false,
         visible2: false,
-        isHoverProperty: false,
-        confirmCloseAction: false,
-        modifyBookAction: false,
-        createNewNoteAction: false,
         createBookAction: false
       }
     },
@@ -179,7 +70,8 @@
       ...mapGetters({
         largeSize: 'largeSize',
         mainHeight: 'mainHeight',
-        scrollTop: 'scrollTop'
+        scrollTop: 'scrollTop',
+        notebookList: 'notebookList'
       })
     },
     watch: {
@@ -201,29 +93,27 @@
       }
     },
     methods: {
+      ...mapActions({
+        'getMyNotebooks': 'getMyNotebooks'
+      }),
       handleIconClick: function () {
-      },
-      showHoverContentView: function () {
-        this.isHoverProperty = true
-      },
-      hideHoverContentView: function () {
-        this.isHoverProperty = false
-      },
-      closeConfirmClose: function () {
-        this.confirmCloseAction = false
-      },
-      closeModifyBook: function () {
-        this.modifyBookAction = false
-      },
-      closeCreateNewNote: function () {
-        this.createNewNoteAction = false
       },
       closeCreateBook: function () {
         this.createBookAction = false
       }
     },
     mounted () {
-//      this.$refs.reference // 获取到目标的引用
+      this.getMyNotebooks({
+        onSuccess: (notebooks) => {
+        },
+        onError: (error) => {
+          this.$message({
+            showClose: true,
+            message: error,
+            type: 'error'
+          })
+        }
+      })
     },
     bind (el, binding, vnode) {
       vnode.context.$refs[binding.arg].$refs.reference = el
