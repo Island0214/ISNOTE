@@ -39,3 +39,23 @@ export function createNoteBookAction (callback, body) {
       console.log(error)
     })
 }
+
+export function getNotebookById (callback, body) {
+  console.log(body)
+  axios.post('/notebook/getNotebookById',
+    body,
+    {
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+    .then(function (response) {
+      console.log('success')
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log('error')
+      console.log(error)
+    })
+}

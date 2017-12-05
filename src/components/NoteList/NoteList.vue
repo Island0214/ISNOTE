@@ -9,8 +9,8 @@
         <el-breadcrumb separator="/">
           <!--<el-breadcrumb-item :to="{ path: '/' }">笔记本</el-breadcrumb-item>-->
           <!--<el-breadcrumb-item>笔记本</el-breadcrumb-item>-->
-          <el-breadcrumb-item :to="{ path: '/note/all' }">笔记本</el-breadcrumb-item>
-          <el-breadcrumb-item>所有笔记 <i class="el-icon-setting"  @click="modifyBookAction=true"></i></el-breadcrumb-item>
+          <el-breadcrumb-item>笔记本</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ this.singleNotebook.notebook_name }} <i class="el-icon-setting"  @click="modifyBookAction=true"></i></el-breadcrumb-item>
         </el-breadcrumb>
 
         <!--<el-button type="default">修改笔记本信息</el-button>-->
@@ -35,11 +35,6 @@
             <i class="el-icon-circle-close" @click="confirmCloseAction=true"></i>
           </div>
         </el-col>
-        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-          <div class="collection-wrapper"></div>
-        </el-col>
-
-
       </el-row>
     </div>
 
@@ -76,14 +71,16 @@
         },
         rightWrapperStyle: {
           height: window.innerHeight + 140 + 'px'
-        }
+        },
+        name: ''
       }
     },
     computed: {
       ...mapGetters({
         largeSize: 'largeSize',
         mainHeight: 'mainHeight',
-        scrollTop: 'scrollTop'
+        scrollTop: 'scrollTop',
+        singleNotebook: 'singleNotebook'
       })
     },
     watch: {
@@ -106,6 +103,7 @@
     },
     methods: {
       ...mapActions({
+        'getNotebookById': 'getNotebookById'
       }),
       closeModifyBook: function () {
         this.modifyBookAction = false
@@ -121,6 +119,32 @@
       },
       hideHoverContentView: function () {
         this.isHoverProperty = false
+      }
+    },
+    // 路由改变前，组件就已经渲染完了
+    // 逻辑稍稍不同
+    beforeRouteUpdate (to, from, next) {
+//      alert(to.params.id)
+      if (to.params.id === 0) {
+      } else {
+        this.getNotebookById({
+          onSuccess: (notebook) => {
+//          this.notebook = notebook
+//          this.name = notebook.notebook_name
+//          console.log(notebook.id)
+            console.log(this.singleNotebook)
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: {
+            id: to.params.id
+          }
+        })
       }
     }
   }

@@ -2,12 +2,14 @@ import * as notebookApi from '../../api/notebook'
 import * as types from '../mutation-types'
 
 const state = {
-  notebookList: {}
+  notebookList: {},
+  singleNotebook: {}
 }
 
 // getters
 const getters = {
-  notebookList: state => state.notebookList
+  notebookList: state => state.notebookList,
+  singleNotebook: state => state.singleNotebook
 }
 
 const actions = {
@@ -29,6 +31,16 @@ const actions = {
         onSuccess(data.notebook)
       }
     }, body)
+  },
+  'getNotebookById'  ({state, commit}, {onSuccess, onError, body}) {
+    notebookApi.getNotebookById(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        commit(types.SET_NOTEBOOK, data.notebook)
+        onSuccess(data.notebook)
+      }
+    }, body)
   }
 }
 
@@ -36,6 +48,9 @@ const actions = {
 const mutations = {
   [types.SET_NOTEBOOKS] (state, notebooks) {
     state.notebookList = notebooks
+  },
+  [types.SET_NOTEBOOK] (state, notebook) {
+    state.singleNotebook = notebook
   }
 }
 

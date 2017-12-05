@@ -316,20 +316,20 @@
         },
         userInfo: true,
         options: [{
-          value: '选项1',
+          value: '所有人',
           label: '所有人'
         }, {
-          value: '选项2',
+          value: '仅好友',
           label: '仅好友'
         }, {
-          value: '选项3',
+          value: '只有我',
           label: '只有我'
         }],
         options2: [{
-          value: '选项4',
+          value: '允许',
           label: '允许'
         }, {
-          value: '选项5',
+          value: '不允许',
           label: '不允许'
         }],
         showModifyIntro: false,

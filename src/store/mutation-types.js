@@ -14,3 +14,4 @@ export const SIGN_IN = 'SIGN_IN'
 export const CHANGE_LOG_STATUS = 'CHANGE_LOG_STATUS'
 
 export const SET_NOTEBOOKS = 'SET_NOTEBOOKS'
+export const SET_NOTEBOOK = 'SET_NOTEBOOK'

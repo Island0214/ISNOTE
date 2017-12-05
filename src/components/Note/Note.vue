@@ -10,7 +10,7 @@
           <div class="nav-wrapper">
             <el-menu default-active="0" class="el-menu-vertical-demo">
               <el-menu-item index="0">所有笔记</el-menu-item>
-              <el-menu-item v-for="notebook in notebookList" :index="notebook.id + ''">{{ notebook.notebook_name }}</el-menu-item>
+              <el-menu-item v-for="notebook in notebookList" :index="notebook.id + ''" @click="pushToNotes(notebook.id)">{{ notebook.notebook_name }}</el-menu-item>
             </el-menu>
           </div>
         </div>
@@ -104,6 +104,9 @@
       },
       createNewBook: function (newNotebook) {
         this.notebookList.push(newNotebook)
+      },
+      pushToNotes: function (id) {
+        this.$router.push('/note/' + id + '/notes')
       }
     },
     mounted () {
