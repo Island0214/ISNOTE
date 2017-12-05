@@ -5,7 +5,7 @@
   </div>
   <div class="collections-wrapper">
     <div class="breadcrumb-wrapper">
-      <el-col :xs="24" :sm="24" :md="12" :lg="16" style="padding: 0;">
+      <el-col :xs="24" :sm="24" :md="24" :lg="16" style="padding: 0;">
         <el-breadcrumb separator="/">
           <!--<el-breadcrumb-item :to="{ path: '/' }">笔记本</el-breadcrumb-item>-->
           <!--<el-breadcrumb-item>笔记本</el-breadcrumb-item>-->
@@ -15,6 +15,13 @@
         </el-breadcrumb>
       </el-col>
       <el-col :xs="12" :sm="12" :md="12" :lg="8" style="padding: 0;">
+        <div>
+          <!--<p>点赞和转发在这里</p>-->
+          <i :class="" style="margin-top: 10px; float: right; position: relative"></i>
+        </div>
+      </el-col>
+      <el-col :xs="12" :sm="12" :md="12" :lg="12" style="padding: 0; margin-top: 10px;">
+        <!--<p style="padding: 0; margin: 0; position: relative; display: inline-block;">笔记权限</p>-->
         <el-select v-model="value" placeholder="请选择">
           <el-option
             v-for="item in options"
@@ -24,11 +31,12 @@
           </el-option>
         </el-select>
       </el-col>
-      <el-col :xs="24" :sm="24" :md="24" :lg="24" style="padding: 0;">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;  margin-top: 10px;">
         <el-input
           placeholder=""
           icon="search"
           v-model="input2"
+          style="width: 100%"
         >
           <!--:on-icon-click=""-->
         </el-input>

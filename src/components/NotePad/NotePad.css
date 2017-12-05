@@ -154,7 +154,7 @@
 
 #main-wrapper .right-wrapper .collections-wrapper .breadcrumb-wrapper .el-input {
   position: relative;
-  width: 100%;
+  width: 60%;
   /* left: 5%; */
   /* top: 8%; */
   float: right;
@@ -238,7 +238,7 @@
 
 
 /deep/  .el-select {
-  width: 100%;
+  /*width: 100%;*/
   font-size: 2vmin;
   z-index: 0;
   margin-bottom: 1vmin;
@@ -253,10 +253,11 @@
   font-weight: 500;
   z-index: 0;
   height: 4vmin;
+  z-index: 1;
 }
 
 .el-select .el-input /deep/ i{
-  z-index: 2;
+  z-index: 3;
 }
 
 .el-select /deep/ .el-input__inner{
@@ -269,7 +270,7 @@
 }
 
 .el-select /deep/ .el-input /deep/ .el-input__icon{
-  z-index: 2;
+  z-index: 3;
 }
 
 
