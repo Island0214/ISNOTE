@@ -1,11 +1,6 @@
 <template>
   <div>
-    <el-dialog
-      title="提示"
-      :visible.sync="confirmCloseAction"
-      width="20%"
-      top="30%"
-    >
+    <el-dialog title="提示" :visible.sync="confirmCloseAction" width="20%" top="30%" :modal=false>
       <span>确认删除该笔记吗？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="closeConfirmClose">取 消</el-button>
@@ -18,6 +13,7 @@
       :visible.sync="modifyBookAction"
       width="20%"
       top="30%"
+      :modal=false
     >
       <p>笔记本名称</p>
       <el-input></el-input>
@@ -42,6 +38,7 @@
       :visible.sync="createBookAction"
       width="20%"
       top="30%"
+      :modal=false
     >
       <p>笔记本名称</p>
       <el-input></el-input>
@@ -66,6 +63,7 @@
       :visible.sync="createNewNoteAction"
       width="20%"
       top="30%"
+      :modal=false
     >
       <p>笔记名称</p>
       <el-input></el-input>

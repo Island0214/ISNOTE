@@ -1,0 +1,130 @@
+<template>
+  <div class="right-wrapper">
+    <div class="search-wrapper">
+      <input placeholder="搜索笔记"/>
+      <el-button type="default"><i class="el-icon-search"></i></el-button>
+    </div>
+    <div class="collections-wrapper" :style="rightWrapperStyle">
+      <div class="breadcrumb-wrapper">
+        <el-breadcrumb separator="/">
+          <!--<el-breadcrumb-item :to="{ path: '/' }">笔记本</el-breadcrumb-item>-->
+          <!--<el-breadcrumb-item>笔记本</el-breadcrumb-item>-->
+          <el-breadcrumb-item :to="{ path: '/note/all' }">笔记本</el-breadcrumb-item>
+          <el-breadcrumb-item>所有笔记 <i class="el-icon-setting"  @click="modifyBookAction=true"></i></el-breadcrumb-item>
+        </el-breadcrumb>
+
+        <!--<el-button type="default">修改笔记本信息</el-button>-->
+      </div>
+
+      <el-row :gutter="10" style="margin: 0">
+        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
+          <div class="collection-wrapper new-wrapper"  @click="createNewNoteAction=true">
+            <el-button type="default"><i class="el-icon-plus"></i><br><br><br>新建笔记</el-button>
+          </div>
+        </el-col>
+
+        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
+          <div class="collection-wrapper" @mouseenter="showHoverContentView()" @mouseleave="hideHoverContentView()">
+            <div>
+              <h5>娃娃的阿斯顿萨芬鹅气氛啊说</h5>
+              <h6>更新于<br>2017-08-08<br>08:08:08</h6>
+            </div>
+            <div v-show="isHoverProperty">
+              <p><span>笔记内容</span><br>safasfasfsafasfasfafsasfafsasfasfasfasfasfasfasfasfaafsasfasfasfasfasfasfasfasfafsasfasf</p>
+            </div>
+            <i class="el-icon-circle-close" @click="confirmCloseAction=true"></i>
+          </div>
+        </el-col>
+        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
+          <div class="collection-wrapper"></div>
+        </el-col>
+
+
+      </el-row>
+    </div>
+
+    <dialogs
+      :confirmCloseAction="confirmCloseAction" @closeConfirmClose="closeConfirmClose"
+      :modifyBookAction="modifyBookAction" @closeModifyBook="closeModifyBook"
+      :createNewNoteAction="createNewNoteAction" @closeCreateNewNote="closeCreateNewNote"
+    ></dialogs>
+  </div>
+</template>
+
+
+<script>
+  import {mapGetters, mapActions} from 'vuex'
+  import Dialogs from '../Note/Dialogs'
+  import NotePad from '../NotePad/NotePad'
+
+  export default {
+    components: {
+      Dialogs,
+      NotePad
+    },
+    data () {
+      return {
+        isHoverProperty: false,
+        confirmCloseAction: false,
+        modifyBookAction: false,
+        createNewNoteAction: false,
+        mainStyle: {
+          minHeight: window.innerHeight - 60 + 'px'
+        },
+        leftWrapperStyle: {
+          minHeight: window.innerHeight - 110 + 'px'
+        },
+        rightWrapperStyle: {
+          height: window.innerHeight + 140 + 'px'
+        }
+      }
+    },
+    computed: {
+      ...mapGetters({
+        largeSize: 'largeSize',
+        mainHeight: 'mainHeight',
+        scrollTop: 'scrollTop'
+      })
+    },
+    watch: {
+      mainHeight: function () {
+        this.mainStyle.minHeight = this.mainHeight - 60 + 'px'
+        this.leftWrapperStyle.minHeight = this.mainHeight - 110 + 'px'
+        this.rightWrapperStyle.height = this.mainHeight + 140 + 'px'
+//      this.contentStyle.height = this.mainHeight - 100 + 'px'
+      },
+      scrollTop: function () {
+        if (this.scrollTop > 80) {
+          this.isSticky = true
+        } else {
+          this.isSticky = false
+        }
+      },
+      largeSize: function () {
+//        alert(this.largeSize)
+      }
+    },
+    methods: {
+      ...mapActions({
+      }),
+      closeModifyBook: function () {
+        this.modifyBookAction = false
+      },
+      closeCreateNewNote: function () {
+        this.createNewNoteAction = false
+      },
+      closeConfirmClose: function () {
+        this.confirmCloseAction = false
+      },
+      showHoverContentView: function () {
+        this.isHoverProperty = true
+      },
+      hideHoverContentView: function () {
+        this.isHoverProperty = false
+      }
+    }
+  }
+</script>
+
+<style scoped src="./NoteList.css"></style>
+

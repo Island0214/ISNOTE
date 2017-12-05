@@ -6,6 +6,8 @@ import FriendInfoPage from '../page/FriendInfoPage.vue'
 import CommunityPage from '../page/CommunityPage.vue'
 import NotePage from '../page/NotePage.vue'
 import UserPage from '../page/UserPage.vue'
+import NotePad from '../components/NotePad/NotePad.vue'
+import NoteList from '../components/NoteList/NoteList.vue'
 
 Vue.use(Router)
 
@@ -28,9 +30,23 @@ export default new Router({
       name: 'community',
       component: CommunityPage
     }, {
-      path: '/note',
+      path: '/note/:id',
       name: 'note',
-      component: NotePage
+      component: NotePage,
+      children: [
+        {
+          // 当 /user/:id/profile 匹配成功，
+          // UserProfile 会被渲染在 User 的 <router-view> 中
+          path: 'notes',
+          component: NoteList
+        },
+        {
+          // 当 /user/:id/posts 匹配成功
+          // UserPosts 会被渲染在 User 的 <router-view> 中
+          path: 'note/:id',
+          component: NotePad
+        }
+      ]
     }, {
       path: '/user',
       name: 'user',

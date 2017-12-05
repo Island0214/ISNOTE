@@ -46,7 +46,8 @@ export function getUser (callback, token) {
       params: {
         token: token
       }
-    })
+    }
+    )
     .then(function (response) {
       callback(response.data)
       // console.log(response)

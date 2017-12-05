@@ -12,3 +12,5 @@ export const LOG_IN = 'LOG_IN'
 export const QUIT_LOG = 'QUIT_LOG'
 export const SIGN_IN = 'SIGN_IN'
 export const CHANGE_LOG_STATUS = 'CHANGE_LOG_STATUS'
+
+export const SET_NOTEBOOKS = 'SET_NOTEBOOKS'

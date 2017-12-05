@@ -355,10 +355,10 @@
         intro: '',
         email: '',
         phone: '',
-        seen: '',
-        info: '',
-        search: '',
-        modify: '',
+        seen: '无',
+        info: '无',
+        search: '无',
+        modify: '无',
         count: 0
       }
     },
