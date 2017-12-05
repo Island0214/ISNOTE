@@ -20,6 +20,15 @@ const actions = {
         onSuccess(data)
       }
     }, localStorage.getItem('token'))
+  },
+  'createNoteBookAction' ({state, commit}, {onSuccess, onError, body}) {
+    notebookApi.createNoteBookAction(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data.notebook)
+      }
+    }, body)
   }
 }
 

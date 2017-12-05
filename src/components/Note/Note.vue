@@ -8,7 +8,7 @@
           <h1>笔 记。</h1>
           <el-button type="default" class="create-button" @click="createBookAction=true" style="width: 80%">新建笔记本</el-button>
           <div class="nav-wrapper">
-            <el-menu default-active="0" class="el-menu-vertical-demo" :style="mainStyle">
+            <el-menu default-active="0" class="el-menu-vertical-demo">
               <el-menu-item index="0">所有笔记</el-menu-item>
               <el-menu-item v-for="notebook in notebookList" :index="notebook.id + ''">{{ notebook.notebook_name }}</el-menu-item>
             </el-menu>
@@ -21,7 +21,7 @@
       </el-col>
       <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
 
-        <router-view></router-view>
+        <router-view ></router-view>
         <!--<note-pad></note-pad>-->
 
       </el-col>
@@ -31,6 +31,7 @@
     </el-row>
     <dialogs
       :createBookAction="createBookAction" @closeCreateBook="closeCreateBook"
+      @createNewBook="createNewBook"
     ></dialogs>
 
   </div>
@@ -100,6 +101,9 @@
       },
       closeCreateBook: function () {
         this.createBookAction = false
+      },
+      createNewBook: function (newNotebook) {
+        this.notebookList.push(newNotebook)
       }
     },
     mounted () {
