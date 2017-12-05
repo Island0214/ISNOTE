@@ -9,16 +9,16 @@
     </el-dialog>
 
     <el-dialog
-      title="修改笔记设置"
+      title="修改笔记本设置"
       :visible.sync="modifyBookAction"
       width="20%"
       top="30%"
       :modal=false
     >
       <p>笔记本名称</p>
-      <el-input></el-input>
+      <el-input v-model="moBookName"></el-input>
       <p>笔记本权限</p>
-      <el-select v-model="value1" placeholder="请选择">
+      <el-select v-model="moBookAuthority" placeholder="请选择">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -29,7 +29,7 @@
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="closeModifyBook">取 消</el-button>
-        <el-button type="primary" @click="closeModifyBook">确 定</el-button>
+        <el-button type="primary" @click="modifyNotebookSetting">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -86,7 +86,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
   export default {
     props: ['confirmCloseAction', 'modifyBookAction', 'createBookAction', 'createNewNoteAction'],
@@ -111,8 +111,15 @@
         }],
         value1: '',
         newBookName: '',
-        newBookAuthority: ''
+        newBookAuthority: '',
+        moBookName: '',
+        moBookAuthority: ''
       }
+    },
+    computed: {
+      ...mapGetters({
+        singleNotebook: 'singleNotebook'
+      })
     },
     methods: {
       ...mapActions({
@@ -122,12 +129,16 @@
         this.$emit('closeConfirmClose')
       },
       closeModifyBook: function () {
+        this.moBookName = this.singleNotebook.notebook_name
+        this.moBookAuthority = this.singleNotebook.authority
         this.$emit('closeModifyBook')
       },
       closeCreateNewNote: function () {
         this.$emit('closeCreateNewNote')
       },
       closeCreateBook: function () {
+        this.newBookName = ''
+        this.newBookAuthority = ''
         this.$emit('closeCreateBook')
       },
       createNewNoteBook: function () {
@@ -158,6 +169,22 @@
             'authority': this.newBookAuthority
           }
         })
+      },
+      modifyNotebookSetting: function () {
+        let newInfo = {
+          name: this.moBookName,
+          authority: this.moBookAuthority
+        }
+        this.$emit('modifyNotebookAction', newInfo)
+        this.moBookName = this.singleNotebook.notebook_name
+        this.moBookAuthority = this.singleNotebook.authority
+        this.closeModifyBook()
+      }
+    },
+    watch: {
+      singleNotebook: function () {
+        this.moBookName = this.singleNotebook.notebook_name
+        this.moBookAuthority = this.singleNotebook.authority
       }
     }
   }

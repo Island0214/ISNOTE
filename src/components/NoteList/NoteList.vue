@@ -10,14 +10,14 @@
           <!--<el-breadcrumb-item :to="{ path: '/' }">笔记本</el-breadcrumb-item>-->
           <!--<el-breadcrumb-item>笔记本</el-breadcrumb-item>-->
           <el-breadcrumb-item>笔记本</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ this.singleNotebook.notebook_name }} <i class="el-icon-setting"  @click="modifyBookAction=true"></i></el-breadcrumb-item>
+          <el-breadcrumb-item>{{ this.singleNotebook.notebook_name }} <i class="el-icon-setting"  @click="modifyBookAction=true" v-show="singleNotebook.id !== 0"></i></el-breadcrumb-item>
         </el-breadcrumb>
 
         <!--<el-button type="default">修改笔记本信息</el-button>-->
       </div>
 
       <el-row :gutter="10" style="margin: 0">
-        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
+        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center" v-show="singleNotebook.id !== 0">
           <div class="collection-wrapper new-wrapper"  @click="createNewNoteAction=true">
             <el-button type="default"><i class="el-icon-plus"></i><br><br><br>新建笔记</el-button>
           </div>
@@ -42,15 +42,17 @@
       :confirmCloseAction="confirmCloseAction" @closeConfirmClose="closeConfirmClose"
       :modifyBookAction="modifyBookAction" @closeModifyBook="closeModifyBook"
       :createNewNoteAction="createNewNoteAction" @closeCreateNewNote="closeCreateNewNote"
+      @modifyNotebookAction="modifyNotebookAction"
     ></dialogs>
   </div>
 </template>
 
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
+  import {mapGetters, mapActions, mapMutations} from 'vuex'
   import Dialogs from '../Note/Dialogs'
   import NotePad from '../NotePad/NotePad'
+  import * as types from '../../store/mutation-types'
 
   export default {
     components: {
@@ -102,8 +104,12 @@
       }
     },
     methods: {
+      ...mapMutations({
+        'setNotebook': types.SET_NOTEBOOK
+      }),
       ...mapActions({
-        'getNotebookById': 'getNotebookById'
+        'getNotebookById': 'getNotebookById',
+        'modifyNotebook': 'modifyNotebook'
       }),
       closeModifyBook: function () {
         this.modifyBookAction = false
@@ -119,19 +125,42 @@
       },
       hideHoverContentView: function () {
         this.isHoverProperty = false
+      },
+      modifyNotebookAction: function (newBookInfo) {
+        newBookInfo['id'] = this.singleNotebook.id
+//        console.log(newBookInfo)
+        this.modifyNotebook({
+          onSuccess: () => {
+            this.$message({
+              showClose: true,
+              message: '修改笔记本设置成功！',
+              type: 'success'
+            })
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: newBookInfo
+        })
       }
     },
-    // 路由改变前，组件就已经渲染完了
-    // 逻辑稍稍不同
     beforeRouteUpdate (to, from, next) {
 //      alert(to.params.id)
+      console.log(to.params.id)
       if (to.params.id === 0) {
+        console.log('all')
+        let allNotebook = {
+          id: 0,
+          notebook_name: '所有笔记'
+        }
+        this.setNotebook(allNotebook)
       } else {
         this.getNotebookById({
           onSuccess: (notebook) => {
-//          this.notebook = notebook
-//          this.name = notebook.notebook_name
-//          console.log(notebook.id)
             console.log(this.singleNotebook)
           },
           onError: (error) => {

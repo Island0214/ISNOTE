@@ -41,6 +41,16 @@ const actions = {
         onSuccess(data.notebook)
       }
     }, body)
+  },
+  'modifyNotebook' ({state, commit}, {onSuccess, onError, body}) {
+    notebookApi.modifyNotebook(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        commit(types.SET_NOTEBOOK, data.notebook)
+        onSuccess(data.notebook)
+      }
+    }, body)
   }
 }
 

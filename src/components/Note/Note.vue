@@ -9,7 +9,7 @@
           <el-button type="default" class="create-button" @click="createBookAction=true" style="width: 80%">新建笔记本</el-button>
           <div class="nav-wrapper">
             <el-menu default-active="0" class="el-menu-vertical-demo">
-              <el-menu-item index="0">所有笔记</el-menu-item>
+              <el-menu-item index="0" @click="showAllNotes()">所有笔记</el-menu-item>
               <el-menu-item v-for="notebook in notebookList" :index="notebook.id + ''" @click="pushToNotes(notebook.id)">{{ notebook.notebook_name }}</el-menu-item>
             </el-menu>
           </div>
@@ -38,9 +38,10 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
+  import {mapGetters, mapActions, mapMutations} from 'vuex'
   import Dialogs from './Dialogs'
   import NotePad from '../NotePad/NotePad'
+  import * as types from '../../store/mutation-types'
 
   export default {
     components: {
@@ -94,6 +95,9 @@
       }
     },
     methods: {
+      ...mapMutations({
+        'setNotebook': types.SET_NOTEBOOK
+      }),
       ...mapActions({
         'getMyNotebooks': 'getMyNotebooks'
       }),
@@ -106,10 +110,20 @@
         this.notebookList.push(newNotebook)
       },
       pushToNotes: function (id) {
+//        console.log(id)
         this.$router.push('/note/' + id + '/notes')
+      },
+      showAllNotes: function () {
+        console.log('all')
+        let allNotebook = {
+          id: 0,
+          notebook_name: '所有笔记'
+        }
+        this.setNotebook(allNotebook)
       }
     },
     mounted () {
+      this.showAllNotes()
       this.getMyNotebooks({
         onSuccess: (notebooks) => {
         },

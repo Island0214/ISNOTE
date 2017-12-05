@@ -59,3 +59,32 @@ export function getNotebookById (callback, body) {
       console.log(error)
     })
 }
+
+export function modifyNotebook (callback, body) {
+  console.log(body)
+  axios.post('/notebook/modifyNotebook',
+    body,
+    {
+      params: {
+        token: localStorage.getItem('token')
+      },
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+    .then(function (response) {
+      console.log('success')
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log('error')
+      this.$message({
+        showClose: true,
+        message: '登录状态出错...请重新登录',
+        type: 'error'
+      })
+      this.$router.push('/')
+      console.log(error)
+    })
+}
