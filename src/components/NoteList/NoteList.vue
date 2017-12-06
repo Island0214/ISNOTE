@@ -23,16 +23,19 @@
           </div>
         </el-col>
 
-        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center" v-for="note in noteList" @click="pustToNoteContent(note.id)">
-          <div class="collection-wrapper" @mouseenter="showHoverContentView()" @mouseleave="hideHoverContentView()" @click="pustToNoteContent(note.id)">
-            <div>
+        <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center" v-for="note in noteList">
+          <div class="collection-wrapper" @mouseenter="showHoverContentView()" @mouseleave="hideHoverContentView()">
+            <div @click="pushToNoteContent(note.id)">
               <h5>{{ note.note_title }}</h5>
+              <p>{{ note.note_body }}</p>
               <h6>更新于<br>{{ note.updated_at }}</h6>
             </div>
             <!--<div v-show="isHoverProperty">-->
               <!--<p><span>笔记内容</span><br>{{ note.note_body }}</p>-->
             <!--</div>-->
-            <i class="el-icon-circle-close" @click="confirmCloseAction=true"></i>
+            <div @click="showConfirm(note.id)" v-show="singleNotebook.id !== 0">
+              <i class="el-icon-circle-close" ></i>
+            </div>
           </div>
         </el-col>
       </el-row>
@@ -44,6 +47,9 @@
       :createNewNoteAction="createNewNoteAction" @closeCreateNewNote="closeCreateNewNote"
       @modifyNotebookAction="modifyNotebookAction"
       @createNewNote="createNewNote"
+      :noteID="noteID"
+      :notebookName="singleNotebook.notebook_name"
+      :notebookAuthority="singleNotebook.authority"
     ></dialogs>
   </div>
 </template>
@@ -75,7 +81,8 @@
         rightWrapperStyle: {
           minHeight: window.innerHeight + 140 + 'px'
         },
-        name: ''
+        name: '',
+        noteID: ''
       }
     },
     computed: {
@@ -102,48 +109,6 @@
         }
       },
       largeSize: function () {
-//        alert(this.largeSize)
-      },
-      '$route' (to, from) {
-        console.log(to.params.id)
-        if (to.params.id === 0) {
-          console.log('all')
-          let allNotebook = {
-            id: 0,
-            notebook_name: '所有笔记'
-          }
-          this.setNotebook(allNotebook)
-        } else {
-          this.getNotebookById({
-            onSuccess: (notebook) => {
-            },
-            onError: (error) => {
-              this.$message({
-                showClose: true,
-                message: error,
-                type: 'error'
-              })
-            },
-            body: {
-              id: to.params.id
-            }
-          })
-
-          this.getNotesByNotebook({
-            onSuccess: (notebook) => {
-            },
-            onError: (error) => {
-              this.$message({
-                showClose: true,
-                message: error,
-                type: 'error'
-              })
-            },
-            body: {
-              id: to.params.id
-            }
-          })
-        }
       }
     },
     methods: {
@@ -161,6 +126,10 @@
       },
       closeCreateNewNote: function () {
         this.createNewNoteAction = false
+      },
+      showConfirm: function (id) {
+        this.confirmCloseAction = true
+        this.noteID = id
       },
       closeConfirmClose: function () {
         this.confirmCloseAction = false
@@ -196,52 +165,11 @@
           body: newBookInfo
         })
       },
-      pustToNoteContent: function (id) {
-//        console.log('/workbench/' + this.singleNotebook.id + '/note/' + id)
+      pushToNoteContent: function (id) {
+        console.log('/workbench/' + this.singleNotebook.id + '/note/' + id)
         this.$router.push('/workbench/' + this.singleNotebook.id + '/' + id)
       }
     }
-//    beforeRouteUpdate (to, from, next) {
-//      console.log(to.params.id)
-//      if (to.params.id === 0) {
-//        console.log('all')
-//        let allNotebook = {
-//          id: 0,
-//          notebook_name: '所有笔记'
-//        }
-//        this.setNotebook(allNotebook)
-//      } else {
-//        this.getNotebookById({
-//          onSuccess: (notebook) => {
-//          },
-//          onError: (error) => {
-//            this.$message({
-//              showClose: true,
-//              message: error,
-//              type: 'error'
-//            })
-//          },
-//          body: {
-//            id: to.params.id
-//          }
-//        })
-//
-//        this.getNotesByNotebook({
-//          onSuccess: (notebook) => {
-//          },
-//          onError: (error) => {
-//            this.$message({
-//              showClose: true,
-//              message: error,
-//              type: 'error'
-//            })
-//          },
-//          body: {
-//            id: to.params.id
-//          }
-//        })
-//      }
-//    }
   }
 </script>
 

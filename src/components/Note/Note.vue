@@ -9,7 +9,7 @@
           <el-button type="default" class="create-button" @click="createBookAction=true" style="width: 80%">新建笔记本</el-button>
           <div class="nav-wrapper">
             <el-menu default-active="0" class="el-menu-vertical-demo">
-              <el-menu-item index="0" @click="showAllNotes()">所有笔记</el-menu-item>
+              <el-menu-item index="0" @click="pushToNotes(0)">所有笔记</el-menu-item>
               <el-menu-item v-for="notebook in notebookList" :index="notebook.id + ''" @click="pushToNotes(notebook.id)">{{ notebook.notebook_name }}</el-menu-item>
             </el-menu>
           </div>
@@ -90,6 +90,43 @@
         }
       },
       largeSize: function () {
+      },
+      '$route' (to, from) {
+        console.log(to)
+        console.log('nav-change: ' + to.params.id)
+        if (to.params.id === 0 || to.params.id === '0') {
+          this.showAllNotes()
+        } else {
+          this.getNotebookById({
+            onSuccess: (notebook) => {
+            },
+            onError: (error) => {
+              this.$message({
+                showClose: true,
+                message: error,
+                type: 'error'
+              })
+            },
+            body: {
+              id: to.params.id
+            }
+          })
+
+          this.getNotesByNotebook({
+            onSuccess: (notebook) => {
+            },
+            onError: (error) => {
+              this.$message({
+                showClose: true,
+                message: error,
+                type: 'error'
+              })
+            },
+            body: {
+              id: to.params.id
+            }
+          })
+        }
       }
     },
     methods: {
@@ -98,7 +135,9 @@
       }),
       ...mapActions({
         'getMyNotebooks': 'getMyNotebooks',
-        'getMyNotes': 'getMyNotes'
+        'getMyNotes': 'getMyNotes',
+        'getNotebookById': 'getNotebookById',
+        'getNotesByNotebook': 'getNotesByNotebook'
       }),
       handleIconClick: function () {
       },
@@ -113,15 +152,18 @@
         this.$router.push('/workbench/' + id)
       },
       showAllNotes: function () {
-        console.log('all')
+//        console.log('all')
+//        this.pushToNotes(0)
         let allNotebook = {
           id: 0,
-          notebook_name: '所有笔记'
+          notebook_name: '所有笔记',
+          authority: '只有我'
         }
-        this.setNotebook(allNotebook)
+        this.setNotebook({allNotebook})
+//        this.singleNotebook = allNotebook
         this.getMyNotes({
           onSuccess: (notes) => {
-            console.log(notes)
+            console.log('getAll')
           },
           onError: (error) => {
             this.$message({
@@ -131,11 +173,11 @@
             })
           }
         })
-        this.pushToNotes(0)
       }
     },
     mounted () {
-      this.showAllNotes()
+//      if (this.singleNotebook !== null) {
+//      }
       this.getMyNotebooks({
         onSuccess: (notebooks) => {
         },
@@ -147,6 +189,7 @@
           })
         }
       })
+      this.showAllNotes()
     },
     bind (el, binding, vnode) {
       vnode.context.$refs[binding.arg].$refs.reference = el

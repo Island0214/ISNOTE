@@ -140,7 +140,6 @@
         }
       },
       largeSize: function () {
-//        alert(this.largeSize)
       }
     },
     methods: {
@@ -162,23 +161,8 @@
         this.inputValue = ''
       }
     },
-    afterRouteEnter (to, from, next) {
+    beforeRouteUpdate (to, from, next) {
       console.log(to.params.id)
-      next()
-//      this.getNotebookById({
-//        onSuccess: (notebook) => {
-//        },
-//        onError: (error) => {
-//          this.$message({
-//            showClose: true,
-//            message: error,
-//            type: 'error'
-//          })
-//        },
-//        body: {
-//          id: to.params.id
-//        }
-//      })
     }
   }
 </script>

@@ -52,6 +52,15 @@ const actions = {
         // commit(types.ADD_NEWNOTE, data)
       }
     }, body)
+  },
+  'deleteNote' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.deleteNote(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data.success)
+      }
+    }, body)
   }
 }
 

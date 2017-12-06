@@ -1,16 +1,16 @@
 <template>
   <div>
-    <el-dialog title="提示" :visible.sync="confirmCloseAction" width="20%" top="30%" :modal=false>
+    <el-dialog title="提示" :visible.sync="confirmCloseStatus" width="20%" top="30%" :modal=false>
       <span>确认删除该笔记吗？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="closeConfirmClose">取 消</el-button>
-        <el-button type="primary" @click="closeConfirmClose">确 定</el-button>
+        <el-button type="primary" @click="deleteNoteAction">确 定</el-button>
       </span>
     </el-dialog>
 
     <el-dialog
       title="修改笔记本设置"
-      :visible.sync="modifyBookAction"
+      :visible.sync="modifyBookStatus"
       width="20%"
       top="30%"
       :modal=false
@@ -35,7 +35,7 @@
 
     <el-dialog
       title="新建笔记本"
-      :visible.sync="createBookAction"
+      :visible.sync="createBookStatus"
       width="20%"
       top="30%"
       :modal=false
@@ -60,7 +60,7 @@
 
     <el-dialog
       title="新建笔记"
-      :visible.sync="createNewNoteAction"
+      :visible.sync="createNewNoteStatus"
       width="20%"
       top="30%"
       :modal=false
@@ -89,7 +89,7 @@
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
-    props: ['confirmCloseAction', 'modifyBookAction', 'createBookAction', 'createNewNoteAction'],
+    props: ['confirmCloseAction', 'modifyBookAction', 'createBookAction', 'createNewNoteAction', 'noteID', 'notebookName', 'notebookAuthority'],
     data () {
       return {
         options: [{
@@ -111,29 +111,39 @@
         }],
         newBookName: '',
         newBookAuthority: '',
+        newNoteName: '',
+        newNoteAuthority: '',
         moBookName: '',
         moBookAuthority: '',
-        newNoteName: '',
-        newNoteAuthority: ''
+        confirmCloseStatus: this.confirmCloseAction,
+        modifyBookStatus: this.modifyBookAction,
+        createBookStatus: this.createBookAction,
+        createNewNoteStatus: this.createNewNoteAction
       }
     },
     computed: {
       ...mapGetters({
         singleNotebook: 'singleNotebook'
       })
+//      moBookName: this.singleNotebook.notebook_name,
+//      moBookAuthority: this.singleNotebook.authority
+      //      moBookName: notebookName,
+//      moBookAuthority: notebookAuthority
     },
     methods: {
       ...mapActions({
         'createNoteBookAction': 'createNoteBookAction',
-        'createNoteAction': 'createNoteAction'
+        'createNoteAction': 'createNoteAction',
+        'deleteNote': 'deleteNote'
       }),
       closeConfirmClose: function () {
+        this.confirmCloseStatus = false
         this.$emit('closeConfirmClose')
       },
       closeModifyBook: function () {
+        this.$emit('closeModifyBook')
         this.moBookName = this.singleNotebook.notebook_name
         this.moBookAuthority = this.singleNotebook.authority
-        this.$emit('closeModifyBook')
       },
       closeCreateNewNote: function () {
         this.$emit('closeCreateNewNote')
@@ -208,12 +218,55 @@
           },
           body: newNote
         })
+      },
+      deleteNoteAction: function () {
+        this.deleteNote({
+          onSuccess: (success) => {
+            this.closeConfirmClose()
+            this.$router.push('/workbench/0')
+            this.$router.push('/workbench/' + this.singleNotebook.id)
+            this.$message({
+              showClose: true,
+              message: success,
+              type: 'success'
+            })
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: {
+            id: this.noteID
+          }
+        })
       }
     },
+    mounted () {
+//      modifyBookAction: function () {
+//        console.log(this.singleNotebook.notebook_name)
+//        console.log(this.singleNotebook.notebook_name)
+//        console.log(this.$route)
+      this.moBookName = this.singleNotebook.notebook_name
+      this.moBookAuthority = this.singleNotebook.authority
+//      }
+    },
     watch: {
-      singleNotebook: function () {
+      confirmCloseAction: function () {
+        this.confirmCloseStatus = this.confirmCloseAction
+      },
+      modifyBookAction: function () {
+        this.modifyBookStatus = this.modifyBookAction
         this.moBookName = this.singleNotebook.notebook_name
         this.moBookAuthority = this.singleNotebook.authority
+      },
+      createBookAction: function () {
+        this.createBookStatus = this.createBookAction
+      },
+      createNewNoteAction: function () {
+        this.createNewNoteStatus = this.createNewNoteAction
       }
     }
   }

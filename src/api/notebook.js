@@ -31,11 +31,9 @@ export function createNoteBookAction (callback, body) {
     }
   )
     .then(function (response) {
-      console.log('success')
       callback(response.data)
     })
     .catch(function (error) {
-      console.log('error')
       console.log(error)
     })
 }
@@ -51,11 +49,9 @@ export function getNotebookById (callback, body) {
     }
   )
     .then(function (response) {
-      console.log('success')
       callback(response.data)
     })
     .catch(function (error) {
-      console.log('error')
       console.log(error)
     })
 }
@@ -74,11 +70,9 @@ export function modifyNotebook (callback, body) {
     }
   )
     .then(function (response) {
-      console.log('success')
       callback(response.data)
     })
     .catch(function (error) {
-      console.log('error')
       this.$message({
         showClose: true,
         message: '登录状态出错...请重新登录',

@@ -60,7 +60,24 @@ const mutations = {
     state.notebookList = notebooks
   },
   [types.SET_NOTEBOOK] (state, notebook) {
-    state.singleNotebook = notebook
+    // console.log('notebook:')
+    // console.log(notebook)
+
+    if (notebook !== null) {
+      // console.log('allNotebook:')
+      // console.log(notebook.allNotebook)
+      if (notebook.allNotebook !== undefined) {
+        // console.log('safgdhfjghdgsfadfdgfhg')
+        state.singleNotebook.id = notebook.allNotebook.id
+        state.singleNotebook.notebook_name = notebook.allNotebook.notebook_name
+        state.singleNotebook.authority = notebook.allNotebook.authority
+      } else {
+        // console.log('!!!!!!!!!!!!!!!!!!!')
+        state.singleNotebook.id = notebook.id
+        state.singleNotebook.notebook_name = notebook.notebook_name
+        state.singleNotebook.authority = notebook.authority
+      }
+    }
   }
 }
 
