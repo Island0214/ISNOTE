@@ -208,6 +208,7 @@
 </script>
 
 <style scoped src="./User.css"></style>
+<style scoped src="../NoteList/NoteList.css"></style>
 <style scoped src="../Note/Note.css"></style>
 <style>
   .page-login-toolTipClass {

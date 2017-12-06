@@ -30,20 +30,20 @@ export default new Router({
       name: 'community',
       component: CommunityPage
     }, {
-      path: '/note/:id',
-      name: 'note',
+      path: '/workbench/:id',
+      name: 'workbench',
       component: NotePage,
       children: [
         {
           // 当 /user/:id/profile 匹配成功，
           // UserProfile 会被渲染在 User 的 <router-view> 中
-          path: 'notes',
+          path: '',
           component: NoteList
         },
         {
           // 当 /user/:id/posts 匹配成功
           // UserPosts 会被渲染在 User 的 <router-view> 中
-          path: 'note/:id',
+          path: ':id',
           component: NotePad
         }
       ]

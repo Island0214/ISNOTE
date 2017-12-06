@@ -66,9 +66,9 @@
       :modal=false
     >
       <p>笔记名称</p>
-      <el-input></el-input>
+      <el-input v-model="newNoteName"></el-input>
       <p>笔记权限</p>
-      <el-select v-model="value1" placeholder="请选择">
+      <el-select v-model="newNoteAuthority" placeholder="请选择">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -79,7 +79,7 @@
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="closeCreateNewNote">取 消</el-button>
-        <el-button type="primary" @click="closeCreateNewNote">确 定</el-button>
+        <el-button type="primary" @click="createNewNote">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -109,11 +109,12 @@
           value: '选项5',
           label: '不允许'
         }],
-        value1: '',
         newBookName: '',
         newBookAuthority: '',
         moBookName: '',
-        moBookAuthority: ''
+        moBookAuthority: '',
+        newNoteName: '',
+        newNoteAuthority: ''
       }
     },
     computed: {
@@ -123,7 +124,8 @@
     },
     methods: {
       ...mapActions({
-        'createNoteBookAction': 'createNoteBookAction'
+        'createNoteBookAction': 'createNoteBookAction',
+        'createNoteAction': 'createNoteAction'
       }),
       closeConfirmClose: function () {
         this.$emit('closeConfirmClose')
@@ -135,6 +137,8 @@
       },
       closeCreateNewNote: function () {
         this.$emit('closeCreateNewNote')
+        this.newNoteName = ''
+        this.newNoteAuthority = ''
       },
       closeCreateBook: function () {
         this.newBookName = ''
@@ -176,9 +180,34 @@
           authority: this.moBookAuthority
         }
         this.$emit('modifyNotebookAction', newInfo)
-        this.moBookName = this.singleNotebook.notebook_name
-        this.moBookAuthority = this.singleNotebook.authority
         this.closeModifyBook()
+      },
+      createNewNote: function () {
+        let newNote = {
+          notebook: this.singleNotebook.id,
+          note_title: this.newNoteName,
+          note_authority: this.newNoteAuthority
+        }
+        this.createNoteAction({
+          onSuccess: (note) => {
+            this.closeCreateNewNote()
+            this.$emit('createNewNote', note)
+
+            this.$message({
+              showClose: true,
+              message: '成功创建新笔记！',
+              type: 'success'
+            })
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: newNote
+        })
       }
     },
     watch: {

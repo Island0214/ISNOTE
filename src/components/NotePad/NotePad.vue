@@ -97,14 +97,14 @@
         dynamicTags: ['标签一', '标签二', '标签三'],
         inputVisible: false,
         options: [{
-          value: '选项1',
-          label: '所有人可见'
+          value: '所有人',
+          label: '所有人'
         }, {
-          value: '选项2',
-          label: '仅好友可见'
+          value: '仅好友',
+          label: '仅好友'
         }, {
-          value: '选项3',
-          label: '只有我可见'
+          value: '只有我',
+          label: '只有我'
         }],
         options2: [{
           value: '选项4',
@@ -113,7 +113,9 @@
           value: '选项5',
           label: '不允许'
         }],
-        value1: ''
+        value1: '',
+        input2: '',
+        value: ''
       }
     },
     computed: {
@@ -159,6 +161,24 @@
         this.inputVisible = false
         this.inputValue = ''
       }
+    },
+    afterRouteEnter (to, from, next) {
+      console.log(to.params.id)
+      next()
+//      this.getNotebookById({
+//        onSuccess: (notebook) => {
+//        },
+//        onError: (error) => {
+//          this.$message({
+//            showClose: true,
+//            message: error,
+//            type: 'error'
+//          })
+//        },
+//        body: {
+//          id: to.params.id
+//        }
+//      })
     }
   }
 </script>

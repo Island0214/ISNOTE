@@ -81,7 +81,6 @@
         this.mainStyle.minHeight = this.mainHeight - 60 + 'px'
         this.leftWrapperStyle.minHeight = this.mainHeight - 110 + 'px'
         this.rightWrapperStyle.height = this.mainHeight + 140 + 'px'
-//      this.contentStyle.height = this.mainHeight - 100 + 'px'
       },
       scrollTop: function () {
         if (this.scrollTop > 80) {
@@ -91,7 +90,6 @@
         }
       },
       largeSize: function () {
-//        alert(this.largeSize)
       }
     },
     methods: {
@@ -112,7 +110,7 @@
       },
       pushToNotes: function (id) {
 //        console.log(id)
-        this.$router.push('/note/' + id + '/notes')
+        this.$router.push('/workbench/' + id)
       },
       showAllNotes: function () {
         console.log('all')
@@ -133,6 +131,7 @@
             })
           }
         })
+        this.pushToNotes(0)
       }
     },
     mounted () {

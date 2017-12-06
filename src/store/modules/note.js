@@ -32,6 +32,26 @@ const actions = {
         onSuccess(data)
       }
     }, body)
+  },
+  'createNoteAction' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.createNoteAction(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data)
+        // commit(types.ADD_NEWNOTE, data)
+      }
+    }, body)
+  },
+  'getNoteById' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.getNotekById(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data.note)
+        // commit(types.ADD_NEWNOTE, data)
+      }
+    }, body)
   }
 }
 
@@ -42,6 +62,10 @@ const mutations = {
   },
   [types.SET_NOTE] (state, note) {
     state.singleNote = note
+  },
+  [types.ADD_NEWNOTE] (state, note) {
+    console.log(state.noteList)
+    state.noteList.push(note)
   }
 }
 
