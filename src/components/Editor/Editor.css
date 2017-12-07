@@ -28,22 +28,26 @@
 
 
 .quillWrapper /deep/ h1 {
+  position: relative;
   font-size: 32px;
   letter-spacing: normal;
   color: #333;
-  position: relative;
   margin: 0;
   padding: 0;
+  left: 0;
+  top: 0;
 }
 
 
 .quillWrapper /deep/ h2 {
+  position: relative;
   font-size: 24px;
   letter-spacing: normal;
   color: #333;
-  position: relative;
   margin: 0;
   padding: 0;
+  left: 0;
+  top: 0;
 }
 
 
@@ -54,6 +58,8 @@
   position: relative;
   margin: 0;
   padding: 0;
+  left: 0;
+  top: 0;
 }
 
 
@@ -64,6 +70,8 @@
   position: relative;
   margin: 0;
   padding: 0;
+  left: 0;
+  top: 0;
 }
 
 
@@ -75,6 +83,8 @@
   position: relative;
   margin: 0;
   padding: 0;
+  left: 0;
+  top: 0;
 }
 
 
@@ -85,6 +95,8 @@
   position: relative;
   margin: 0;
   padding: 0;
+  left: 0;
+  top: 0;
 }
 
 .quillWrapper /deep/ .ql-container {

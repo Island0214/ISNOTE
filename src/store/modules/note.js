@@ -44,12 +44,12 @@ const actions = {
     }, body)
   },
   'getNoteById' ({state, commit}, {onSuccess, onError, body}) {
-    noteApi.getNotekById(data => {
+    noteApi.getNoteById(data => {
       if (data.error !== undefined) {
         onError(data.error)
       } else {
         onSuccess(data.note)
-        // commit(types.ADD_NEWNOTE, data)
+        commit(types.SET_NOTE, data)
       }
     }, body)
   },
@@ -61,7 +61,65 @@ const actions = {
         onSuccess(data.success)
       }
     }, body)
-  }
+  },
+  'likeNote' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.likeNote(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data.success)
+      }
+    }, body)
+  },
+  'cancelLike' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.cancelLikeNote(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data.success)
+      }
+    }, body)
+  },
+  'addTag' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.addTag(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data)
+      }
+    }, body)
+  },
+  'deleteTag' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.deleteTag(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data.success)
+      }
+    }, body)
+  },
+  'uploadImage' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.uploadImage(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        let url = data.url // Get url from response
+        let name = url.split('/')[url.split('/').length - 1]
+        // name = '/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + name
+        onSuccess(name)
+      }
+    }, body)
+  },
+  'modifyNote' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.modifyNote(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        // commit(types.SET_NOTES, data)
+        onSuccess(data)
+      }
+    }, body)
+  },
 }
 
 // mutations

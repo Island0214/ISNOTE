@@ -13,8 +13,13 @@ import Vuex from 'vuex'
 import store from './store'
 import VueRouter from 'vue-router'
 import * as types from './store/mutation-types'
+import 'font-awesome/css/font-awesome.css'
 // import { mapMutations, mapActions } from 'vuex'
+import 'vue-awesome/icons/flag'
+import 'vue-awesome/icons'
+import Icon from 'vue-awesome/components/Icon'
 
+Vue.component('icon', Icon)
 Vue.use(Vuex)
 Vue.config.productionTip = false
 Vue.use(ElementUI)

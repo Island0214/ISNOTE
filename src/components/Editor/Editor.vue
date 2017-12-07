@@ -2,7 +2,7 @@
   <div class="quillWrapper" id="quill-wrapper">
     <div ref="quillContainer" :id="id" ></div>
     <input v-if="useCustomImageHandler" @change="emitImageInfo($event)" ref="fileInput" id="file-upload" type="file"
-           style="display:none;">
+           style="display: none">
   </div>
 </template>
 

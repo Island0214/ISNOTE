@@ -1,7 +1,7 @@
 <template>
   <div class="right-wrapper">
   <div class="search-wrapper">
-    <input placeholder="输入标题" value="ISLAND"/>
+    <input placeholder="输入标题" :value="curNote.note_title"/>
   </div>
   <div class="collections-wrapper">
     <div class="breadcrumb-wrapper">
@@ -9,20 +9,35 @@
         <el-breadcrumb separator="/">
           <!--<el-breadcrumb-item :to="{ path: '/' }">笔记本</el-breadcrumb-item>-->
           <!--<el-breadcrumb-item>笔记本</el-breadcrumb-item>-->
-          <el-breadcrumb-item :to="{ path: '/note/all' }">笔记本</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/note/all' }">笔记本1</el-breadcrumb-item>
-          <el-breadcrumb-item>哈哈哈哈</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/workbench/0' }">笔记本</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/workbench/' + this.curNote.notebook }">{{ this.curNote.notebook_name }}</el-breadcrumb-item>
+          <el-breadcrumb-item>笔记详情</el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
       <el-col :xs="12" :sm="12" :md="12" :lg="8" style="padding: 0;">
         <div>
           <!--<p>点赞和转发在这里</p>-->
-          <i :class="" style="margin-top: 10px; float: right; position: relative"></i>
+          <!--<i class="address-book-o" style="margin-top: 10px; float: right; position: relative"></i>-->
+          <div style="margin: 0; line-height: 2vmin">
+            <div style="display: inline-block" @click="likeNoteAction">
+              <icon :name="heartName" class="icon"></icon>
+            </div>
+            <p style="display: inline-block">{{ curNote.like_count }}</p>
+            <div style="display: inline-block">
+              <icon name="reply" class="icon"></icon>
+            </div>
+            <p style="display: inline-block">{{ curNote.fork_count }}</p>
+            <div style="display: inline-block">
+              <icon name="share-alt" class="icon"></icon>
+            </div>
+            <p style="display: inline-block">{{ curNote.post_count }}</p>
+          </div>
+
         </div>
       </el-col>
       <el-col :xs="12" :sm="12" :md="12" :lg="12" style="padding: 0; margin-top: 10px;">
         <!--<p style="padding: 0; margin: 0; position: relative; display: inline-block;">笔记权限</p>-->
-        <el-select v-model="value" placeholder="请选择">
+        <el-select v-model="curNote.note_authority" placeholder="请选择">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -31,7 +46,7 @@
           </el-option>
         </el-select>
       </el-col>
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;  margin-top: 10px;">
+      <el-col :xs="24" :sm="24" :md="24" :lg="12" style="padding: 0;  margin-top: 10px;">
         <el-input
           placeholder=""
           icon="search"
@@ -44,17 +59,22 @@
 
     </div>
 
-    <editor></editor>
+    <editor  v-model="editorContent"></editor>
+
+    <p style="position:absolute; left: 1%; font-size: 1.3vmin">上次更新于 {{ this.curNote.updated_at }}</p>
+    <el-button type="default" class="save-button" @click="modifyNoteAction()">保 存</el-button>
 
     <div class="tags-wrapper" >
+      <p style="font-size: 1.3vmin">最多添加五个标签</p>
+
       <el-tag
-        :key="tag"
+        :key="tag.id"
         v-for="tag in dynamicTags"
         :closable="true"
         :close-transition="false"
         @close="handleCloseTag(tag)"
       >
-        {{tag}}
+        {{tag.tag}}
       </el-tag>
       <el-input
         class="input-new-tag"
@@ -66,7 +86,7 @@
         @blur="handleInputConfirm"
       >
       </el-input>
-      <el-button class="button-new-tag" size="small" @click="showInput" v-else>+ 新标签</el-button>
+      <el-button v-show="showInputStatus" class="button-new-tag" size="small" @click="showInput" v-else>+ 新标签</el-button>
     </div>
 
   </div>
@@ -75,8 +95,10 @@
 
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
   import Editor from '../Editor/Editor.vue'
+  import axios from 'axios'
+//  import Quill from 'quill'
 
   export default {
     components: {
@@ -94,7 +116,7 @@
           height: window.innerHeight - 20 + 'px'
         },
         editorContent: '',
-        dynamicTags: ['标签一', '标签二', '标签三'],
+        dynamicTags: [],
         inputVisible: false,
         options: [{
           value: '所有人',
@@ -113,24 +135,31 @@
           value: '选项5',
           label: '不允许'
         }],
-        value1: '',
+        curNote: '',
+        noteID: '',
+        notebookOfNote: '',
         input2: '',
-        value: ''
+        heartName: 'heart-o',
+        showInputStatus: true,
+        inputValue: '',
+        imageName: []
+//        path: require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + this.imageName)
       }
     },
     computed: {
       ...mapGetters({
         largeSize: 'largeSize',
         mainHeight: 'mainHeight',
-        scrollTop: 'scrollTop'
-      })
+        scrollTop: 'scrollTop',
+        singleNotebook: 'singleNotebook',
+        singleNote: 'singleNote'
+      }),
     },
     watch: {
       mainHeight: function () {
         this.mainStyle.minHeight = this.mainHeight - 60 + 'px'
         this.leftWrapperStyle.minHeight = this.mainHeight - 110 + 'px'
         this.rightWrapperStyle.height = this.mainHeight - 20 + 'px'
-//      this.contentStyle.height = this.mainHeight - 100 + 'px'
       },
       scrollTop: function () {
         if (this.scrollTop > 80) {
@@ -140,11 +169,46 @@
         }
       },
       largeSize: function () {
+      },
+      dynamicTags: function () {
+        if (this.dynamicTags.length > 4) {
+          this.showInputStatus = false
+        } else {
+          this.showInputStatus = true
+        }
       }
     },
     methods: {
+      ...mapActions({
+        'getNoteById': 'getNoteById',
+        'likeNote': 'likeNote',
+        'cancelLike': 'cancelLike',
+        'addTag': 'addTag',
+        'deleteTag': 'deleteTag',
+        'uploadImage': 'uploadImage',
+        'modifyNote': 'modifyNote'
+      }),
       handleCloseTag (tag) {
-        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
+        this.deleteTag({
+          onSuccess: () => {
+            this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
+            this.$message({
+              showClose: true,
+              message: '删除标签成功！',
+              type: 'success'
+            })
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: {
+            id: tag.id
+          }
+        })
       },
       showInput () {
         this.inputVisible = true
@@ -154,15 +218,175 @@
       },
       handleInputConfirm () {
         let inputValue = this.inputValue
+        if (inputValue.length > 10) {
+          this.$message({
+            showClose: true,
+            message: '单个标签不能超过10个字！',
+            type: 'error'
+          })
+          this.inputVisible = false
+          this.inputValue = ''
+          return
+        }
         if (inputValue) {
-          this.dynamicTags.push(inputValue)
+          this.addTag({
+            onSuccess: (tag) => {
+              console.log(tag.tag)
+              this.dynamicTags.push(tag.tag)
+              this.$message({
+                showClose: true,
+                message: '增加标签成功！',
+                type: 'success'
+              })
+            },
+            onError: (error) => {
+              this.$message({
+                showClose: true,
+                message: error,
+                type: 'error'
+              })
+            },
+            body: {
+              note_id: this.curNote.id,
+              tag: this.inputValue
+            }
+          })
         }
         this.inputVisible = false
         this.inputValue = ''
+      },
+      likeNoteAction () {
+        console.log('heart')
+        if (this.heartName === 'heart-o') {
+          this.likeNote({
+            onSuccess: () => {
+              this.heartName = 'heart'
+              this.curNote.like_count++
+              this.$message({
+                showClose: true,
+                message: '点赞成功！',
+                type: 'success'
+              })
+            },
+            onError: (error) => {
+              this.$message({
+                showClose: true,
+                message: error,
+                type: 'error'
+              })
+            },
+            body: {
+              note_id: this.noteID
+            }
+          })
+        }
+        if (this.heartName === 'heart') {
+          this.cancelLike({
+            onSuccess: () => {
+              this.heartName = 'heart-o'
+              this.curNote.like_count--
+              this.$message({
+                showClose: true,
+                message: '取消点赞成功！',
+                type: 'success'
+              })
+            },
+            onError: (error) => {
+              this.$message({
+                showClose: true,
+                message: error,
+                type: 'error'
+              })
+            },
+            body: {
+              note_id: this.noteID
+            }
+          })
+        }
+      },
+      handleImageAdded: function (file, Editor, cursorLocation) {
+//        alert('sad')
+        let formData = new FormData()
+        formData.append('image', file)
+//        console.log(formData.get('image'))
+
+        this.uploadImage({
+          onSuccess: (path) => {
+            //     Editor.insertEmbed(cursorLocation, 'image', this.path)
+//            let url = data.url // Get url from response
+//            let name = url.split('/')[url.split('/').length - 1]
+//            let path = require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + name)
+//            require.ensure([], function(require){
+//              url = require.context('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/', false, path)
+//            });
+            this.imageName.push(JSON.parse(JSON.stringify(path)))
+            Editor.insertEmbed(cursorLocation, 'image', require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + this.imageName[0]))
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: formData
+        })
+      },
+      modifyNoteAction: function () {
+        console.log(this.editorContent)
+        this.modifyNote({
+          onSuccess: (note) => {
+//            this.curNote = JSON.parse(JSON.stringify(note))
+            console.log(note)
+            this.curNote.updated_at = note.note.updated_at
+            this.$message({
+              showClose: true,
+              message: '保存成功！',
+              type: 'success'
+            })
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: {
+            id: this.curNote.id,
+            title: this.curNote.note_title,
+            body: this.editorContent,
+            authority: this.curNote.note_authority
+          }
+        })
       }
     },
-    beforeRouteUpdate (to, from, next) {
-      console.log(to.params.id)
+    mounted () {
+      this.noteID = this.$router.history.current.params.id
+      console.log('noteID: ' + this.$router.history.current.params.id)
+      this.getNoteById({
+        onSuccess: (note) => {
+          console.log(note)
+          this.curNote = JSON.parse(JSON.stringify(note))
+          if (this.curNote.isLike === true) {
+            this.heartName = 'heart'
+          }
+          this.dynamicTags = JSON.parse(JSON.stringify(this.curNote.tags))
+          this.editorContent = JSON.parse(JSON.stringify(this.curNote.note_body))
+//          console.log(this.note_authority)
+//          console.log(note.note_authority)
+        },
+        onError: (error) => {
+          this.$message({
+            showClose: true,
+            message: error,
+            type: 'error'
+          })
+        },
+        body: {
+          id: this.noteID
+        }
+      })
     }
   }
 </script>

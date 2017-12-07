@@ -255,6 +255,13 @@ p {
   font-size: 12px;
 }
 
+.icon {
+  color: #ff94a3;
+  cursor: pointer;
+  background-color: #f9f9f7;
+  margin-left: 10px;
+}
+
 
 .el-message /deep/ .el-message__img {
   opacity: 0.5;

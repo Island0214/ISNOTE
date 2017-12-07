@@ -204,6 +204,9 @@
   word-break: break-all;
   overflow: visible;
   height: auto;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
 }
 
 /deep/ .input-new-tag {
@@ -227,7 +230,8 @@
   height: 24px;
   line-height: 22px;
   font-size: 12px;
-  border-radius: 20px
+  border-radius: 20px;
+  /*font-weight: 600;*/
 }
 
 .el-input--mini /deep/ .el-input__inner {
@@ -273,4 +277,24 @@
   z-index: 3;
 }
 
+#main-wrapper .right-wrapper .collections-wrapper .save-button {
+  font-size: 2vmin;
+  border-radius: 100px;
+  border: 0.2vmin solid #B2DDAC;
+  color: #B2DDAC;
+  /*transform: translate(0, -35%);*/
+  transition: color .5s linear;
+  float: right;
+  position: relative;
+  margin-right: 1%;
+  font-weight: 600;
+  padding: 1vmin 5vmin 1vmin 5vmin;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 
+#main-wrapper .right-wrapper .collections-wrapper .save-button:hover {
+  color: #ffffff;
+  background-color: #B2DDAC;
+
+}

@@ -1,7 +1,7 @@
 <template>
-  <div class="footer-wrapper">
+  <footer class="footer-wrapper">
     <p>ISNOTE copyright@2017</p>
-  </div>
+  </footer>
 </template>
 
 <style scoped src="./Footer.css"></style>
