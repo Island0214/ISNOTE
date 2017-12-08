@@ -19,7 +19,7 @@ const actions = {
         onSuccess(data)
       }
     }, body)
-  },
+  }
 }
 
 // mutations

@@ -2,7 +2,7 @@
 
   <div>
     <Nav/>
-    <Community/>
+    <community/>
     <Footer/>
   </div>
 
@@ -10,7 +10,7 @@
 
 <script>
   import Nav from '../components/Nav/Nav'
-  import Community from '../components/Community/Community'
+  import Community from '../components/Community/Commu.vue'
   import Footer from '../components/Footer/Footer'
   export default {
     components: {

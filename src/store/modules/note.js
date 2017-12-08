@@ -130,6 +130,16 @@ const actions = {
       }
     }, body)
   },
+  'getHotNotes' ({state, commit}, {onSuccess, onError}) {
+    noteApi.getHotNotes(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        // commit(types.SET_NOTES, data)
+        onSuccess(data)
+      }
+    })
+  }
 }
 
 // mutations

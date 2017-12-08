@@ -103,10 +103,7 @@
 <script>
   import {mapGetters, mapActions} from 'vuex'
   import Editor from '../Editor/Editor.vue'
-  import axios from 'axios'
   import Dialogs from './Dialogs'
-
-  //  import Quill from 'quill'
 
   export default {
     components: {
@@ -164,7 +161,7 @@
         scrollTop: 'scrollTop',
         singleNotebook: 'singleNotebook',
         singleNote: 'singleNote'
-      }),
+      })
     },
     watch: {
       mainHeight: function () {
@@ -197,7 +194,8 @@
         'addTag': 'addTag',
         'deleteTag': 'deleteTag',
         'uploadImage': 'uploadImage',
-        'modifyNote': 'modifyNote'
+        'modifyNote': 'modifyNote',
+        'getHotNotes': 'getHotNotes'
       }),
       handleCloseTag (tag) {
         this.deleteTag({
@@ -330,8 +328,8 @@
 //            require.ensure([], function(require){
 //              url = require.context('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/', false, path)
 //            });
-            this.imageName.push(JSON.parse(JSON.stringify(path)))
-            Editor.insertEmbed(cursorLocation, 'image', require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + this.imageName[0]))
+//            this.imageName.push(JSON.parse(JSON.stringify(path)))
+//            Editor.insertEmbed(cursorLocation, 'image', require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + this.imageName[0]))
           },
           onError: (error) => {
             this.$message({

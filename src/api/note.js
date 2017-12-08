@@ -17,6 +17,23 @@ export function getAllNotesByUser (callback, body) {
     })
 }
 
+export function getHotNotes (callback) {
+  axios.get('/note/getHotNotes',
+    {
+      params: {
+        token: localStorage.getItem('token')
+      }
+    }
+  )
+    .then(function (response) {
+      console.log(response.data)
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
 export function getNotesByNotebook (callback, body) {
   axios.post('/note/getNotesByNotebook',
     body,
@@ -39,7 +56,7 @@ export function getNotesByNotebook (callback, body) {
 }
 
 export function createNoteAction (callback, body) {
-  console.log(body)
+  // console.log(body)
   axios.post('/note/createNote',
     body,
     {
@@ -60,7 +77,7 @@ export function createNoteAction (callback, body) {
 }
 
 export function getNoteById (callback, body) {
-  console.log(body)
+  // console.log(body)
   axios.post('/note/getNoteById',
     body,
     {
@@ -81,7 +98,7 @@ export function getNoteById (callback, body) {
 }
 
 export function deleteNote (callback, body) {
-  console.log(body)
+  // console.log(body)
   axios.post('/note/deleteNote',
     body,
     {
@@ -102,7 +119,7 @@ export function deleteNote (callback, body) {
 }
 
 export function likeNote (callback, body) {
-  console.log(body)
+  // console.log(body)
   console.log('like')
   axios.post('/like/likeNote',
     body,
@@ -124,7 +141,7 @@ export function likeNote (callback, body) {
 }
 
 export function cancelLikeNote (callback, body) {
-  console.log(body)
+  // console.log(body)
   console.log('cancelLike')
   axios.post('/like/cancelLike',
     body,
@@ -146,7 +163,7 @@ export function cancelLikeNote (callback, body) {
 }
 
 export function addTag (callback, body) {
-  console.log(body)
+  // console.log(body)
   console.log('addTag')
   axios.post('/tag/addTag',
     body,
@@ -168,7 +185,7 @@ export function addTag (callback, body) {
 }
 
 export function deleteTag (callback, body) {
-  console.log(body)
+  // console.log(body)
   console.log('deleteTag')
   axios.post('/tag/deleteTag',
     body,
@@ -190,7 +207,7 @@ export function deleteTag (callback, body) {
 }
 
 export function uploadImage (callback, body) {
-  console.log(body)
+  // console.log(body)
   axios.post('/note/uploadImage',
     body,
     {
@@ -216,7 +233,7 @@ export function uploadImage (callback, body) {
 }
 
 export function modifyNote (callback, body) {
-  console.log(body)
+  // console.log(body)
   axios.post('/note/modifyNote',
     body,
     {
@@ -237,7 +254,7 @@ export function modifyNote (callback, body) {
 }
 
 export function forkNote (callback, body) {
-  console.log(body)
+  // console.log(body)
   axios.post('/note/forkNote',
     body,
     {

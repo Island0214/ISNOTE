@@ -438,19 +438,21 @@
         this.errorEmailPattern = !emailPattern.test(this.newEmail)
       },
       modifyUserInfo () {
+        let body = {
+          name: this.username,
+          email: this.email,
+          phone: this.phone,
+          gender: this.radio,
+          intro: this.intro,
+          icon: '../',
+          see: this.seen,
+          modify: this.modify,
+          search: this.search,
+          info: this.info
+        }
+        console.log(body)
         this.modifyUser({
-          body: {
-            name: this.username,
-            email: this.email,
-            phone: this.phone,
-            gender: this.radio,
-            intro: this.intro,
-            icon: '../',
-            see: this.seen,
-            modify: this.modify,
-            search: this.search,
-            info: this.info
-          },
+          body: body,
           onSuccess: (success) => {
             this.$message({
               showClose: true,

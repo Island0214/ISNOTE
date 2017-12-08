@@ -108,29 +108,29 @@
   font-size: 2.5vmin;
 }
 
-#main-wrapper .left-wrapper .inner-border ul {
+#main-wrapper .left-wrapper .inner-border ol {
   position: absolute;
-  left: 5%;
+  left: 15%;
   top: 20%;
   padding-left: 0;
 }
 
-#main-wrapper .left-wrapper .inner-border ul li {
+#main-wrapper .left-wrapper .inner-border ol li {
   top: 25%;
-  list-style: none;
   font-size: 2vmin;
   /*margin-bottom: 1vmin;*/
   margin-bottom: 10%;
+  list-style: decimal;
 }
 
-#main-wrapper .left-wrapper .inner-border ul li a {
+#main-wrapper .left-wrapper .inner-border ol li a {
   text-decoration: none;
   color: #b3b3af;
   letter-spacing: 0.2vmin;
   font-weight: 500;
 }
 
-#main-wrapper .left-wrapper .inner-border ul li a:hover {
+#main-wrapper .left-wrapper .inner-border ol li a:hover {
   color: #ffffff;
   text-decoration: underline;
 }

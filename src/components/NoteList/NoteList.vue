@@ -16,6 +16,8 @@
         <!--<el-button type="default">修改笔记本信息</el-button>-->
       </div>
 
+      <h3 v-show="noteList.length===0 && this.singleNotebook.id===0" style="width: 100%; text-align: center; position: absolute; top: 30%;">暂无笔记...<br><span style="color: #ff94a3">新建笔记本</span>之后即可创建笔记！</h3>
+
       <el-row :gutter="10" style="margin: 0">
         <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center" v-show="singleNotebook.id !== 0">
           <div class="collection-wrapper new-wrapper"  @click="createNewNoteAction=true">
