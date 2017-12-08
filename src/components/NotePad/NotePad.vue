@@ -27,7 +27,7 @@
               <icon name="reply" class="icon"></icon>
             </div>
             <p style="display: inline-block">{{ curNote.fork_count }}</p>
-            <div style="display: inline-block">
+            <div style="display: inline-block" @click="shareNoteAction=true">
               <icon name="share-alt" class="icon"></icon>
             </div>
             <p style="display: inline-block">{{ curNote.post_count }}</p>
@@ -93,7 +93,8 @@
 
     <dialogs
       :forkNoteAction="forkNoteAction" @closeForkNoteAction="forkNoteAction=false"
-      @addForkNum="addForkNum"
+      @addForkNum="addForkNum" @addPostNum="addPostNum"
+      :shareNoteAction="shareNoteAction"  @closeShareNoteAction="shareNoteAction=false"
     ></dialogs>
   </div>
 </template>
@@ -151,7 +152,8 @@
         showInputStatus: true,
         inputValue: '',
         imageName: [],
-        forkNoteAction: false
+        forkNoteAction: false,
+        shareNoteAction: false
 //        path: require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + this.imageName)
       }
     },
@@ -371,6 +373,9 @@
       },
       addForkNum () {
         this.curNote.fork_count++
+      },
+      addPostNum () {
+        this.curNote.post_count++
       }
     },
     mounted () {

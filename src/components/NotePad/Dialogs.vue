@@ -37,6 +37,32 @@
         <el-button type="primary" @click="confirmForkNote">保 存</el-button>
       </span>
     </el-dialog>
+    <el-dialog
+      title="分享笔记"
+      :visible.sync="shareNoteStatus"
+      width="20%"
+      top="30%"
+      :modal=true
+      :modal-append-to-body=false
+      :show-close=false
+      :close-on-click-modal=false
+      :close-on-press-escape=false
+    >
+      <!--<p>所属笔记本</p>-->
+      <!--<el-input v-model="newNoteNotebook"></el-input>-->
+      <p>分享内容</p>
+      <el-input
+        type="textarea"
+        :rows="2"
+        placeholder="请输入内容"
+        v-model="shareInfo"
+      >
+      </el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="closeShareNote">取 消</el-button>
+        <el-button type="primary" @click="confirmShareNote">保 存</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -44,7 +70,7 @@
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
-    props: ['forkNoteAction'],
+    props: ['forkNoteAction', 'shareNoteAction'],
     data () {
       return {
         options: [{
@@ -65,8 +91,10 @@
           label: '不允许'
         }],
         forkNoteStatus: this.forkNoteAction,
+        shareNoteStatus: this.shareNoteAction,
         newNoteAuthority: '',
-        newNoteNotebook: ''
+        newNoteNotebook: '',
+        shareInfo: ''
 //        allNotebooks: []
       }
     },
@@ -79,7 +107,8 @@
     methods: {
       ...mapActions({
         'getMyNotes': 'getMyNotes',
-        'forkNote': 'forkNote'
+        'forkNote': 'forkNote',
+        'sharePost': 'sharePost'
       }),
       closeForkNote: function () {
         this.$emit('closeForkNoteAction')
@@ -96,6 +125,11 @@
         }
         this.forkNote({
           onSuccess: (data) => {
+            this.$message({
+              showClose: true,
+              message: '转载成功！',
+              type: 'success'
+            })
             this.$emit('addForkNum')
           },
           onError: (error) => {
@@ -108,6 +142,36 @@
           body: body
         })
         this.closeForkNote()
+      },
+      closeShareNote: function () {
+        this.$emit('closeShareNoteAction')
+        this.shareInfo = ''
+      },
+      confirmShareNote: function () {
+//        if (this.shareInfo)
+        let body = {
+          note_id: this.singleNote.note.id,
+          content: this.shareInfo
+        }
+        this.sharePost({
+          onSuccess: (data) => {
+            this.$emit('addPostNum')
+            this.$message({
+              showClose: true,
+              message: '分享成功！',
+              type: 'success'
+            })
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: body
+        })
+        this.closeShareNote()
       }
     },
     mounted () {
@@ -129,6 +193,9 @@
     watch: {
       forkNoteAction: function () {
         this.forkNoteStatus = this.forkNoteAction
+      },
+      shareNoteAction: function () {
+        this.shareNoteStatus = this.shareNoteAction
       }
     }
   }
