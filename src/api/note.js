@@ -235,3 +235,24 @@ export function modifyNote (callback, body) {
       console.log(error)
     })
 }
+
+export function forkNote (callback, body) {
+  console.log(body)
+  axios.post('/note/forkNote',
+    body,
+    {
+      params: {
+        token: localStorage.getItem('token')
+      },
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

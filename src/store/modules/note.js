@@ -120,6 +120,16 @@ const actions = {
       }
     }, body)
   },
+  'forkNote' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.forkNote(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        // commit(types.SET_NOTES, data)
+        onSuccess(data)
+      }
+    }, body)
+  },
 }
 
 // mutations

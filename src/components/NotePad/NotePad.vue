@@ -23,7 +23,7 @@
               <icon :name="heartName" class="icon"></icon>
             </div>
             <p style="display: inline-block">{{ curNote.like_count }}</p>
-            <div style="display: inline-block">
+            <div style="display: inline-block" @click="forkNoteAction=true">
               <icon name="reply" class="icon"></icon>
             </div>
             <p style="display: inline-block">{{ curNote.fork_count }}</p>
@@ -90,6 +90,11 @@
     </div>
 
   </div>
+
+    <dialogs
+      :forkNoteAction="forkNoteAction" @closeForkNoteAction="forkNoteAction=false"
+      @addForkNum="addForkNum"
+    ></dialogs>
   </div>
 </template>
 
@@ -98,11 +103,14 @@
   import {mapGetters, mapActions} from 'vuex'
   import Editor from '../Editor/Editor.vue'
   import axios from 'axios'
-//  import Quill from 'quill'
+  import Dialogs from './Dialogs'
+
+  //  import Quill from 'quill'
 
   export default {
     components: {
-      Editor
+      Editor,
+      Dialogs
     },
     data () {
       return {
@@ -142,7 +150,8 @@
         heartName: 'heart-o',
         showInputStatus: true,
         inputValue: '',
-        imageName: []
+        imageName: [],
+        forkNoteAction: false
 //        path: require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + this.imageName)
       }
     },
@@ -359,6 +368,9 @@
             authority: this.curNote.note_authority
           }
         })
+      },
+      addForkNum () {
+        this.curNote.fork_count++
       }
     },
     mounted () {

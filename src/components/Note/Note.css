@@ -15,7 +15,7 @@
   /*left: 20%;*/
   height: 100%;
   background-color: #5F5F5F;
-  z-index: 1;
+  z-index: 0;
   white-space: nowrap;
   overflow: hidden;
   opacity: 0.8;

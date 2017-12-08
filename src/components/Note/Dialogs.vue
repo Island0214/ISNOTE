@@ -1,6 +1,11 @@
 <template>
   <div>
-    <el-dialog title="提示" :visible.sync="confirmCloseStatus" width="20%" top="30%" :modal=false>
+    <el-dialog title="提示" :visible.sync="confirmCloseStatus" width="20%" top="30%"
+               :modal-append-to-body=false
+               :show-close=false
+               :close-on-click-modal=false
+               :close-on-press-escape=false
+    >
       <span>确认删除该笔记吗？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="closeConfirmClose">取 消</el-button>
@@ -13,7 +18,11 @@
       :visible.sync="modifyBookStatus"
       width="20%"
       top="30%"
-      :modal=false
+      :modal=true
+      :modal-append-to-body=false
+      :show-close=false
+      :close-on-click-modal=false
+      :close-on-press-escape=false
     >
       <p>笔记本名称</p>
       <el-input v-model="moBookName"></el-input>
@@ -38,7 +47,10 @@
       :visible.sync="createBookStatus"
       width="20%"
       top="30%"
-      :modal=false
+      :modal-append-to-body=false
+      :show-close=false
+      :close-on-click-modal=false
+      :close-on-press-escape=false
     >
       <p>笔记本名称</p>
       <el-input v-model="newBookName"></el-input>
@@ -63,7 +75,10 @@
       :visible.sync="createNewNoteStatus"
       width="20%"
       top="30%"
-      :modal=false
+      :modal-append-to-body=false
+      :show-close=false
+      :close-on-click-modal=false
+      :close-on-press-escape=false
     >
       <p>笔记名称</p>
       <el-input v-model="newNoteName"></el-input>
