@@ -58,3 +58,37 @@ export function cancelFollowUserAction (callback, body) {
       console.log(error)
     })
 }
+
+export function getMyFollowers (callback, body) {
+  axios.get('/friend/getMyFollowers',
+    {
+      params: {
+        token: localStorage.getItem('token')
+      }
+    }
+  )
+    .then(function (response) {
+      console.log(response.data)
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
+export function getMyFollowing (callback, body) {
+  axios.get('/friend/getMyFollowing',
+    {
+      params: {
+        token: localStorage.getItem('token')
+      }
+    }
+  )
+    .then(function (response) {
+      console.log(response.data)
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

@@ -342,7 +342,7 @@
         })
       },
       modifyNoteAction: function () {
-        console.log(this.editorContent)
+//        console.log(this.editorContent)
         this.modifyNote({
           onSuccess: (note) => {
 //            this.curNote = JSON.parse(JSON.stringify(note))

@@ -19,6 +19,24 @@ const actions = {
         onSuccess(data)
       }
     }, body)
+  },
+  'getPostsOfMyFollowing' ({state, commit}, {onSuccess, onError}) {
+    postApi.getPostsOfMyFollowing(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data)
+      }
+    })
+  },
+  'sendPost' ({state, commit}, {onSuccess, onError, body}) {
+    postApi.sendPost(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data)
+      }
+    }, body)
   }
 }
 

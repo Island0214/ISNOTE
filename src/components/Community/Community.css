@@ -125,7 +125,7 @@
 
 #main-wrapper .left-wrapper .inner-border ol li a {
   text-decoration: none;
-  color: #b3b3af;
+  color: #B2DDAC;
   letter-spacing: 0.2vmin;
   font-weight: 500;
 }
@@ -157,6 +157,9 @@
   left: 30%;
   font-size: 2vmin;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #main-wrapper .left-wrapper .inner-border .user-wrapper a:hover {
@@ -222,6 +225,7 @@
   box-shadow: 0.2vmax 0.2vmax 0.6vmax #5f5f5f;
   /*height: 2000px;*/
   margin-bottom: 40px;
+  overflow: visible;
 }
 
 #main-wrapper .right-wrapper h1 {

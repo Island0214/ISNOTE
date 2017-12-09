@@ -10,7 +10,6 @@
               v-model="input2"
             >
               <!--:on-icon-click=""-->
-
             </el-input>
 
             <h2 style="top: 15%;">热门笔记</h2>
@@ -58,21 +57,11 @@
               v-model="textarea">
             </el-input>
             <br>
-            <el-button type="success">发言</el-button>
+            <el-button type="success" @click="sendNewPost">发言</el-button>
           </div>
-          <!--<el-upload-->
-          <!--action="https://jsonplaceholder.typicode.com/posts/"-->
-          <!--list-type="picture-card"-->
-          <!--:on-preview="handlePictureCardPreview"-->
-          <!--:on-remove="handleRemove">-->
-          <!--<i class="el-icon-plus"></i>-->
-          <!--</el-upload>-->
-          <!--<el-dialog v-model="dialogVisible" size="tiny">-->
-          <!--<img width="100%" :src="dialogImageUrl" alt="">-->
-          <!--</el-dialog>-->
-          <div class="split-wrapper"></div>
-          <post></post>
 
+          <div class="split-wrapper"></div>
+          <post v-for="singlePost in postList" :singlePost="singlePost"></post>
         </div>
       </el-col>
     </el-row>
@@ -113,7 +102,8 @@
           {
             top: '86%'
           }
-        ]
+        ],
+        postList: []
       }
     },
     computed: {
@@ -144,7 +134,9 @@
         'getHotNotes': 'getHotNotes',
         'getOneRecommendation': 'getOneRecommendation',
         'followUserAction': 'followUserAction',
-        'cancelFollowUserAction': 'cancelFollowUserAction'
+        'cancelFollowUserAction': 'cancelFollowUserAction',
+        'getPostsOfMyFollowing': 'getPostsOfMyFollowing',
+        'sendPost': 'sendPost'
       }),
       pushToNote (user, id) {
         console.log(user + '/2/' + id)
@@ -169,6 +161,31 @@
           },
           body: {
             'user': user.name
+          }
+        })
+      },
+      sendNewPost () {
+        this.sendPost({
+          onSuccess: (data) => {
+//            console.log(data)
+            this.postList.unshift(data.post)
+//            console.log(this.postList)
+            this.textarea = ''
+            this.$message({
+              showClose: true,
+              message: '发送成功！',
+              type: 'success'
+            })
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: {
+            'content': this.textarea
           }
         })
       },
@@ -219,6 +236,20 @@
       for (let i = 0; i < 3; i++) {
         this.getRecommendation()
       }
+
+      this.getPostsOfMyFollowing({
+        onSuccess: (data) => {
+//          console.log(data)
+          this.postList = JSON.parse(JSON.stringify(data))
+        },
+        onError: (error) => {
+          this.$message({
+            showClose: true,
+            message: error,
+            type: 'error'
+          })
+        }
+      })
     }
   }
 </script>

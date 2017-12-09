@@ -37,6 +37,24 @@ const actions = {
         onSuccess(data)
       }
     }, body)
+  },
+  'getMyFollowers' ({state, commit}, {onSuccess, onError}) {
+    friendApi.getMyFollowers(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data)
+      }
+    })
+  },
+  'getMyFollowing' ({state, commit}, {onSuccess, onError}) {
+    friendApi.getMyFollowing(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data)
+      }
+    })
   }
 }
 
