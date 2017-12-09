@@ -1,9 +1,9 @@
 <template>
   <div class="info-wrapper">
     <div class="icon-wrapper">
-      <img src="../../assets/icon.png" style="cursor: pointer" @mouseover="showPopoverView"/>
+      <img src="../../assets/icon.png" style="cursor: pointer" @mouseover="showPopoverView" @click="toUser"/>
       <!--<div class="popover-wrapper"></div>-->
-      <popover v-if="showPopover" @hidePopoverEvent="hidePopoverView" @enterPopoverEvent="enterPopoverView"></popover>
+      <popover v-if="showPopover" @hidePopoverEvent="hidePopoverView" @enterPopoverEvent="enterPopoverView" :user="singlePost.user"></popover>
 
     </div>
     <div class="content-wrapper" v-show="singlePost.type === '4' || singlePost.type === 4">
@@ -37,7 +37,7 @@
 
 <script>
   import Popover from '../Popover/Popover.vue'
-  import {mapActions} from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
 
   export default {
     props: ['singlePost'],
@@ -52,6 +52,11 @@
         noteType: ['分享了笔记:', '创建了笔记:', '修改了笔记:'],
         noteContent: ''
       }
+    },
+    computed: {
+      ...mapGetters({
+        'curUsername': 'curUsername'
+      })
     },
     methods: {
       ...mapActions({
@@ -74,7 +79,11 @@
         this.enterPopover = true
       },
       toUser: function () {
-        this.$router.push('/user')
+        if (this.singlePost.user === this.curUsername) {
+          this.$router.push('/info')
+        } else {
+          this.$router.push('/user')
+        }
       }
     },
     mounted () {

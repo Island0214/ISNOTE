@@ -92,3 +92,24 @@ export function getMyFollowing (callback, body) {
       console.log(error)
     })
 }
+
+export function getFriendByName (callback, body) {
+  axios.post('/friend/getFriendByName',
+    body,
+    {
+      params: {
+        token: localStorage.getItem('token')
+      },
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+    .then(function (response) {
+      console.log(response.data)
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

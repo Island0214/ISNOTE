@@ -55,6 +55,15 @@ const actions = {
         onSuccess(data)
       }
     })
+  },
+  'getFriendByName' ({state, commit}, {onSuccess, onError, body}) {
+    friendApi.getFriendByName(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data)
+      }
+    }, body)
   }
 }
 
