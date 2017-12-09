@@ -26,7 +26,9 @@
           <!--<div class="upload_box">-->
           <!--点我上传图片哦-->
           <!--</div>-->
-          <div class="info-wrapper">
+          <h3 style="position: relative; text-align: left; margin-bottom: 0; left: 5%;" v-if="follows">共有 <span style="color: #ff94a3">{{ followList.length }}</span> 人关注我</h3>
+          <h3 style="position: relative; text-align: left; margin-bottom: 0; left: 5%;" v-else>共关注 <span style="color: #ff94a3">{{ followList.length }}</span> 人</h3>
+          <div class="info-wrapper" style="position:relative;">
             <div v-for="user in followList">
               <div class="friend-wrapper">
                 <el-row :gutter="10" style="margin: 0">

@@ -25,6 +25,9 @@
   font-weight: 600;
   line-height: 6vmin;
   left: 2vmin;
+  width: 100%; overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block
 }
 
 .friend-wrapper a:hover {
