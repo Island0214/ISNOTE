@@ -5,39 +5,27 @@
         <div class="left-wrapper" style="padding-bottom: 150%; overflow: visible;">
           <div class="inner-border" style="overflow: visible;">
             <img src="../../assets/icon.png"/>
-            <h5>ISLAND</h5>
-            <el-tooltip :popper-class="tooltip" class="item" effect="light" content="sasdjjjjjsafasgfhsdhagdagdsdgsdgsdjsasdjjjjjsafasgfhsdhagdagdsdgsdgsdjsasdjjjjjsafasgfhsdhagdagdsdgsdgsdjsasdjjjjjsafasgfhsdhagdagdsdgsdgsdjsasdjjjjjsafasgfhsdhagdagdsdgsdgsdjsasdjjjjjsafasgfhsdhagdagdsdgsdgsdj" placement="bottom" >
-              <p>sasdjjjjjsafasgfhsdhagdagdsdgsdgsdj</p>
+            <h5>{{ userInfo.name }}</h5>
+            <el-tooltip :popper-class="tooltip" class="item" effect="light" :content="userInfo.intro" placement="bottom" >
+              <p>{{ userInfo.intro }}</p>
             </el-tooltip>
-            <h6 style="top: 48%;">关注 <span>13</span>  被关注 <span>13</span></h6>
-            <!--<p>sasdjjjjjsafasgfhsdhagdagdsdgsdgsdj</p>-->
-            <el-button type="default">关注</el-button>
+            <h6 style="top: 48%;">关注 <span>{{ userInfo.following_count }}</span>  被关注 <span>{{ userInfo.follower_count }}</span></h6>
+            <el-button type="default" @click="handleFollow">{{ userInfo.isFriend }}</el-button>
 
           </div>
           <h1>用 户。</h1>
 
 
           <div class="nav-wrapper" style="top: auto; overflow: visible;">
-            <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="true">
-              <el-menu-item index="2">
+            <el-menu default-active="2" class="el-menu-vertical-demo left-nav" @open="handleOpen" @close="handleClose" :collapse="false">
+              <el-menu-item index="2" @click="showPosts">
                 <i class="el-icon-menu">动态</i>
-                <span slot="title">导航二</span>
               </el-menu-item>
-              <el-submenu index="1">
+              <el-menu-item index="1" @click="showNotes">
                 <template slot="title">
                   <i class="el-icon-menu">笔记</i>
-                  <span slot="title">导航一</span>
                 </template>
-                <el-menu-item index="1-1">asd
-                </el-menu-item>
-                <el-menu-item index="1-2">asd
-                </el-menu-item>
-                <el-menu-item index="1-3">asd
-                </el-menu-item>
-                <el-menu-item index="1-4">asd
-                </el-menu-item>
-
-              </el-submenu>
+              </el-menu-item>
             </el-menu>
 
           </div>
@@ -48,98 +36,7 @@
         <div style="min-height: 1px; background-color: #ffffff00"></div>
       </el-col>
       <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
-
-        <div class="right-wrapper" style="z-index: -1;">
-          <div class="search-wrapper">
-            <input placeholder="搜索笔记"/>
-            <el-button type="default"><i class="el-icon-search"></i></el-button>
-          </div>
-          <div class="collections-wrapper" :style="rightWrapperStyle">
-            <div class="breadcrumb-wrapper">
-              <el-breadcrumb separator="/">
-                <!--<el-breadcrumb-item :to="{ path: '/' }">笔记本</el-breadcrumb-item>-->
-                <!--<el-breadcrumb-item>笔记本</el-breadcrumb-item>-->
-                <el-breadcrumb-item :to="{ path: '/note/all' }">笔记本</el-breadcrumb-item>
-                <el-breadcrumb-item>所有笔记</el-breadcrumb-item>
-              </el-breadcrumb>
-
-              <!--<el-button type="default">修改笔记本信息</el-button>-->
-            </div>
-
-            <el-row :gutter="10" style="margin: 0">
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper" @mouseenter="showHoverContentView()" @mouseleave="hideHoverContentView()">
-                  <div>
-                    <h5>娃娃的阿斯顿萨芬鹅气氛啊说</h5>
-                    <h6>更新于<br>2017-08-08<br>08:08:08</h6>
-                  </div>
-                  <div v-show="isHoverProperty">
-                    <p><span>笔记内容</span><br>safasfasfsafasfasfafsasfafsasfasfasfasfasfasfasfasfaafsasfasfasfasfasfasfasfasfafsasfasf</p>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-              <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center">
-                <div class="collection-wrapper"></div>
-              </el-col>
-
-            </el-row>
-          </div>
-        </div>
-
-        <div class="right-wrapper" :style="rightWrapperStyle" style="z-index: -1; display: none">
-          <post></post>
-          <post></post>
-          <post></post>
-          <post></post>
-          <post></post>
-          <post></post>
-          <post></post>
-        </div>
+        <router-view></router-view>
       </el-col>
     </el-row>
 
@@ -147,7 +44,7 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
   import Post from '../Post/Post.vue'
 
   export default {
@@ -172,7 +69,8 @@
         dialogImageUrl: '',
         dialogVisible: false,
         visible2: false,
-        isHoverProperty: false
+        userInfo: '',
+        user: ''
       }
     },
     computed: {
@@ -201,8 +99,90 @@
       }
     },
     methods: {
+      ...mapActions({
+        'getFriendByName': 'getFriendByName',
+        'cancelFollowUserAction': 'cancelFollowUserAction',
+        'followUserAction': 'followUserAction'
+      }),
       handleIconClick: function () {
+      },
+      handleOpen: function () {
+      },
+      handleClose: function () {
+      },
+      open: function () {
+      },
+      close: function () {
+      },
+      handleFollow: function () {
+        if (this.userInfo.isFriend !== '关注') {
+          this.cancelFollowUserAction({
+            onSuccess: (data) => {
+              this.getFriend()
+              this.$message({
+                showClose: true,
+                message: '取消关注成功！',
+                type: 'success'
+              })
+            },
+            onError: (error) => {
+              this.$message({
+                showClose: true,
+                message: error,
+                type: 'error'
+              })
+            },
+            body: {
+              'user': this.userInfo.name
+            }
+          })
+        } else {
+          this.followUserAction({
+            onSuccess: (data) => {
+              this.getFriend()
+              this.$message({
+                showClose: true,
+                message: '关注成功！',
+                type: 'success'
+              })
+            },
+            onError: (error) => {
+              this.$message({
+                showClose: true,
+                message: error,
+                type: 'error'
+              })
+            },
+            body: {
+              'user': this.userInfo.name
+            }
+          })
+        }
+      },
+      getFriend: function () {
+        this.getFriendByName({
+          onSuccess: (data) => {
+            this.userInfo = JSON.parse(JSON.stringify(data.friend))
+//          console.log(this.userInfo)
+          },
+          onError: () => {
+          },
+          body: {
+            user: this.user
+          }
+        })
+      },
+      showNotes: function () {
+        this.$router.push('/user/' + this.user + '/notes')
+      },
+      showPosts: function () {
+        this.$router.push('/user/' + this.user)
       }
+    },
+    mounted () {
+      console.log(this.$router.history.current.params.id)
+      this.user = this.$router.history.current.params.id
+      this.getFriend()
     }
   }
 </script>

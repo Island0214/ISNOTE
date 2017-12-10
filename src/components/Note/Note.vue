@@ -92,7 +92,7 @@
       largeSize: function () {
       },
       '$route' (to, from) {
-        console.log(to)
+//        console.log(to)
         console.log('nav-change: ' + to.params.id)
         if (to.params.id === 0 || to.params.id === '0') {
           this.showAllNotes()

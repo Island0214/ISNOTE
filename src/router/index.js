@@ -8,6 +8,9 @@ import NotePage from '../page/NotePage.vue'
 import UserPage from '../page/UserPage.vue'
 import NotePad from '../components/NotePad/NotePad.vue'
 import NoteList from '../components/NoteList/NoteList.vue'
+import UserPost from '../components/User/UserPost.vue'
+import UserNotes from '../components/User/UserNotes.vue'
+import UserNote from '../components/User/UserNote.vue'
 
 Vue.use(Router)
 
@@ -35,22 +38,32 @@ export default new Router({
       component: NotePage,
       children: [
         {
-          // 当 /user/:id/profile 匹配成功，
-          // UserProfile 会被渲染在 User 的 <router-view> 中
           path: '',
           component: NoteList
         },
         {
-          // 当 /user/:id/posts 匹配成功
-          // UserPosts 会被渲染在 User 的 <router-view> 中
           path: ':id',
           component: NotePad
         }
       ]
     }, {
-      path: '/user',
+      path: '/user/:id',
       name: 'user',
-      component: UserPage
+      component: UserPage,
+      children: [
+        {
+          path: '',
+          component: UserPost
+        },
+        {
+          path: 'notes',
+          component: UserNotes
+        },
+        {
+          path: 'note/:id',
+          component: UserNote
+        }
+      ]
     }
   ]
 })

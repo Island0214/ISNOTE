@@ -137,3 +137,7 @@
   background-color: #5f5f5f;
   opacity: 0.8;
 }
+
+#main-wrapper .right-wrapper .collections-wrapper h1 {
+  position: relative;
+}

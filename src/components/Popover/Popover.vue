@@ -1,5 +1,5 @@
 <template>
-  <div class="popover-wrapper" v-if="showPopover1" @mouseover="sendEnterPopoverView" @mouseleave="sendHidePopoverView">
+  <div class="popover-wrapper" v-if="showDisable" @mouseover="sendEnterPopoverView" @mouseleave="sendHidePopoverView">
     <div class="up-wrapper"></div>
     <div class="icon-wrapper">
       <img src="../../assets/icon.png"/>
@@ -24,7 +24,7 @@
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
-    props: ['user'],
+    props: ['user', 'showDisable'],
     data () {
       return {
         showPopover1: true,

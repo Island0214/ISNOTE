@@ -56,3 +56,20 @@ export function sendPost (callback, body) {
       console.log(error)
     })
 }
+
+export function getPostByUser (callback, body) {
+  axios.post('/post/getPostsByUser',
+    body,
+    {
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

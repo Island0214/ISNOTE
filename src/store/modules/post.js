@@ -37,6 +37,15 @@ const actions = {
         onSuccess(data)
       }
     }, body)
+  },
+  'getPostByUser' ({state, commit}, {onSuccess, onError, body}) {
+    postApi.getPostByUser(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data)
+      }
+    }, body)
   }
 }
 

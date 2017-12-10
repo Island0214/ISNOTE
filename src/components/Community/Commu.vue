@@ -61,7 +61,7 @@
           </div>
 
           <div class="split-wrapper"></div>
-          <post v-for="singlePost in postList" :singlePost="singlePost"></post>
+          <post v-for="singlePost in postList" :singlePost="singlePost" :showDisable=true></post>
         </div>
       </el-col>
     </el-row>

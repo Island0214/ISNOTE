@@ -1,13 +1,13 @@
 <template>
   <div class="info-wrapper">
     <div class="icon-wrapper">
-      <img src="../../assets/icon.png" style="cursor: pointer" @mouseover="showPopoverView" @click="toUser"/>
+      <img src="../../assets/icon.png" :class="{ cursorClass: showDisable }" @mouseover="showPopoverView" @click="toUser"/>
       <!--<div class="popover-wrapper"></div>-->
-      <popover v-if="showPopover" @hidePopoverEvent="hidePopoverView" @enterPopoverEvent="enterPopoverView" :user="singlePost.user"></popover>
+      <popover v-if="showPopover" @hidePopoverEvent="hidePopoverView" @enterPopoverEvent="enterPopoverView" :user="singlePost.user" :showDisable="showDisable"></popover>
 
     </div>
     <div class="content-wrapper" v-show="singlePost.type === '4' || singlePost.type === 4">
-      <a href="#" @mouseover="showPopoverView" @click="toUser">{{ singlePost.user }}</a>
+      <p style="color: #5F5F5F; font-size: 2vmin; font-weight: 600; letter-spacing: 0.2vmin; margin-top: 0" :class="{ cursorClass: showDisable }" @mouseover="showPopoverView" @click="toUser">{{ singlePost.user }}</p>
       <p>说：</p>
       <p style="float: right">{{ singlePost.updated_at }}</p>
       <div class="inner-wrapper">
@@ -16,7 +16,7 @@
 
     </div>
     <div class="content-wrapper" v-show="singlePost.type !== '4' && singlePost.type !== 4">
-      <a href="#"  @mouseover="showPopoverView" @click="toUser">{{ singlePost.user }}</a>
+      <p style="color: #5F5F5F; font-size: 2vmin; font-weight: 600; letter-spacing: 0.2vmin; margin-top: 0" :class="{ cursorClass: showDisable }"  @mouseover="showPopoverView" @click="toUser">{{ singlePost.user }}</p>
       <p>{{ noteType[singlePost.type - 1] }}</p>
       <p style="float: right">{{ singlePost.updated_at }}</p>
       <div class="inner-wrapper" style="cursor: pointer">
@@ -40,7 +40,7 @@
   import {mapActions, mapGetters} from 'vuex'
 
   export default {
-    props: ['singlePost'],
+    props: ['singlePost', 'showDisable'],
     components: {
       Popover
     },
@@ -79,10 +79,13 @@
         this.enterPopover = true
       },
       toUser: function () {
+//        console.log('/user/' + this.singlePost.user)
         if (this.singlePost.user === this.curUsername) {
           this.$router.push('/info')
         } else {
-          this.$router.push('/user')
+//          console.log('/user/' + this.singlePost.user)
+//          alert('asdfasf')
+          this.$router.push('/user/' + this.singlePost.user)
         }
       }
     },
@@ -105,3 +108,8 @@
 </script>
 
 <style scoped src="./Post.css"></style>
+<style>
+  .cursorClass {
+    cursor: pointer;
+  }
+</style>
