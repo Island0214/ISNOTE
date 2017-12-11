@@ -108,7 +108,8 @@
       ...mapActions({
         'getMyNotes': 'getMyNotes',
         'forkNote': 'forkNote',
-        'sharePost': 'sharePost'
+        'sharePost': 'sharePost',
+        'getMyNotebooks': 'getMyNotebooks'
       }),
       closeForkNote: function () {
         this.$emit('closeForkNoteAction')
@@ -188,6 +189,17 @@
 //          })
 //        }
 //      })
+      this.getMyNotebooks({
+        onSuccess: (notebooks) => {
+        },
+        onError: (error) => {
+          this.$message({
+            showClose: true,
+            message: error,
+            type: 'error'
+          })
+        }
+      })
 //      this.allNotebook = this.notebookList
     },
     watch: {

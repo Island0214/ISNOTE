@@ -5,6 +5,7 @@
     <div class="collections-wrapper" :style="rightWrapperStyle">
       <h1 style="position: relative; float: right; right: 5%; left: 0;">Ta的动态</h1>
 
+      <h3 v-if="postList.length === 0" style="width: 100%; text-align: center; position:absolute; top: 45%; color: #ff94a3">该用户暂无动态...</h3>
       <post v-for="singlePost in postList" :singlePost="singlePost" :showDisable=false></post>
     </div>
   </div>

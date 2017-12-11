@@ -53,6 +53,16 @@ const actions = {
       }
     }, body)
   },
+  'getNotesByUser' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.getNotesByUser(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        onSuccess(data)
+        commit(types.SET_NOTES, data)
+      }
+    }, body)
+  },
   'deleteNote' ({state, commit}, {onSuccess, onError, body}) {
     noteApi.deleteNote(data => {
       if (data.error !== undefined) {

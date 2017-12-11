@@ -18,7 +18,7 @@
         <div>
           <!--<p>点赞和转发在这里</p>-->
           <!--<i class="address-book-o" style="margin-top: 10px; float: right; position: relative"></i>-->
-          <div style="margin: 0; line-height: 2vmin">
+          <div style="margin: 0; line-height: 2vmin; left: 0">
             <div style="display: inline-block" @click="likeNoteAction">
               <icon :name="heartName" class="icon"></icon>
             </div>

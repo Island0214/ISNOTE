@@ -97,6 +97,27 @@ export function getNoteById (callback, body) {
     })
 }
 
+export function getNotesByUser (callback, body) {
+  // console.log(body)
+  axios.post('/note/getNotesByUser',
+    body,
+    {
+      params: {
+        token: localStorage.getItem('token')
+      },
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
 export function deleteNote (callback, body) {
   // console.log(body)
   axios.post('/note/deleteNote',

@@ -36,7 +36,7 @@
         <div style="min-height: 1px; background-color: #ffffff00"></div>
       </el-col>
       <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
-        <router-view></router-view>
+        <router-view :user="user"></router-view>
       </el-col>
     </el-row>
 
@@ -102,7 +102,8 @@
       ...mapActions({
         'getFriendByName': 'getFriendByName',
         'cancelFollowUserAction': 'cancelFollowUserAction',
-        'followUserAction': 'followUserAction'
+        'followUserAction': 'followUserAction',
+        'getNotesByUser': 'getNotesByUser'
       }),
       handleIconClick: function () {
       },
@@ -180,9 +181,25 @@
       }
     },
     mounted () {
-      console.log(this.$router.history.current.params.id)
+//      console.log(this.$router.history.current.params.id)
       this.user = this.$router.history.current.params.id
       this.getFriend()
+
+      this.getNotesByUser({
+        onSuccess: (data) => {
+//          console.log(data)
+        },
+        onError: (error) => {
+          this.$message({
+            showClose: true,
+            message: error,
+            type: 'error'
+          })
+        },
+        body: {
+          'user': this.user
+        }
+      })
     }
   }
 </script>
