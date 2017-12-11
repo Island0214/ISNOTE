@@ -1,8 +1,8 @@
 <template>
   <div class="right-wrapper">
     <div class="search-wrapper">
-      <input placeholder="搜索笔记"/>
-      <el-button type="default"><i class="el-icon-search"></i></el-button>
+      <input placeholder="搜索笔记" v-model="searchInput"/>
+      <el-button type="default" @click="searchNotes"><i class="el-icon-search"></i></el-button>
     </div>
     <div class="collections-wrapper" :style="rightWrapperStyle">
       <div class="breadcrumb-wrapper">
@@ -16,7 +16,8 @@
         <!--<el-button type="default">修改笔记本信息</el-button>-->
       </div>
 
-      <h3 v-show="noteList.length===0 && this.singleNotebook.id===0" style="width: 100%; text-align: center; position: absolute; top: 30%;">暂无笔记...<br><span style="color: #ff94a3">新建笔记本</span>之后即可创建笔记！</h3>
+      <h3 v-show="noteList.length===0 && this.singleNotebook.id===0 && !searchNull" style="width: 100%; text-align: center; position: absolute; top: 30%;">暂无笔记...<br><span style="color: #ff94a3">新建笔记本</span>之后即可创建笔记！</h3>
+      <h3 v-show="searchNull" style="width: 100%; text-align: center; position: absolute; top: 30%;"><span style="color: #ff94a3">无搜索结果...</span></h3>
 
       <el-row :gutter="10" style="margin: 0">
         <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center" v-show="singleNotebook.id !== 0">
@@ -29,7 +30,7 @@
           <div class="collection-wrapper" @mouseenter="showHoverContentView()" @mouseleave="hideHoverContentView()">
             <div @click="pushToNoteContent(note.id)">
               <h5>{{ note.note_title }}</h5>
-              <p>{{ note.note_body.replace(/<\/?.+?>/g, '').replace(/ /g, '') }}</p>
+              <p>{{ note.note_body === null ? note.note_body.replace(/<\/?.+?>/g, '').replace(/ /g, '') : ''}}</p>
               <h6 style="font-size: 1.2vmin">更新于<br>{{ note.updated_at }}</h6>
             </div>
             <!--<div v-show="isHoverProperty">-->
@@ -84,7 +85,9 @@
           minHeight: window.innerHeight + 140 + 'px'
         },
         name: '',
-        noteID: ''
+        noteID: '',
+        searchInput: '',
+        searchNull: false
       }
     },
     computed: {
@@ -111,6 +114,12 @@
         }
       },
       largeSize: function () {
+      },
+      '$route': function () {
+        if (this.searchInput !== '' || this.searchInput !== null) {
+//          alert('asfgsag')
+          this.searchNotes()
+        }
       }
     },
     methods: {
@@ -121,7 +130,8 @@
         'getNotebookById': 'getNotebookById',
         'modifyNotebook': 'modifyNotebook',
         'getMyNotes': 'getMyNotes',
-        'getNotesByNotebook': 'getNotesByNotebook'
+        'getNotesByNotebook': 'getNotesByNotebook',
+        'searchInNotebook': 'searchInNotebook'
       }),
       closeModifyBook: function () {
         this.modifyBookAction = false
@@ -170,7 +180,32 @@
       pushToNoteContent: function (id) {
         console.log('/workbench/' + this.singleNotebook.id + '/note/' + id)
         this.$router.push('/workbench/' + this.singleNotebook.id + '/' + id)
+      },
+      searchNotes: function () {
+        this.searchInNotebook({
+          onSuccess: (data) => {
+            console.log(data)
+            if (data.length === 0) {
+              this.searchNull = true
+            } else {
+              this.searchNull = false
+            }
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: {
+            'notebook': this.singleNotebook.id,
+            'contain': this.searchInput
+          }
+        })
       }
+    },
+    mounted () {
     }
   }
 </script>

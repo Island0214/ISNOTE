@@ -1,7 +1,7 @@
 <template>
   <div class="right-wrapper">
   <div class="search-wrapper">
-    <input placeholder="输入标题" :value="curNote.note_title"/>
+    <input placeholder="输入标题" v-model="curNote.note_title"/>
   </div>
   <div class="collections-wrapper">
     <div class="breadcrumb-wrapper">
@@ -62,7 +62,7 @@
     <editor  v-model="editorContent"></editor>
 
     <p style="position:absolute; left: 1%; font-size: 1.3vmin">上次更新于 {{ this.curNote.updated_at }}</p>
-    <el-button type="default" class="save-button" @click="modifyNoteAction()">保 存</el-button>
+    <el-button type="default" class="save-button" @click="modifyNotesAction()">保 存</el-button>
 
     <div class="tags-wrapper" >
       <p style="font-size: 1.3vmin">最多添加五个标签</p>
@@ -341,12 +341,11 @@
           body: formData
         })
       },
-      modifyNoteAction: function () {
-//        console.log(this.editorContent)
+      modifyNotesAction: function () {
         this.modifyNote({
           onSuccess: (note) => {
 //            this.curNote = JSON.parse(JSON.stringify(note))
-            console.log(note)
+//            console.log(note)
             this.curNote.updated_at = note.note.updated_at
             this.$message({
               showClose: true,
@@ -381,8 +380,9 @@
       console.log('noteID: ' + this.$router.history.current.params.id)
       this.getNoteById({
         onSuccess: (note) => {
-          console.log(note)
+//          console.log(note)
           this.curNote = JSON.parse(JSON.stringify(note))
+          console.log(this.curNote)
           if (this.curNote.isLike === true) {
             this.heartName = 'heart'
           }

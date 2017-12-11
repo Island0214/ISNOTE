@@ -294,3 +294,24 @@ export function forkNote (callback, body) {
       console.log(error)
     })
 }
+
+export function searchInNotebook (callback, body) {
+  console.log(body)
+  axios.post('/note/searchInNotebook',
+    body,
+    {
+      params: {
+        token: localStorage.getItem('token')
+      },
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

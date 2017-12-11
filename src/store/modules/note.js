@@ -135,7 +135,6 @@ const actions = {
       if (data.error !== undefined) {
         onError(data.error)
       } else {
-        // commit(types.SET_NOTES, data)
         onSuccess(data)
       }
     }, body)
@@ -145,10 +144,22 @@ const actions = {
       if (data.error !== undefined) {
         onError(data.error)
       } else {
-        // commit(types.SET_NOTES, data)
         onSuccess(data)
       }
     })
+  },
+  'searchInNotebook' ({state, commit}, {onSuccess, onError, body}) {
+    noteApi.searchInNotebook(data => {
+      if (data.error !== undefined) {
+        onError(data.error)
+      } else {
+        commit(types.SET_NOTES, data)
+        if (data.length === 0) {
+          commit(types.SET_NOTES, '')
+        }
+        onSuccess(data)
+      }
+    }, body)
   }
 }
 
