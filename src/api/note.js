@@ -232,11 +232,15 @@ export function uploadImage (callback, body) {
   axios.post('/note/uploadImage',
     body,
     {
+      params: {
+        token: localStorage.getItem('token')
+      },
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }
   ).then((response) => {
+    console.log(response.data)
     callback(response.data)
 
     // let url = response.data.url // Get url from response

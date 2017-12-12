@@ -113,10 +113,10 @@ const actions = {
       if (data.error !== undefined) {
         onError(data.error)
       } else {
-        let url = data.url // Get url from response
-        let name = url.split('/')[url.split('/').length - 1]
+        // let url = data.url // Get url from response
+        // let name = url.split('/')[url.split('/').length - 1]
         // name = '/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + name
-        onSuccess(name)
+        onSuccess(data)
       }
     }, body)
   },

@@ -28,16 +28,17 @@
           <!--</div>-->
           <div class="info-wrapper" v-show="userInfo">
             <div class="icon-wrapper">
-              <el-upload
-                class="avatar-uploader"
-                :show-file-list="false"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-success="handleAvatarSuccess"
-                :on-failure="handleAvatarFailure"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                <i class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
+              <!--<el-upload-->
+                <!--class="avatar-uploader"-->
+                <!--:show-file-list="false"-->
+                <!--action="http://localhost:8000/api/user/uploadIcon"-->
+                <!--:on-success="handleAvatarSuccess"-->
+                <!--:on-failure="handleAvatarFailure"-->
+                <!--:before-upload="beforeAvatarUpload">-->
+                <!--<img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+                <!--<i class="el-icon-plus avatar-uploader-icon"></i>-->
+              <!--</el-upload>-->
+              <icon :curUserInfo="curUserInfo"></icon>
             </div>
             <div class="name-wrapper">
               <p>{{ username }}</p>
@@ -302,12 +303,16 @@
 <script>
   import {mapGetters, mapActions} from 'vuex'
   import * as types from '../../store/mutation-types'
+  import Icon from './Icon.vue'
 
   export default {
+    components: {
+      Icon
+    },
     data () {
       return {
         isCollapse: false,
-        imageUrl: require('../../assets/icon.png'),
+        imageUrl: '',
         mainStyle: {
           height: window.innerHeight + 'px'
         },
@@ -359,7 +364,9 @@
         info: '无',
         search: '无',
         modify: '无',
-        count: 0
+        count: 0,
+        curUserInfo: {},
+        iconUrl: ''
       }
     },
     computed: {
@@ -373,26 +380,9 @@
         'getUser': 'getUser',
         'modifyUser': 'modifyUser',
         log_in: types.LOG_IN,
-        'modifyPasswordAction': 'modifyPassword'
+        'modifyPasswordAction': 'modifyPassword',
+        'uploadImage': 'uploadImage'
       }),
-      handleAvatarSuccess (res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw)
-      },
-      handleAvatarFailure (res, file) {
-        alert('fail')
-      },
-      beforeAvatarUpload (file) {
-        const isJPG = file.type === 'image/jpeg' || file.type === 'image/png'
-        const isLt2M = file.size / 1024 / 1024 < 4
-
-        if (!isJPG) {
-          alert('上传头像图片只能是 JPG 或 PNG 格式!')
-        }
-        if (!isLt2M) {
-          alert('上传头像图片大小不能超过 4MB!')
-        }
-        return isJPG && isLt2M
-      },
 //      ...mapMutations({
 //      }),
 //      handleSelect (key, keyPath) {
@@ -592,6 +582,14 @@
           this.modify = user.modify
           this.info = user.info
           this.search = user.search
+          this.imageUrl = user.icon
+
+          this.curUserInfo = JSON.parse(JSON.stringify(user))
+          this.iconUrl = user.icon
+//          console.log(user)
+//          console.log('iconUrlllllllllll:' + this.iconUrl)
+//          let name = user.icon
+//          this.imageUrl = require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/local/' + name)
         },
         onError: (error) => {
           this.$message({
