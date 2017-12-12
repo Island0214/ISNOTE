@@ -21,7 +21,7 @@
       </el-col>
       <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
 
-        <router-view ></router-view>
+        <router-view @getAllNotebooks="getAllNotebooks"></router-view>
         <!--<note-pad></note-pad>-->
 
       </el-col>
@@ -173,22 +173,26 @@
             })
           }
         })
+      },
+      getAllNotebooks: function () {
+        this.getMyNotebooks({
+          onSuccess: (notebooks) => {
+//            console.log(notebooks)
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          }
+        })
       }
     },
     mounted () {
 //      if (this.singleNotebook !== null) {
 //      }
-      this.getMyNotebooks({
-        onSuccess: (notebooks) => {
-        },
-        onError: (error) => {
-          this.$message({
-            showClose: true,
-            message: error,
-            type: 'error'
-          })
-        }
-      })
+      this.getAllNotebooks()
       this.showAllNotes()
     },
     bind (el, binding, vnode) {

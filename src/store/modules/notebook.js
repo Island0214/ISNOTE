@@ -61,8 +61,7 @@ const mutations = {
   },
   [types.SET_NOTEBOOK] (state, notebook) {
     // console.log('notebook:')
-    // console.log(notebook)
-
+    console.log(notebook)
     if (notebook !== null) {
       // console.log('allNotebook:')
       // console.log(notebook.allNotebook)
@@ -78,6 +77,8 @@ const mutations = {
         state.singleNotebook.authority = notebook.authority
       }
     }
+    console.log('state:')
+    console.log(state.singleNotebook)
   }
 }
 
