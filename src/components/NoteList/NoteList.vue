@@ -30,7 +30,7 @@
           <div class="collection-wrapper" @mouseenter="showHoverContentView()" @mouseleave="hideHoverContentView()">
             <div @click="pushToNoteContent(note.id)">
               <h5>{{ note.note_title }}</h5>
-              <p>{{ note.note_body === null ? note.note_body.replace(/<\/?.+?>/g, '').replace(/ /g, '') : ''}}</p>
+              <p style="border-radius: 0">{{ note.note_body !== null ? note.note_body.replace(/<\/?.+?>/g, '').replace(/ /g, '') : ''}}</p>
               <h6 style="font-size: 1.2vmin">更新于<br>{{ note.updated_at }}</h6>
             </div>
             <!--<div v-show="isHoverProperty">-->

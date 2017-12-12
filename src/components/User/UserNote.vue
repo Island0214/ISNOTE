@@ -184,6 +184,8 @@
       }
     },
     mounted () {
+//      console.log(this.$router.history.current.matched[0])
+
       this.noteID = this.$router.history.current.params.id
 //      console.log(this.noteID)
 //      console.log(this.user)

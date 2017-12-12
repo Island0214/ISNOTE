@@ -11,6 +11,11 @@ import NoteList from '../components/NoteList/NoteList.vue'
 import UserPost from '../components/User/UserPost.vue'
 import UserNotes from '../components/User/UserNotes.vue'
 import UserNote from '../components/User/UserNote.vue'
+import PostArea from '../components/Community/PostArea.vue'
+import AllContent from '../components/SearchContent/AllContent.vue'
+import UserContent from '../components/SearchContent/UserContent.vue'
+import PostContent from '../components/SearchContent/PostContent.vue'
+import NoteContent from '../components/SearchContent/NoteContent.vue'
 
 Vue.use(Router)
 
@@ -31,7 +36,29 @@ export default new Router({
     }, {
       path: '/community',
       name: 'community',
-      component: CommunityPage
+      component: CommunityPage,
+      children: [
+        {
+          path: 'posts',
+          component: PostArea
+        },
+        {
+          path: 'search',
+          component: AllContent
+        },
+        {
+          path: 'search/allUsers',
+          component: UserContent
+        },
+        {
+          path: 'search/allNotes',
+          component: NoteContent
+        },
+        {
+          path: 'search/allPosts',
+          component: PostContent
+        }
+      ]
     }, {
       path: '/workbench/:id',
       name: 'workbench',

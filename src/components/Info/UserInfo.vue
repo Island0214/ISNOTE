@@ -122,7 +122,7 @@
             <div class="prop-wrapper" style="top: 5%;">
               <el-row :gutter="10">
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">
-                  <p>允许谁看我的笔记</p>
+                  <p>允许谁查看我的动态</p>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
                   <el-select v-model="seen" placeholder="请选择">
@@ -140,7 +140,7 @@
             <div class="prop-wrapper" style="top: 15%">
               <el-row :gutter="10">
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">
-                  <p>允许谁修改我的笔记</p>
+                  <p>允许谁转载我的笔记</p>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
                   <el-select v-model="modify" placeholder="请选择">
@@ -155,41 +155,41 @@
 
               </el-row>
             </div>
-            <div class="prop-wrapper" style="top: 25%">
-              <el-row :gutter="10">
-                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">
-                  <p>允许谁搜索到我的笔记</p>
-                </el-col>
-                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
-                  <el-select v-model="search" placeholder="请选择">
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </el-col>
-              </el-row>
-            </div>
-            <div class="prop-wrapper" style="top: 35%">
-              <el-row :gutter="10">
-                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">
-                  <p>将笔记动态显示在社区</p>
-                </el-col>
-                <el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">
-                  <el-select v-model="info" placeholder="请选择">
-                    <el-option
-                      v-for="item in options2"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </el-col>
+            <!--<div class="prop-wrapper" style="top: 25%">-->
+              <!--<el-row :gutter="10">-->
+                <!--<el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">-->
+                  <!--<p>允许谁搜索到我的笔记</p>-->
+                <!--</el-col>-->
+                <!--<el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">-->
+                  <!--<el-select v-model="search" placeholder="请选择">-->
+                    <!--<el-option-->
+                      <!--v-for="item in options"-->
+                      <!--:key="item.value"-->
+                      <!--:label="item.label"-->
+                      <!--:value="item.value">-->
+                    <!--</el-option>-->
+                  <!--</el-select>-->
+                <!--</el-col>-->
+              <!--</el-row>-->
+            <!--</div>-->
+            <!--<div class="prop-wrapper" style="top: 35%">-->
+              <!--<el-row :gutter="10">-->
+                <!--<el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0">-->
+                  <!--<p>将笔记动态显示在社区</p>-->
+                <!--</el-col>-->
+                <!--<el-col :xs="24" :sm="24" :md="12" :lg="12" style="padding: 0;">-->
+                  <!--<el-select v-model="info" placeholder="请选择">-->
+                    <!--<el-option-->
+                      <!--v-for="item in options2"-->
+                      <!--:key="item.value"-->
+                      <!--:label="item.label"-->
+                      <!--:value="item.value">-->
+                    <!--</el-option>-->
+                  <!--</el-select>-->
+                <!--</el-col>-->
 
-              </el-row>
-            </div>
+              <!--</el-row>-->
+            <!--</div>-->
           </div>
         </div>
       </div>

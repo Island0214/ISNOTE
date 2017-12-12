@@ -18,7 +18,7 @@
             笔 记
           </el-menu-item>
         </router-link>
-        <router-link to="/community" class="nav-button">
+        <router-link to="/community/posts" class="nav-button">
           <el-menu-item index="1-3">
             社 区
           </el-menu-item>
@@ -65,7 +65,7 @@
             <router-link to="/workbench/0" class="nav-button">笔 记</router-link>
           </el-menu-item>
           <el-menu-item index="3">
-            <router-link to="/community" class="nav-button">社 区</router-link>
+            <router-link to="/community/posts" class="nav-button">社 区</router-link>
           </el-menu-item>
 
         </el-menu>

@@ -123,14 +123,15 @@
   list-style: decimal;
 }
 
-#main-wrapper .left-wrapper .inner-border ol li a {
+#main-wrapper .left-wrapper .inner-border ol li p {
   text-decoration: none;
   color: #B2DDAC;
   letter-spacing: 0.2vmin;
   font-weight: 500;
+  cursor: pointer;
 }
 
-#main-wrapper .left-wrapper .inner-border ol li a:hover {
+#main-wrapper .left-wrapper .inner-border ol li p:hover {
   color: #ffffff;
   text-decoration: underline;
 }

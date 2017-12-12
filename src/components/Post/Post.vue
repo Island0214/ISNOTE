@@ -19,7 +19,7 @@
       <p style="color: #5F5F5F; font-size: 2vmin; font-weight: 600; letter-spacing: 0.2vmin; margin-top: 0" :class="{ cursorClass: showDisable }"  @mouseover="showPopoverView" @click="toUser">{{ singlePost.user }}</p>
       <p>{{ noteType[singlePost.type - 1] }}</p>
       <p style="float: right">{{ singlePost.updated_at }}</p>
-      <div class="inner-wrapper" style="cursor: pointer">
+      <div class="inner-wrapper" style="cursor: pointer" @click="toNote(singlePost.user, singlePost.note_id)">
         <h3 style="color: #ff94a3">{{ noteInfo.note_title }}</h3>
         <p v-show="noteInfo.note_body != ''">{{ noteContent }}</p>
       </div>
@@ -86,6 +86,13 @@
 //          console.log('/user/' + this.singlePost.user)
 //          alert('asdfasf')
           this.$router.push('/user/' + this.singlePost.user)
+        }
+      },
+      toNote: function (user, id) {
+        if (this.curUsername !== user) {
+          this.$router.push('/user/' + user + '/note/' + id)
+        } else {
+          this.$router.push('/workbench/0/' + id)
         }
       }
     },

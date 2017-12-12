@@ -17,14 +17,14 @@
 
 
           <div class="nav-wrapper" style="top: auto; overflow: visible;">
-            <el-menu default-active="2" class="el-menu-vertical-demo left-nav" @open="handleOpen" @close="handleClose" :collapse="false">
-              <el-menu-item index="2" @click="showPosts">
-                <i class="el-icon-menu">动态</i>
-              </el-menu-item>
+            <el-menu default-active="1" class="el-menu-vertical-demo left-nav" @open="handleOpen" @close="handleClose" :collapse="false">
               <el-menu-item index="1" @click="showNotes">
                 <template slot="title">
                   <i class="el-icon-menu">笔记</i>
                 </template>
+              </el-menu-item>
+              <el-menu-item index="2" @click="showPosts">
+                <i class="el-icon-menu">动态</i>
               </el-menu-item>
             </el-menu>
 
@@ -181,8 +181,8 @@
       }
     },
     mounted () {
-//      console.log(this.$router.history.current.params.id)
-      this.user = this.$router.history.current.params.id
+//      console.log(this.$router.history.current.fullPath.split('/')[2])
+      this.user = this.$router.history.current.fullPath.split('/')[2]
       this.getFriend()
 
       this.getNotesByUser({

@@ -18,3 +18,5 @@ export const SET_NOTEBOOK = 'SET_NOTEBOOK'
 export const SET_NOTES = 'SET_NOTES'
 export const SET_NOTE = 'SET_NOTE'
 export const ADD_NEWNOTE = 'ADD_NEWNOTE'
+
+export const SET_SEARCH = 'SET_SEARCH'

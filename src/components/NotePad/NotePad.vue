@@ -50,10 +50,10 @@
         <el-input
           placeholder=""
           icon="search"
-          v-model="input2"
+          v-model="searchInput"
           style="width: 100%"
+          :on-icon-click="searchContain"
         >
-          <!--:on-icon-click=""-->
         </el-input>
       </el-col>
 
@@ -144,14 +144,15 @@
         curNote: '',
         noteID: '',
         notebookOfNote: '',
-        input2: '',
+        searchInput: '',
         heartName: 'heart-o',
         showInputStatus: true,
         inputValue: '',
         imageName: [],
         forkNoteAction: false,
-        shareNoteAction: false
-//        path: require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/pics/' + this.imageName)
+        shareNoteAction: false,
+        curNoteBody: '',
+        isSearching: false
       }
     },
     computed: {
@@ -183,6 +184,13 @@
           this.showInputStatus = false
         } else {
           this.showInputStatus = true
+        }
+      },
+      editorContent: function () {
+        if (!this.isSearching) {
+          this.curNoteBody = this.editorContent
+        } else {
+          this.isSearching = false
         }
       }
     },
@@ -363,7 +371,7 @@
           body: {
             id: this.curNote.id,
             title: this.curNote.note_title,
-            body: this.editorContent,
+            body: this.curNoteBody,
             authority: this.curNote.note_authority
           }
         })
@@ -373,6 +381,22 @@
       },
       addPostNum () {
         this.curNote.post_count++
+      },
+      searchContain () {
+        if (this.searchInput.length > 0) {
+          this.isSearching = true
+          this.editorContent = this.curNoteBody
+//        let tmpBody = this.curNoteBody
+//        console.log('/' + this.searchInput + '/g')
+          let pattern = new RegExp(this.searchInput, 'g')
+          this.editorContent = this.editorContent.replace(pattern, '<span style="background-color: #B2DDAC; color: #333;">' + this.searchInput + '</span>')
+//        this.curNoteBody = tmpBody
+//        let sad =
+//          console.log(this.editorContent)
+//          console.log(this.curNoteBody)
+        } else {
+          this.editorContent = this.curNoteBody
+        }
       }
     },
     mounted () {

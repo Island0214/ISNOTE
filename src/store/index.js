@@ -9,6 +9,7 @@ import notebook from './modules/notebook'
 import note from './modules/note'
 import post from './modules/post'
 import friend from './modules/friend'
+import search from './modules/search'
 
 // import createLogger from '../../../src/plugins/logger'
 
@@ -26,7 +27,8 @@ export default new Vuex.Store({
     notebook,
     note,
     post,
-    friend
+    friend,
+    search
   },
   strict: debug
   // plugins: debug ? [createLogger()] : []

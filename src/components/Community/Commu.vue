@@ -8,14 +8,14 @@
               placeholder=""
               icon="search"
               v-model="input2"
+              :on-icon-click="searchAllContents"
             >
-              <!--:on-icon-click=""-->
             </el-input>
 
             <h2 style="top: 15%;">热门笔记</h2>
             <ol type="1">
               <li v-for="note in hotNotes">
-                <a href="#" @click="pushToNote(note.user, note.id)">{{ note.note_title }}</a>
+                <p @click="pushToNote(note.user, note.id)">{{ note.note_title }}</p>
               </li>
             <!--<li><a href="#">1. sagascaxsfasd</a></li>-->
             <!--<li><a href="#">2. xwxzxas</a></li>-->
@@ -28,8 +28,8 @@
 
             <div v-for="user in recommendUsers">
               <div class="user-wrapper" :style="positions[recommendUsers.indexOf(user)]">
-                <img src="../../assets/icon.png"/>
-                <a class="name-wrapper">{{ user.name }}</a>
+                <img src="../../assets/icon.png" @click="pushToUser(user.name)"/>
+                <a class="name-wrapper" @click="pushToUser(user.name)">{{ user.name }}</a>
                 <p class="info-wrapper">{{ user.intro }}</p>
                 <el-button type="default" @click="followUser(user)">关<br><br>注</el-button>
               </div>
@@ -46,35 +46,18 @@
         <div style="min-height: 1px; background-color: #ffffff00"></div>
       </el-col>
       <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
-        <div class="right-wrapper" :style="leftWrapperStyle">
-          <h1>关注人动态</h1>
-          <div class="post-wrapper">
-            <h2>说句话吧</h2>
-            <el-input
-              type="textarea"
-              :autosize="{ minRows: 4, maxRows: 4}"
-              placeholder="说 话。"
-              v-model="textarea">
-            </el-input>
-            <br>
-            <el-button type="success" @click="sendNewPost">发言</el-button>
-          </div>
-
-          <div class="split-wrapper"></div>
-          <post v-for="singlePost in postList" :singlePost="singlePost" :showDisable=true></post>
-        </div>
+        <router-view></router-view>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
-  import Post from '../Post/Post.vue'
+  import {mapGetters, mapActions, mapMutations} from 'vuex'
+  import * as types from '../../store/mutation-types'
 
   export default {
     components: {
-      Post
     },
     data () {
       return {
@@ -110,7 +93,9 @@
       ...mapGetters({
         largeSize: 'largeSize',
         mainHeight: 'mainHeight',
-        scrollTop: 'scrollTop'
+        scrollTop: 'scrollTop',
+        curUsername: 'curUsername',
+        searchContent: 'searchContent'
       })
     },
     watch: {
@@ -130,6 +115,9 @@
       }
     },
     methods: {
+      ...mapMutations({
+        setSearch: types.SET_SEARCH
+      }),
       ...mapActions({
         'getHotNotes': 'getHotNotes',
         'getOneRecommendation': 'getOneRecommendation',
@@ -140,6 +128,11 @@
       }),
       pushToNote (user, id) {
         console.log(user + '/2/' + id)
+        if (this.curUsername !== user) {
+          this.$router.push('/user/' + user + '/note/' + id)
+        } else {
+          this.$router.push('/workbench/0/' + id)
+        }
       },
       followUser (user) {
         this.followUserAction({
@@ -168,6 +161,7 @@
         this.sendPost({
           onSuccess: (data) => {
 //            console.log(data)
+            this.postList.shift()
             this.postList.unshift(data.post)
 //            console.log(this.postList)
             this.textarea = ''
@@ -190,6 +184,11 @@
         })
       },
       pushToUser (user) {
+        if (user === this.curUsername) {
+          this.$router.push('/info')
+        } else {
+          this.$router.push('/user/' + user)
+        }
       },
       getRecommendation () {
         this.getOneRecommendation({
@@ -217,6 +216,14 @@
             })
           }
         })
+      },
+      searchAllContents () {
+        this.setSearch(this.input2)
+        if (this.input2.length > 0) {
+          this.$router.push('/community/search')
+        } else {
+          this.$router.push('/community/posts')
+        }
       }
     },
     mounted: function () {
@@ -236,20 +243,6 @@
       for (let i = 0; i < 3; i++) {
         this.getRecommendation()
       }
-
-      this.getPostsOfMyFollowing({
-        onSuccess: (data) => {
-//          console.log(data)
-          this.postList = JSON.parse(JSON.stringify(data))
-        },
-        onError: (error) => {
-          this.$message({
-            showClose: true,
-            message: error,
-            type: 'error'
-          })
-        }
-      })
     }
   }
 </script>
