@@ -33,10 +33,10 @@
               <div class="friend-wrapper">
                 <el-row :gutter="10" style="margin: 0">
                   <el-col :xs="4" :sm="4" :md="4" :lg="4" style="padding: 0">
-                    <img src="../../assets/icon.png">
+                    <img src="../../assets/icon.png" @click="pushToUser(user.name)" style="cursor: pointer">
                   </el-col>
                   <el-col :xs="12" :sm="12" :md="13" :lg="14" style="padding: 0; text-align: left;">
-                    <a href="#">{{ user.name }}</a>
+                    <a @click="pushToUser(user.name)" style="cursor: pointer">{{ user.name }}</a>
                     <p>{{ user.intro }}</p>
                   </el-col>
                   <el-col :xs="8" :sm="8" :md="7" :lg="6" style="padding: 0">
@@ -90,6 +90,9 @@
         'followUserAction': 'followUserAction',
         'cancelFollowUserAction': 'cancelFollowUserAction'
       }),
+      pushToUser (user) {
+        this.$router.push('/user/' + user + '/notes')
+      },
       handleNavClick (key, keyPath) {
         if (key.index === '1') {
           this.follows = true
