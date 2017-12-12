@@ -3,13 +3,15 @@ import * as types from '../mutation-types'
 
 const state = {
   notebookList: {},
-  singleNotebook: {}
+  singleNotebook: {},
+  notebookName: ''
 }
 
 // getters
 const getters = {
   notebookList: state => state.notebookList,
-  singleNotebook: state => state.singleNotebook
+  singleNotebook: state => state.singleNotebook,
+  notebookName: state => state.notebookName
 }
 
 const actions = {
@@ -61,7 +63,7 @@ const mutations = {
   },
   [types.SET_NOTEBOOK] (state, notebook) {
     // console.log('notebook:')
-    console.log(notebook)
+    // console.log(notebook)
     if (notebook !== null) {
       // console.log('allNotebook:')
       // console.log(notebook.allNotebook)
@@ -70,11 +72,13 @@ const mutations = {
         state.singleNotebook.id = notebook.allNotebook.id
         state.singleNotebook.notebook_name = notebook.allNotebook.notebook_name
         state.singleNotebook.authority = notebook.allNotebook.authority
+        state.notebookName = notebook.allNotebook.notebook_name
       } else {
         // console.log('!!!!!!!!!!!!!!!!!!!')
         state.singleNotebook.id = notebook.id
         state.singleNotebook.notebook_name = notebook.notebook_name
         state.singleNotebook.authority = notebook.authority
+        state.notebookName = notebook.notebook_name
       }
     }
     console.log('state:')

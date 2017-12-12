@@ -99,6 +99,7 @@
         } else {
           this.getNotebookById({
             onSuccess: (notebook) => {
+              this.setNotebook(notebook)
             },
             onError: (error) => {
               this.$message({

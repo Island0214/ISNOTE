@@ -10,7 +10,7 @@
           <!--<el-breadcrumb-item :to="{ path: '/' }">笔记本</el-breadcrumb-item>-->
           <!--<el-breadcrumb-item>笔记本</el-breadcrumb-item>-->
           <el-breadcrumb-item>笔记本</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ notebookName }} <i class="el-icon-setting"  @click="modifyBookAction=true" v-show="singleNotebook.id !== 0"></i></el-breadcrumb-item>
+          <el-breadcrumb-item>{{ this.notebookName }} <i class="el-icon-setting"  @click="modifyBookAction=true" v-show="singleNotebook.id !== 0"></i></el-breadcrumb-item>
         </el-breadcrumb>
 
         <!--<el-button type="default">修改笔记本信息</el-button>-->
@@ -87,8 +87,8 @@
         name: '',
         noteID: '',
         searchInput: '',
-        searchNull: false,
-        notebookName: ''
+        searchNull: false
+//        notebookName: ''
       }
     },
     computed: {
@@ -97,7 +97,8 @@
         mainHeight: 'mainHeight',
         scrollTop: 'scrollTop',
         singleNotebook: 'singleNotebook',
-        noteList: 'noteList'
+        noteList: 'noteList',
+        notebookName: 'notebookName'
       })
     },
     watch: {
@@ -117,7 +118,9 @@
       largeSize: function () {
       },
       '$route': function () {
-        console.log(this.searchInput)
+//        console.log(this.searchInput)
+        this.notebookName = this.singleNotebook.notebook_name
+        console.log(this.notebookName)
         if (this.searchInput.length !== 0) {
 //          alert('asfgsag')
           this.searchNotesInNotebook()
@@ -165,8 +168,9 @@
         newBookInfo['id'] = this.singleNotebook.id
         this.modifyNotebook({
           onSuccess: (data) => {
-            this.notebookName = this.singleNotebook.notebook_name
+//            this.notebookName = this.singleNotebook.notebook_name
             this.$emit('getAllNotebooks')
+            this.setNotebook()
             this.$message({
               showClose: true,
               message: '修改笔记本设置成功！',
@@ -216,7 +220,7 @@
       }
     },
     mounted () {
-      this.notebookName = this.singleNotebook.notebook_name
+//      this.notebookName = this.singleNotebook.notebook_name
     }
   }
 </script>
