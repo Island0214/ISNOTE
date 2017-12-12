@@ -12,7 +12,7 @@
               <icon :name="heartName" class="icon"></icon>
             </div>
             <p style="display: inline-block; left: 0;">{{ note.like_count }}</p>
-            <div style="display: inline-block" @click="forkNoteAction=true">
+            <div style="display: inline-block" @click="tryForkNote">
               <icon name="reply" class="icon"></icon>
             </div>
             <p style="display: inline-block; left: 0;">{{ note.fork_count }}</p>
@@ -76,7 +76,7 @@
   import Dialogs from '../NotePad/Dialogs.vue'
 
   export default {
-    props: ['user'],
+    props: ['user', 'userInfo'],
     components: {
       Dialogs
     },
@@ -181,6 +181,27 @@
       },
       addPostNum () {
         this.note.post_count++
+      },
+      tryForkNote () {
+        if (this.userInfo.modify === '只有我') {
+          this.$message({
+            showClose: true,
+            message: '该用户不允许转载笔记！',
+            type: 'error'
+          })
+          return
+        }
+
+        if (this.userInfo.modify === '所有人' || (this.userInfo.modify === '仅好友' && this.userInfo.isFriend === '互相关注')) {
+          this.forkNoteAction = true
+        } else {
+          this.$message({
+            showClose: true,
+            message: '该用户仅允许好友转载笔记！',
+            type: 'error'
+          })
+        }
+//        this.getFriendByName
       }
     },
     mounted () {

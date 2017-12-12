@@ -36,7 +36,7 @@
         <div style="min-height: 1px; background-color: #ffffff00"></div>
       </el-col>
       <el-col :xs="16" :sm="16" :md="16" :lg="18" style="padding: 0;">
-        <router-view :user="user"></router-view>
+        <router-view :user="user" :userInfo="userInfo" :userNotes="userNotes"></router-view>
       </el-col>
     </el-row>
 
@@ -70,7 +70,8 @@
         dialogVisible: false,
         visible2: false,
         userInfo: '',
-        user: ''
+        user: '',
+        userNotes: []
       }
     },
     computed: {
@@ -188,6 +189,7 @@
       this.getNotesByUser({
         onSuccess: (data) => {
 //          console.log(data)
+          this.userNotes = this.noteList
         },
         onError: (error) => {
           this.$message({

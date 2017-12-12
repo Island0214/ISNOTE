@@ -5,7 +5,9 @@
     <div class="collections-wrapper" :style="rightWrapperStyle">
       <h1 style="position: relative; float: right; right: 5%; left: 0;">Ta的动态</h1>
 
-      <h3 v-if="postList.length === 0" style="width: 100%; text-align: center; position:absolute; top: 45%; color: #ff94a3">该用户暂无动态...</h3>
+      <h3 v-if="postList.length === 0 && showPosts && onlyMe" style="width: 100%; text-align: center; position:absolute; top: 45%; color: #ff94a3">该用户暂无动态...</h3>
+      <h3 v-if="!showPosts && !onlyMe" style="width: 100%; text-align: center; position:absolute; top: 45%; color: #ff94a3">该用户动态仅好友可见...</h3>
+      <h3 v-if="onlyMe" style="width: 100%; text-align: center; position:absolute; top: 45%; color: #ff94a3">该用户动态仅自己可见...</h3>
       <post v-for="singlePost in postList" :singlePost="singlePost" :showDisable=false></post>
     </div>
   </div>
@@ -23,6 +25,7 @@
   import Post from '../Post/Post.vue'
 
   export default {
+    props: ['userInfo'],
     components: {
       Post
     },
@@ -37,7 +40,9 @@
         rightWrapperStyle: {
           minHeight: window.innerHeight - 20 + 'px'
         },
-        postList: []
+        postList: [],
+        showPosts: true,
+        onlyMe: false
       }
     },
     computed: {
@@ -71,22 +76,30 @@
     mounted () {
       this.user = this.$router.history.current.params.id
 
-      this.getPostByUser({
-        onSuccess: (data) => {
-          this.postList = JSON.parse(JSON.stringify(data))
-          console.log(this.postList)
-        },
-        onError: (error) => {
-          this.$message({
-            showClose: true,
-            message: error,
-            type: 'error'
-          })
-        },
-        body: {
-          'user': this.user
-        }
-      })
+      if (this.userInfo.see === '所有人' || (this.userInfo.see === '仅好友' && this.userInfo.isFriend === '互相关注')) {
+        this.getPostByUser({
+          onSuccess: (data) => {
+            this.postList = JSON.parse(JSON.stringify(data))
+            console.log(this.postList)
+          },
+          onError: (error) => {
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          },
+          body: {
+            'user': this.user
+          }
+        })
+      } else {
+        this.showPosts = false
+      }
+
+      if (this.userInfo.see === '只有我') {
+        this.onlyMe = true
+      }
     }
   }
 </script>

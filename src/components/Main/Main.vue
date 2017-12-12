@@ -209,7 +209,7 @@
         if (!this.loginState) {
           this.showLogIn()
         } else {
-          this.$router.push('/note')
+          this.$router.push('/workbench/0')
         }
       },
       tryLogIn () {

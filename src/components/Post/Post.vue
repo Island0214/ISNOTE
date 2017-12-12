@@ -85,7 +85,7 @@
         } else {
 //          console.log('/user/' + this.singlePost.user)
 //          alert('asdfasf')
-          this.$router.push('/user/' + this.singlePost.user)
+          this.$router.push('/user/' + this.singlePost.user + '/notes')
         }
       },
       toNote: function (user, id) {

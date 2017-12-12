@@ -7,7 +7,7 @@
       <h3 v-if="noteList.length === 0" style="width: 100%; text-align: center; position:absolute; top: 45%; color: #ff94a3;">该用户暂无笔记...</h3>
 
 
-      <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center" v-for="note in notes">
+      <el-col :xs="12" :sm="12" :md="8" :lg="6" style="padding: 0; text-align: center" v-for="note in noteList">
         <div class="collection-wrapper">
           <div @click="pushToNoteContent(note.id)">
             <h5>{{ note.note_title }}</h5>
@@ -21,10 +21,10 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
 
   export default {
-    props: ['user'],
+    props: ['user', 'userNotes'],
     components: {
     },
     data () {
@@ -66,13 +66,31 @@
       }
     },
     methods: {
+      ...mapActions({
+        'getNotesByUser': 'getNotesByUser'
+      }),
       pushToNoteContent: function (id) {
 //        console.log(id)
         this.$router.push('/user/' + this.user + '/note/' + id)
       }
     },
     mounted () {
-      this.notes = this.noteList
+      this.getNotesByUser({
+        onSuccess: (data) => {
+//          console.log(data)
+          this.notes = this.noteList
+        },
+        onError: (error) => {
+          this.$message({
+            showClose: true,
+            message: error,
+            type: 'error'
+          })
+        },
+        body: {
+          'user': this.user
+        }
+      })
     }
   }
 </script>
