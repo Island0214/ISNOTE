@@ -64,7 +64,7 @@
         if (this.user.name === this.curUsername) {
           this.$router.push('/info')
         } else {
-          this.$router.push('/user/' + this.user.name)
+          this.$router.push('/user/' + this.user.name + '/notes')
         }
       },
       handleFollow: function () {

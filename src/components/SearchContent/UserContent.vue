@@ -6,9 +6,9 @@
     </div>
 
     <div class="info-wrapper">
-      <div  v-for="user in userList">
-        <user :user="user"></user>
-      </div>
+      <!--<div  v-for="user in userList">-->
+        <user  v-for="user in userList" :user="user"></user>
+      <!--</div>-->
     </div>
 
     <!--<post v-for="singlePost in postList" :singlePost="singlePost" :showDisable=true></post>-->

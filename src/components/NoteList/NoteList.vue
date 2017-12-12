@@ -2,7 +2,7 @@
   <div class="right-wrapper">
     <div class="search-wrapper">
       <input placeholder="搜索笔记" v-model="searchInput"/>
-      <el-button type="default" @click="searchNotes"><i class="el-icon-search"></i></el-button>
+      <el-button type="default" @click="searchNotesInNotebook"><i class="el-icon-search"></i></el-button>
     </div>
     <div class="collections-wrapper" :style="rightWrapperStyle">
       <div class="breadcrumb-wrapper">
@@ -116,9 +116,12 @@
       largeSize: function () {
       },
       '$route': function () {
-        if (this.searchInput !== '' || this.searchInput !== null) {
+        console.log(this.searchInput)
+        if (this.searchInput.length !== 0) {
 //          alert('asfgsag')
-          this.searchNotes()
+          this.searchNotesInNotebook()
+        } else {
+          this.searchNull = false
         }
       }
     },
@@ -181,28 +184,32 @@
         console.log('/workbench/' + this.singleNotebook.id + '/note/' + id)
         this.$router.push('/workbench/' + this.singleNotebook.id + '/' + id)
       },
-      searchNotes: function () {
-        this.searchInNotebook({
-          onSuccess: (data) => {
-            console.log(data)
-            if (data.length === 0) {
-              this.searchNull = true
-            } else {
-              this.searchNull = false
+      searchNotesInNotebook: function () {
+        if (this.searchInput.length === 0) {
+          this.searchNull = false
+        } else {
+          this.searchInNotebook({
+            onSuccess: (data) => {
+              console.log(data)
+              if (data.length === 0) {
+                this.searchNull = true
+              } else {
+                this.searchNull = false
+              }
+            },
+            onError: (error) => {
+              this.$message({
+                showClose: true,
+                message: error,
+                type: 'error'
+              })
+            },
+            body: {
+              'notebook': this.singleNotebook.id,
+              'contain': this.searchInput
             }
-          },
-          onError: (error) => {
-            this.$message({
-              showClose: true,
-              message: error,
-              type: 'error'
-            })
-          },
-          body: {
-            'notebook': this.singleNotebook.id,
-            'contain': this.searchInput
-          }
-        })
+          })
+        }
       }
     },
     mounted () {

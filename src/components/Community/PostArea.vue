@@ -15,6 +15,7 @@
 
     <div class="split-wrapper"></div>
     <post v-for="singlePost in postList" :singlePost="singlePost" :showDisable=true></post>
+    <h3 v-show="postList.length === 0" style="position:absolute; width: 100%; text-align: center; color: #ff94a3; top: 70%;">暂无动态...</h3>
   </div>
 </template>
 
