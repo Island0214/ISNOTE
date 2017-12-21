@@ -1,7 +1,7 @@
 <template>
   <div class="info-wrapper">
     <div class="icon-wrapper">
-      <img src="../../assets/icon.png" :class="{ cursorClass: showDisable }" @mouseover="showPopoverView" @click="toUser"/>
+      <img :src="iconImage" :class="{ cursorClass: showDisable }" @mouseover="showPopoverView" @click="toUser" style="border-radius: 50px"/>
       <!--<div class="popover-wrapper"></div>-->
       <popover v-if="showPopover" @hidePopoverEvent="hidePopoverView" @enterPopoverEvent="enterPopoverView" :user="singlePost.user" :showDisable="showDisable"></popover>
 
@@ -50,17 +50,33 @@
         enterPopover: false,
         noteInfo: '',
         noteType: ['分享了笔记:', '创建了笔记:', '修改了笔记:'],
-        noteContent: ''
+        noteContent: '',
+        iconUser: {}
       }
     },
     computed: {
       ...mapGetters({
         'curUsername': 'curUsername'
-      })
+      }),
+      iconImage: function () {
+//        console.log('sad')
+//        console.log('photoname:' + this.iconUser.icon)
+//        console.log('iconUser:')
+//        console.log(this.iconUser)
+        if (this.iconUser.icon !== undefined) {
+          let name = this.iconUser.icon.split('/')[this.iconUser.icon.split('/').length - 1]
+          console.log(name)
+
+          return require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/local/' + name)
+        } else {
+          return require('../../assets/icon.png')
+        }
+      }
     },
     methods: {
       ...mapActions({
-        'getNoteById': 'getNoteById'
+        'getNoteById': 'getNoteById',
+        'getFriendByName': 'getFriendByName'
       }),
       showPopoverView: function () {
         this.showPopover = true
@@ -110,6 +126,27 @@
           }
         })
       }
+
+      this.getFriendByName({
+        onSuccess: (user) => {
+          this.iconUser = JSON.parse(JSON.stringify(user.friend))
+          console.log('iconnnnnnnnnnnnnnnnnnnnnnnnnnn')
+          console.log(this.iconUser)
+//          let name = user.icon
+//          this.imageUrl = require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/local/' + name)
+        },
+        onError: (error) => {
+          this.$message({
+            showClose: true,
+            message: error,
+            type: 'error'
+          })
+        },
+        body: {
+          user: this.singlePost.user
+        }
+      })
+//      thi
     }
   }
 </script>

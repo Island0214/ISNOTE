@@ -4,7 +4,7 @@
       <el-col :xs="8" :sm="8" :md="8" :lg="6" style="padding: 0; overflow: visible;" id="left-col" :class="{'largeSticky': largeSize && isSticky, 'smallSticky': (!largeSize) && isSticky}">
         <div class="left-wrapper" style="padding-bottom: 150%; overflow: visible;">
           <div class="inner-border" style="overflow: visible;">
-            <img src="../../assets/icon.png"/>
+            <img :src="iconImage" style="border-radius: 50px"/>
             <h5>{{ userInfo.name }}</h5>
             <el-tooltip :popper-class="tooltip" class="item" effect="light" :content="userInfo.intro" placement="bottom" >
               <p>{{ userInfo.intro }}</p>
@@ -79,7 +79,21 @@
         largeSize: 'largeSize',
         mainHeight: 'mainHeight',
         scrollTop: 'scrollTop'
-      })
+      }),
+      iconImage: function () {
+//        console.log('sad')
+//        console.log('photoname:' + this.iconUser.icon)
+//        console.log('iconUser:')
+//        console.log(this.iconUser)
+        if (this.userInfo.icon !== undefined) {
+          let name = this.userInfo.icon.split('/')[this.userInfo.icon.split('/').length - 1]
+          console.log(name)
+
+          return require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/local/' + name)
+        } else {
+          return require('../../assets/icon.png')
+        }
+      }
     },
     watch: {
       mainHeight: function () {

@@ -2,7 +2,7 @@
   <div class="popover-wrapper" v-if="showDisable" @mouseover="sendEnterPopoverView" @mouseleave="sendHidePopoverView">
     <div class="up-wrapper"></div>
     <div class="icon-wrapper">
-      <img src="../../assets/icon.png"/>
+      <img :src="iconImage" style="border-radius: 50px"/>
     </div>
     <div class="info-wrapper">
       <h3>{{ userInfo.name }}</h3>
@@ -29,13 +29,28 @@
       return {
         showPopover1: true,
         userInfo: '',
-        isSelf: false
+        isSelf: false,
+        iconUser: {}
       }
     },
     computed: {
       ...mapGetters({
         'curUsername': 'curUsername'
-      })
+      }),
+      iconImage: function () {
+//        console.log('sad')
+//        console.log('photoname:' + this.iconUser.icon)
+//        console.log('iconUser:')
+//        console.log(this.iconUser)
+        if (this.iconUser.icon !== undefined) {
+          let name = this.iconUser.icon.split('/')[this.iconUser.icon.split('/').length - 1]
+          console.log(name)
+
+          return require('/Users/island/PhpstormProjects/ISNOTE-SERVER/storage/app/local/' + name)
+        } else {
+          return require('../../assets/icon.png')
+        }
+      }
     },
     methods: {
       ...mapActions({
@@ -98,6 +113,7 @@
         this.getFriendByName({
           onSuccess: (data) => {
             this.userInfo = JSON.parse(JSON.stringify(data.friend))
+            this.iconUser = JSON.parse(JSON.stringify(data.friend))
 //          console.log(this.userInfo)
           },
           onError: () => {

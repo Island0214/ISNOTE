@@ -59,8 +59,7 @@
 
     </div>
 
-    <editor useCustomImageHandler
-            @imageAdded="handleImageAdded"  v-model="editorContent"></editor>
+    <editor v-model="editorContent"></editor>
 
     <p style="position:absolute; left: 1%; font-size: 1.3vmin">上次更新于 {{ this.curNote.updated_at }}</p>
     <el-button type="default" class="save-button" @click="modifyNotesAction()">保 存</el-button>
